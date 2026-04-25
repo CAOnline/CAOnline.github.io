@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TKO Is Killing The Company I Love</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e2d9;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .hero {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 4rem 2rem 3rem;
+    position: relative;
+    border-bottom: 1px solid #2a2a2a;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.012) 2px,
+      rgba(255,255,255,0.012) 4px
+    );
+    pointer-events: none;
+  }
+
+  .hero-kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c0392b;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.95;
+    color: #f5f0e8;
+    margin-bottom: 2rem;
+    max-width: 900px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: #c0392b;
+  }
+
+  .hero-deck {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #9a9590;
+    max-width: 600px;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-byline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: #555;
+    text-transform: uppercase;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .hero-byline span { color: #c0392b; }
+
+  .hero-rule {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 8rem;
+    color: rgba(192, 57, 43, 0.06);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 2rem 6rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.9;
+    margin-bottom: 1.75rem;
+    color: #d4cec5;
+    font-weight: 300;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #f5f0e8;
+    margin: 4rem 0 1.5rem;
+    line-height: 1.2;
+  }
+
+  h2 em {
+    font-style: italic;
+    color: #c0392b;
+  }
+
+  .pull-quote {
+    border-left: 3px solid #c0392b;
+    margin: 3rem 0;
+    padding: 0.5rem 0 0.5rem 2rem;
+  }
+
+  .pull-quote p {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: #f5f0e8;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .pull-quote cite {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #c0392b;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  .stat-block {
+    background: #111;
+    border: 1px solid #1e1e1e;
+    border-left: 3px solid #c0392b;
+    padding: 2rem 2.5rem;
+    margin: 3rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2rem;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: #c0392b;
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #555;
+    margin-top: 6px;
+    display: block;
+    line-height: 1.5;
+  }
+
+  .separator {
+    text-align: center;
+    margin: 3.5rem 0;
+    color: #2a2a2a;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.5em;
+    font-size: 12px;
+  }
+
+  .callout {
+    background: rgba(192, 57, 43, 0.07);
+    border: 1px solid rgba(192, 57, 43, 0.2);
+    padding: 1.5rem 2rem;
+    margin: 3rem 0;
+    font-size: 1rem;
+    color: #c0392b;
+    line-height: 1.7;
+  }
+
+  .callout strong {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #a02020;
+  }
+
+  .end-mark {
+    text-align: center;
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid #1a1a1a;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #333;
+  }
+
+  .end-mark span { color: #c0392b; }
+
+  strong { font-weight: 400; color: #f5f0e8; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-rule">TKO</div>
+  <div class="hero-kicker">Opinion &nbsp;·&nbsp; Wrestling &nbsp;·&nbsp; April 2026</div>
+  <h1 class="hero-title">TKO Is <em>Killing</em> The Company I Love</h1>
+  <p class="hero-deck">Forty years. Not a single PPV missed. I stayed up through every WrestleMania, every Royal Rumble, every ridiculous gimmick match at 3am in the UK. And I have never been angrier than I am right now.</p>
+  <div class="hero-byline">
+    <span>A 40-Year Fan</span> &nbsp;·&nbsp; Norwich, UK &nbsp;·&nbsp; April 25, 2026
+  </div>
+</div>
+
+<div class="content">
+
+  <p>I was seven years old. It was late. I probably should have been asleep. But I wasn't, because something was happening on television that made no logical sense — enormous men in spandex, a crowd losing its mind, and a feeling in my chest I couldn't name yet. Forty years later, I still can't fully name it. But I know what it felt like. And I know that TKO Group Holdings is systematically destroying it.</p>
+
+  <p>Let me be clear about something before we go any further. This isn't nostalgia. I'm not here to tell you the Attitude Era was better and everything since is rubbish. I was there for the bad years too — the PG wilderness, the John Cena Superman era that drove teenagers insane, the endless reigns of the same five blokes. I stayed. Every single PPV, live, no matter what time it kicked off in the UK. That's the commitment. That's what I'm speaking from.</p>
+
+  <p>Which is exactly why what TKO is doing to WWE makes me absolutely savage.</p>
+
+  <div class="separator">· · · · ·</div>
+
+  <h2>The <em>Adpocalypse</em></h2>
+
+  <p>WrestleMania used to be the one night a year where nothing else existed. You cleared your calendar. You stocked up. You stayed up until 4am in a Norwich living room because whatever was happening in that stadium mattered. The Showcase of the Immortals. That wasn't just marketing copy — it was genuinely how it felt.</p>
+
+  <p>WrestleMania 42 in Las Vegas did not feel like that. Not even close.</p>
+
+  <p>Ariel Helwani — one of the most respected combat sports journalists on the planet, a genuine wrestling fan — said it better than anyone: "When everything is for sale, it gets lost. That did not feel like WrestleMania. That did not feel like the showcase of the immortals. That did not feel like the Super Bowl. It didn't feel like the National Championship. It didn't feel like that." He called it soulless. He was right.</p>
+
+  <div class="pull-quote">
+    <p>"The mat now has ads everywhere. The table has ads everywhere. The apron has ads everywhere. There are no more backstage vignettes, no more interviews, and entrances are being lost."</p>
+    <cite>Ariel Helwani — Combat Sports Journalist</cite>
+  </div>
+
+  <p>The Slim Jim tables. The Ram Trucks match presentations. The Wingstop Intercontinental Ladder Match. Every segment sponsored, branded, plastered. We used to count WrestleMania moments — moments that gave you chills, moments you'd describe to people who weren't even wrestling fans. Now the moments belong to Mortal Kombat and a hydration drink.</p>
+
+  <p>TKO's position is that this is just modern sport. That the Super Bowl does it. That sponsorship is part of the product now. What they don't understand — what the people at the very top of that organisation fundamentally cannot grasp because they are not wrestling fans — is that wrestling is not like other sport. The atmosphere, the energy, the feeling of being inside something slightly unhinged and completely unique, that IS the product. When you commodify every inch of it, you don't just add adverts. You hollow the thing out entirely.</p>
+
+  <div class="separator">· · · · ·</div>
+
+  <h2>They Made The Ring <em>Dangerous</em></h2>
+
+  <p>Here's where it stops being about aesthetics and becomes something genuinely shameful. The painted logos on the ring mat — a TKO innovation, revenue from every square inch of canvas — are making the ring slippery. Not according to some angry fans on Reddit. According to Logan Paul. The man who started the whole thing with Prime.</p>
+
+  <p>On his own podcast, Paul admitted: "By the end of the night, the middle of that ring gets really slippery with them logos painted in there. I can't get running full speed. I gotta be really careful with my feet and my placement." He confirmed that LA Knight's slip at Elimination Chamber wasn't a botch — it was a consequence of the paint. The ring crew can't keep the surface safe because the surface is now an advertising board.</p>
+
+  <div class="callout">
+    <strong>Safety concern — on record</strong>
+    Logan Paul confirmed on the ImPaulsive podcast that colored ring mat logos had created slippery conditions across WWE events. LA Knight slipped during a mid-rope elbow drop at Elimination Chamber. WWE's own talent are flagging a safety issue caused by revenue-generating branding decisions.
+  </div>
+
+  <p>These are athletes. They are performing extraordinarily dangerous physical work, trusting that the environment they're performing in is as controlled as it can possibly be. TKO decided that environment could also be a revenue stream. Someone is going to get seriously hurt. And when they do, the people who signed off on painting corporate logos onto a professional wrestling mat will be sitting in a boardroom somewhere, not taking a bump.</p>
+
+  <div class="separator">· · · · ·</div>
+
+  <h2>A Billionaire Bought The <em>Commentary Desk</em></h2>
+
+  <p>I almost don't want to write this paragraph because it sounds made up. But it happened, at WrestleMania 42, on Sunday night, during the main event of the grandest stage in professional wrestling.</p>
+
+  <p>A man appeared at the commentary desk alongside Wade Barrett and Michael Cole. No microphone. No headset. No credentials. No wrestling connection whatsoever. He sat there in silence while the World Heavyweight Championship changed hands. He was later identified as a billionaire named Adam Weitsman, who afterwards posted a video of IShowSpeed's splash on Logan Paul with the caption: "I like to do the more cultured, refined things on the weekend."</p>
+
+  <p>A paying spectator. At the commentary desk. At WrestleMania.</p>
+
+  <p>This is what TKO has created: a product where a wealthy enough individual can simply buy proximity to the action. Not a seat in the crowd — a seat at commentary. The working class families who saved for months and flew across the country to be there got the upper deck at £854 before fees. The billionaire got to sit next to the commentators and say nothing. This is not sport. This is not entertainment. This is a luxury experience sold to people who don't even care what they're watching.</p>
+
+  <div class="separator">· · · · ·</div>
+
+  <h2>The Families Can't Afford It <em>Anymore</em></h2>
+
+  <p>This is the one that genuinely breaks my heart, because wrestling was never supposed to be for the wealthy. It was built for working people. The noise, the passion, the genuine emotional investment from people who didn't have the disposable income to be cynical about it — that was the atmosphere. That was what made the buildings feel electric. That was the product.</p>
+
+  <div class="stat-block">
+    <div class="stat">
+      <span class="stat-num">£46</span>
+      <span class="stat-label">Average WrestleMania ticket, 1985 (inflation adjusted)</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">£960</span>
+      <span class="stat-label">Average WrestleMania ticket, 2025</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">£7,000</span>
+      <span class="stat-label">Ringside floor seat, WrestleMania 42</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">2x</span>
+      <span class="stat-label">Ticket price increase since TKO merger, 2023–2025</span>
+    </div>
+  </div>
+
+  <p>Randy Orton said it himself. A group of fans told him what they'd collectively spent to attend WrestleMania. He winced. "It's embarrassing, to be honest. So much fucking money for a seat." Randy Orton — the man in the ring — was embarrassed by the price of watching him. Think about that for a moment.</p>
+
+  <p>Voices of Wrestling put it precisely: wrestling became a luxury product not because it got better, but because the people who own it now decided the wrong people were in the room. The prices are the policy. And the policy is: if you can't afford it, you're not wanted here.</p>
+
+  <p>Meanwhile, AEW — the competition TKO pretends doesn't exist — has actually seen average ticket prices drop since 2022. They are moving in the opposite direction. They still want everyone in the room.</p>
+
+  <div class="separator">· · · · ·</div>
+
+  <h2>New Orleans Binned For <em>Six Million Quid</em></h2>
+
+  <p>WrestleMania 42 was announced for New Orleans. The Caesars Superdome. Dwayne Johnson himself made the announcement on SmackDown. New Orleans has history with WrestleMania — XXX in 2014, one of the greatest events they've ever produced. The city was ready. The fans had already started planning.</p>
+
+  <p>Then Las Vegas paid $6 million to take it back. Back-to-back WrestleManias at the same stadium, in the same city. Not because it was creatively better. Not because the fans demanded it. Because Las Vegas cut a bigger cheque. New Orleans — the fans who'd booked flights and hotels, who'd been promised this — got nothing. TKO cashed the cheque and moved on.</p>
+
+  <p>Helwani had the perfect analogy for all of this: "TKO is making WWE into Coachella. Coachella attendees are not music fans." He's right. And what happens to Coachella when the people who actually loved music stop showing up? You get an expensive, soulless, corporate event where the brand matters more than the art. Sound familiar?</p>
+
+  <div class="separator">· · · · ·</div>
+
+  <h2>WrestleMania <em>Riyadh</em></h2>
+
+  <p>And then there's this. WrestleMania 43 — 2027 — will be held in Saudi Arabia. The first WrestleMania ever held outside North America. Not London, which John Cena himself said deserved a WrestleMania. Not a European city with a passionate wrestling fanbase. Saudi Arabia. For $250 million.</p>
+
+  <p>The women's wrestlers who perform in Saudi Arabia are required to cover their bodies in oversize t-shirts or full bodysuits. At WrestleMania. The grandest stage in professional wrestling. The night that belongs to Rhea Ripley and Bianca Belair and Becky Lynch — women who have built this business on their backs — and they'll be performing covered up in a country that won't allow them the same freedoms as their male counterparts. And TKO made this decision because Saudi Arabia's General Entertainment Authority pushed for WrestleMania 43 to coincide with the 300th anniversary of the founding of the First Saudi state. The spectacle wasn't even the point. They were purchased as a prestige event for a government's anniversary.</p>
+
+  <p>I've stayed up for every WrestleMania since I was seven years old. Every single one, live, as it happened, regardless of start time. I don't know if I can do it for WrestleMania Riyadh.</p>
+
+  <div class="separator">· · · · ·</div>
+
+  <h2>Danhausen Gets <em>WrestleMania</em></h2>
+
+  <p>Let me tell you who didn't get WrestleMania 42. Tiffany Stratton — one of the most naturally talented performers they have, charisma pouring out of her, a character that connects. IYO SKY — a generational talent, one of the best pure wrestlers on the planet, in the middle of an active storyline with Asuka and Kairi Sane that never even made the card. Kairi Sane herself — released the week after WrestleMania, mid-storyline, without so much as a proper farewell.</p>
+
+  <p>Two nights. More hours than a single-night WrestleMania ever had. And less actual wrestling in them.</p>
+
+  <p>Who did get WrestleMania? Danhausen, the comedy internet character who does not wrestle, teamed with John Cena to beat The Miz and Kit Wilson. This is on the card. This is a WrestleMania match in 2026. Meanwhile the Motor City Machine Guns — tag team legends, men who spent twenty years earning their spot — were released this week. The Wyatt Sicks, a years-long storyline built as a tribute to the late Bray Wyatt, dissolved overnight. Aleister Black — one of the most visually compelling characters in modern wrestling — cut loose after a second run that went nowhere because creative had no idea what to do with him. His wife Zelina Vega, gone too.</p>
+
+  <p>This is not a creative problem. Triple H is trying. You can see it in the moments that still land. This is a structural problem. Every creative decision is filtered through TKO's revenue optimisation model before it reaches the screen. The question is no longer "what makes for great television?" The question is "what generates the most sponsor impressions?"</p>
+
+  <div class="pull-quote">
+    <p>"The letters TKO are becoming somewhat stained in the eyes of wrestling, MMA, and boxing fans. We should never be talking about TKO as fans — that's the parent company. They're ruining the sanctity of what we love."</p>
+    <cite>Ariel Helwani</cite>
+  </div>
+
+  <div class="separator">· · · · ·</div>
+
+  <h2>What <em>Forty Years</em> Means</h2>
+
+  <p>I want to be honest about something. I'll still watch. I know I will. Because forty years of love doesn't just switch off because the people in charge are making catastrophically bad decisions driven entirely by shareholder value. The wrestlers haven't changed. Cody Rhodes is still extraordinary. Roman Reigns becoming World Heavyweight Champion on Sunday was genuinely electric. Oba Femi beating Brock Lesnar was a star-making moment that transcended the corporate noise around it. The talent is not the problem. It never is.</p>
+
+  <p>But I'm done pretending TKO's stewardship of this company is anything other than what it is: a slow, deliberate stripping of everything that made WWE unique, special, and irreplaceable, in service of a quarterly earnings report. They bought something that mattered to millions of people and they are converting it, piece by piece, into a content processing facility with branded mat logos and billionaires at the commentary desk.</p>
+
+  <p>I was seven years old. I stayed up for all of it. I'm still here, 3am in Norwich, watching every PLE live, every week, never missing a thing. Forty years of loyalty. And TKO has spent two of them making me feel, for the first time, like the company I love doesn't actually want me there.</p>
+
+  <p>Unless I can afford a £7,000 ringside seat.</p>
+
+  <p>Which I cannot.</p>
+
+  <div class="end-mark">
+    <span>—</span> &nbsp; End &nbsp; <span>—</span>
+  </div>
+
+</div>
+</body>
+</html>
