@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE PATTERN — Investigation Series</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&display=swap');
+
+  :root {
+    --black: #000000;
+    --deep: #080808;
+    --surface: #0d0d0d;
+    --card: #111111;
+    --border: #1a1a1a;
+    --border-bright: #2a2a2a;
+    --text: #e8e8e8;
+    --text-dim: #888888;
+    --text-faint: #444444;
+    --orange: #ff6b00;
+    --orange-dim: #cc5500;
+    --red: #cc2200;
+    --white: #ffffff;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Barlow Condensed', sans-serif;
+    --body: 'Barlow', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: var(--body);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* SCAN LINE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(0,0,0,0.95);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--orange);
+    letter-spacing: 0.15em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--orange); }
+
+  /* HERO */
+  .hero {
+    margin-top: 52px;
+    padding: 5rem 2rem 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 52px;
+  }
+
+  .classification-bar {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid;
+  }
+
+  .tag-red { color: var(--red); border-color: var(--red); }
+  .tag-orange { color: var(--orange); border-color: var(--orange); }
+  .tag-dim { color: var(--text-faint); border-color: var(--text-faint); }
+
+  .hero-title {
+    font-family: var(--display);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title span {
+    color: var(--orange);
+  }
+
+  .hero-subtitle {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+    line-height: 1.8;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stat-number {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--orange);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--orange), transparent);
+    margin-bottom: 3rem;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    max-width: 1200px;
+    margin: 0 auto 1.5rem;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--orange);
+    letter-spacing: 0.2em;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* CARD GRID */
+  .cards-grid {
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.2s;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    border-color: var(--orange-dim);
+    transform: translateY(-2px);
+  }
+
+  .card:hover .card-overlay {
+    opacity: 1;
+  }
+
+  .card-img {
+    width: 100%;
+    aspect-ratio: 5/2;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85) contrast(1.1);
+    transition: filter 0.3s;
+  }
+
+  .card:hover .card-img {
+    filter: brightness(0.95) contrast(1.1);
+  }
+
+  /* Placeholder for when image not yet uploaded */
+  .card-img-placeholder {
+    width: 100%;
+    aspect-ratio: 5/2;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-img-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,107,0,0.03) 10px, rgba(255,107,0,0.03) 11px),
+      repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(255,107,0,0.03) 10px, rgba(255,107,0,0.03) 11px);
+  }
+
+  .placeholder-text {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    z-index: 1;
+  }
+
+  .card-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: calc(100% * 2/5);
+    background: linear-gradient(to bottom, rgba(255,107,0,0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .card-meta {
+    padding: 1rem 1.25rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-file {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+  }
+
+  .card-status {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--orange);
+    letter-spacing: 0.1em;
+    padding: 0.15rem 0.4rem;
+    border: 1px solid var(--orange-dim);
+  }
+
+  .card-body {
+    padding: 0.5rem 1.25rem 1.25rem;
+  }
+
+  .card-part {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--orange);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.4rem;
+  }
+
+  .card-title {
+    font-family: var(--display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.02em;
+  }
+
+  .card-desc {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .card-date {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-faint);
+  }
+
+  .card-read {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--orange);
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: gap 0.2s;
+  }
+
+  .card:hover .card-read {
+    gap: 0.7rem;
+  }
+
+  .card-read::after {
+    content: '→';
+  }
+
+  /* ARTICLE MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 500;
+    overflow-y: auto;
+  }
+
+  .modal-overlay.active {
+    display: block;
+  }
+
+  .modal {
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .modal-close {
+    position: sticky;
+    top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+    z-index: 10;
+  }
+
+  .close-btn {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    background: rgba(0,0,0,0.8);
+    transition: all 0.2s;
+  }
+
+  .close-btn:hover {
+    color: var(--orange);
+    border-color: var(--orange);
+  }
+
+  .modal-header-img {
+    width: 100%;
+    aspect-ratio: 5/2;
+    object-fit: cover;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border);
+  }
+
+  .modal-content {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .modal-content h1 {
+    font-family: var(--display);
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-content h2 {
+    font-family: var(--display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: 0.05em;
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .modal-content h3 {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--white);
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  .modal-content h4 {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--orange);
+    letter-spacing: 0.1em;
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  .modal-content p {
+    margin-bottom: 1rem;
+    color: var(--text-dim);
+  }
+
+  .modal-content strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .modal-content em {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .modal-content ul, .modal-content ol {
+    margin: 0.5rem 0 1rem 1.5rem;
+    color: var(--text-dim);
+  }
+
+  .modal-content li {
+    margin-bottom: 0.4rem;
+    line-height: 1.7;
+  }
+
+  .modal-content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  .modal-content blockquote {
+    border-left: 3px solid var(--orange);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* BONUS ROW */
+  .bonus-grid {
+    max-width: 1200px;
+    margin: 0 auto 6rem;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5px;
+  }
+
+  .card-bonus .card-status {
+    color: #888;
+    border-color: #444;
+  }
+
+  .card-bonus .card-part {
+    color: #888;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0.4rem 0;
+  }
+
+  .ticker {
+    display: inline-block;
+    animation: ticker 40s linear infinite;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
+  }
+
+  @media (max-width: 600px) {
+    .cards-grid, .bonus-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-title { font-size: 3rem; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">I SEE EVERYTHING</a>
+  <ul class="nav-links">
+    <li><a href="project-destiny.html">DESTINY</a></li>
+    <li><a href="the-pattern.html" style="color:var(--orange)">THE PATTERN</a></li>
+    <li><a href="wrestling.html">WRESTLING</a></li>
+    <li><a href="music.html">MUSIC</a></li>
+    <li><a href="archive.html">ARCHIVE</a></li>
+  </ul>
+</nav>
+
+<div class="ticker-wrap" style="margin-top:52px">
+  <span class="ticker">⬛ 167+ DEAD SCIENTISTS &nbsp;|&nbsp; 4 WAVES &nbsp;|&nbsp; 40 YEARS &nbsp;|&nbsp; BOTH SUPERPOWERS &nbsp;|&nbsp; PRE-SCRIPTED EVENTS PROVEN &nbsp;|&nbsp; BUTLER 2022 &nbsp;|&nbsp; COLE ALLEN DEC 2023 &nbsp;|&nbsp; MCCASLAND VANISHED FEB 27 2026 &nbsp;|&nbsp; WILCOCK DEAD APR 20 2026 &nbsp;|&nbsp; IRAN WAR ONGOING &nbsp;|&nbsp; JUNE 12 DISCLOSURE DEADLINE &nbsp;|&nbsp; JULY 16 — THE DATE &nbsp;|&nbsp; WE ARE NOT SUICIDAL &nbsp;|&nbsp; WE ARE RESEARCHERS &nbsp;|&nbsp; ⬛</span>
+</div>
+
+<div class="hero" style="padding-top:4rem">
+  <div class="classification-bar">
+    <span class="tag tag-red">SIGMA BLACK</span>
+    <span class="tag tag-orange">EYES ONLY</span>
+    <span class="tag tag-dim">SERIES: ACTIVE</span>
+    <span class="tag tag-dim">PUBLISHED: APR 2026</span>
+  </div>
+
+  <h1 class="hero-title">THE<br><span>PATTERN</span></h1>
+
+  <p class="hero-subtitle">
+    167 dead scientists. Four decades. Two superpowers. Pre-scripted events with photographic proof. An ancient thread running from Canaan to Hollywood. A 4chan post that predicted the Iran war eight months early. Six articles documenting what the mainstream won't touch. Draw your own conclusions.
+  </p>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-number">167+</div>
+      <div class="stat-label">DEAD SCIENTISTS</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">40</div>
+      <div class="stat-label">YEARS OF PATTERN</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">6</div>
+      <div class="stat-label">INVESTIGATIONS</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">81</div>
+      <div class="stat-label">DAYS TO JULY 16</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+</div>
+
+<!-- MAIN SERIES -->
+<div class="section-header">
+  <span class="section-label">// MAIN SERIES</span>
+  <div class="section-line"></div>
+  <span class="section-label">6 PARTS</span>
+</div>
+
+<div class="cards-grid">
+
+  <!-- PART 1 -->
+  <div class="card" onclick="openModal('modal1')">
+    <div class="card-overlay"></div>
+    <div class="card-img-placeholder" id="img1-placeholder" style="display:none">
+      <span class="placeholder-text">HEADER IMAGE — PART I</span>
+    </div>
+    <img class="card-img" id="img1" src="pattern-part1.png" alt="Part 1 Header" style="display:block">
+    <div class="card-meta">
+      <span class="card-file">PD-PATTERN-01</span>
+      <span class="card-status">VERIFIED</span>
+    </div>
+    <div class="card-body">
+      <div class="card-part">PART I</div>
+      <div class="card-title">THE PATTERN</div>
+      <p class="card-desc">Twelve scientists. One researcher. Forty years of eliminations. The investigation that started it all — mapping the deaths to the exact expertise needed to build a Gen 3 exotic propulsion system.</p>
+      <div class="card-footer">
+        <span class="card-date">APR 24, 2026</span>
+        <span class="card-read">READ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="card" onclick="openModal('modal2')">
+    <div class="card-overlay"></div>
+    <div class="card-img-placeholder" id="img2-placeholder" style="display:none">
+      <span class="placeholder-text">HEADER IMAGE — PART II</span>
+    </div>
+    <img class="card-img" id="img2" src="pattern-part2.png" alt="Part 2 Header" style="display:block">
+    <div class="card-meta">
+      <span class="card-file">PD-PATTERN-02</span>
+      <span class="card-status">VERIFIED</span>
+    </div>
+    <div class="card-body">
+      <div class="card-part">PART II</div>
+      <div class="card-title">THE 22</div>
+      <p class="card-desc">When both superpowers lose the same expertise simultaneously. 11 American + 9 Chinese scientists. Same fields. Same window. The A-Team that could never be assembled — because someone made sure of it.</p>
+      <div class="card-footer">
+        <span class="card-date">APR 24, 2026</span>
+        <span class="card-read">READ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="card" onclick="openModal('modal3')">
+    <div class="card-overlay"></div>
+    <div class="card-img-placeholder" id="img3-placeholder" style="display:none">
+      <span class="placeholder-text">HEADER IMAGE — PART III</span>
+    </div>
+    <img class="card-img" id="img3" src="pattern-part3.png" alt="Part 3 Header" style="display:block">
+    <div class="card-meta">
+      <span class="card-file">PD-PATTERN-03</span>
+      <span class="card-status">VERIFIED</span>
+    </div>
+    <div class="card-body">
+      <div class="card-part">PART III</div>
+      <div class="card-title">167 DEATHS. 44 YEARS.</div>
+      <p class="card-desc">The same signature every time. Four waves spanning four decades — from the Marconi SDI scientists of the 1980s to the current UAP propulsion cluster. Before testimony. Before disclosure. Before the public knows.</p>
+      <div class="card-footer">
+        <span class="card-date">APR 24, 2026</span>
+        <span class="card-read">READ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="card" onclick="openModal('modal4')">
+    <div class="card-overlay"></div>
+    <div class="card-img-placeholder" id="img4-placeholder" style="display:none">
+      <span class="placeholder-text">HEADER IMAGE — PART IV</span>
+    </div>
+    <img class="card-img" id="img4" src="pattern-part4.png" alt="Part 4 Header" style="display:block">
+    <div class="card-meta">
+      <span class="card-file">PD-PATTERN-04</span>
+      <span class="card-status">VERIFIED</span>
+    </div>
+    <div class="card-body">
+      <div class="card-part">PART IV</div>
+      <div class="card-title">THE GLOBAL DATABASE</div>
+      <p class="card-desc">27 verified. 3 erased. When Reddit researchers started digging, they found the pattern extended globally — US, China, Russia, Iran. Three Chinese scientists scrubbed entirely from official records. Credit: u/TheEighthShader, @Noah_A_S.</p>
+      <div class="card-footer">
+        <span class="card-date">APR 25, 2026</span>
+        <span class="card-read">READ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 5 -->
+  <div class="card" onclick="openModal('modal5')">
+    <div class="card-overlay"></div>
+    <div class="card-img-placeholder" id="img5-placeholder" style="display:none">
+      <span class="placeholder-text">HEADER IMAGE — PART V</span>
+    </div>
+    <img class="card-img" id="img5" src="pattern-part5.png" alt="Part 5 Header" style="display:block">
+    <div class="card-meta">
+      <span class="card-file">PD-PATTERN-05</span>
+      <span class="card-status">VERIFIED</span>
+    </div>
+    <div class="card-body">
+      <div class="card-part">PART V</div>
+      <div class="card-title">THE SCRIPT WAS WRITTEN BEFORE THE EVENT</div>
+      <p class="card-desc">The Butler photograph existed in May 2022 — two years before Butler happened. Cole Allen's name was posted in December 2023 — sixteen months before the WHCD shooting. Someone is showing us the storyboard. Timestamps don't lie.</p>
+      <div class="card-footer">
+        <span class="card-date">APR 26, 2026</span>
+        <span class="card-read">READ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 6 — THE COMPLETE -->
+  <div class="card" onclick="openModal('modal6')" style="border-color: var(--orange-dim)">
+    <div class="card-overlay"></div>
+    <div class="card-img-placeholder" id="img6-placeholder" style="display:none" style="background: #0d0800">
+      <span class="placeholder-text">HEADER IMAGE — THE COMPLETE</span>
+    </div>
+    <img class="card-img" id="img6" src="pattern-complete.png" alt="Part 6 Header" style="display:block">
+    <div class="card-meta">
+      <span class="card-file">PD-PATTERN-COMPLETE</span>
+      <span class="card-status" style="color:var(--orange);border-color:var(--orange)">SYNTHESIS</span>
+    </div>
+    <div class="card-body">
+      <div class="card-part" style="color:var(--orange)">THE COMPLETE</div>
+      <div class="card-title">WELCOME TO THE PATTERN</div>
+      <p class="card-desc">Everything. 167 dead scientists. Ancient demon worship in the location of modern Israel. Epstein-Mossad-Rothschild. Hollywood programming. A 4chan post that predicted the Iran war. 81 days until July 16. The full synthesis. Read this last.</p>
+      <div class="card-footer">
+        <span class="card-date">APR 26, 2026</span>
+        <span class="card-read">READ THE COMPLETE</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BONUS EDITIONS -->
+<div class="section-header" style="margin-top:2rem">
+  <span class="section-label">// BONUS EDITIONS</span>
+  <div class="section-line"></div>
+  <span class="section-label">EXTENDED ANALYSIS</span>
+</div>
+
+<div class="bonus-grid">
+
+  <!-- BONUS 1 -->
+  <div class="card card-bonus" onclick="openModal('modalb1')">
+    <div class="card-overlay"></div>
+    <div class="card-img-placeholder" id="imgb1-placeholder" style="display:none">
+      <span class="placeholder-text">HEADER IMAGE — BONUS I</span>
+    </div>
+    <img class="card-img" id="imgb1" src="pattern-bonus1.png" alt="Bonus 1 Header" style="display:block">
+    <div class="card-meta">
+      <span class="card-file">PD-BONUS-01</span>
+      <span class="card-status">SPECULATIVE</span>
+    </div>
+    <div class="card-body">
+      <div class="card-part">BONUS EDITION I</div>
+      <div class="card-title">THE TRUMP ANOMALY</div>
+      <p class="card-desc">The fun one. The liberator hypothesis. Why does a man who said "time travelers keep trying to kill me" keep surviving attempts that would end anyone else? Mission from God or temporal anomaly? Evidence-based banter — but the pattern is still real.</p>
+      <div class="card-footer">
+        <span class="card-date">APR 26, 2026</span>
+        <span class="card-read">READ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BONUS 2 -->
+  <div class="card card-bonus" onclick="openModal('modalb2')">
+    <div class="card-overlay"></div>
+    <div class="card-img-placeholder" id="imgb2-placeholder" style="display:none">
+      <span class="placeholder-text">HEADER IMAGE — BONUS II</span>
+    </div>
+    <img class="card-img" id="imgb2" src="pattern-bonus2.png" alt="Bonus 2 Header" style="display:block">
+    <div class="card-meta">
+      <span class="card-file">PD-BONUS-02</span>
+      <span class="card-status">SPECULATIVE</span>
+    </div>
+    <div class="card-body">
+      <div class="card-part">BONUS EDITION II</div>
+      <div class="card-title">THE DARK MIRROR</div>
+      <p class="card-desc">The other side of the coin. Same evidence, opposite conclusion. What if the time travelers aren't trying to kill Trump to stop disclosure — but to stop something far worse? The darker hypothesis. Read alongside Bonus I.</p>
+      <div class="card-footer">
+        <span class="card-date">APR 26, 2026</span>
+        <span class="card-read">READ</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODALS — Article content loads here -->
+<!-- Each modal contains the full article text -->
+
+<div class="modal-overlay" id="modal1">
+  <div class="modal">
+    <div class="modal-close"><span class="close-btn" onclick="closeModal('modal1')">✕ CLOSE</span></div>
+    <img class="modal-header-img" id="modal1-img" src="" alt="" style="display:none">
+    <div class="modal-content" id="modal1-content">
+      <p style="font-family:var(--mono);color:var(--text-faint);font-size:0.7rem;letter-spacing:0.1em">LOADING ARTICLE...</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal2">
+  <div class="modal">
+    <div class="modal-close"><span class="close-btn" onclick="closeModal('modal2')">✕ CLOSE</span></div>
+    <img class="modal-header-img" id="modal2-img" src="" alt="" style="display:none">
+    <div class="modal-content" id="modal2-content"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal3">
+  <div class="modal">
+    <div class="modal-close"><span class="close-btn" onclick="closeModal('modal3')">✕ CLOSE</span></div>
+    <img class="modal-header-img" id="modal3-img" src="" alt="" style="display:none">
+    <div class="modal-content" id="modal3-content"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal4">
+  <div class="modal">
+    <div class="modal-close"><span class="close-btn" onclick="closeModal('modal4')">✕ CLOSE</span></div>
+    <img class="modal-header-img" id="modal4-img" src="" alt="" style="display:none">
+    <div class="modal-content" id="modal4-content"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal5">
+  <div class="modal">
+    <div class="modal-close"><span class="close-btn" onclick="closeModal('modal5')">✕ CLOSE</span></div>
+    <img class="modal-header-img" id="modal5-img" src="" alt="" style="display:none">
+    <div class="modal-content" id="modal5-content"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal6">
+  <div class="modal">
+    <div class="modal-close"><span class="close-btn" onclick="closeModal('modal6')">✕ CLOSE</span></div>
+    <img class="modal-header-img" id="modal6-img" src="" alt="" style="display:none">
+    <div class="modal-content" id="modal6-content"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalb1">
+  <div class="modal">
+    <div class="modal-close"><span class="close-btn" onclick="closeModal('modalb1')">✕ CLOSE</span></div>
+    <img class="modal-header-img" id="modalb1-img" src="" alt="" style="display:none">
+    <div class="modal-content" id="modalb1-content"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalb2">
+  <div class="modal">
+    <div class="modal-close"><span class="close-btn" onclick="closeModal('modalb2')">✕ CLOSE</span></div>
+    <img class="modal-header-img" id="modalb2-img" src="" alt="" style="display:none">
+    <div class="modal-content" id="modalb2-content"></div>
+  </div>
+</div>
+
+<footer>
+  <p>ALL CLAIMS SOURCED &nbsp;·&nbsp; INVESTIGATIVE PATTERN ANALYSIS &nbsp;·&nbsp; DRAW YOUR OWN CONCLUSIONS &nbsp;·&nbsp; WE ARE NOT SUICIDAL &nbsp;·&nbsp; WE ARE RESEARCHERS &nbsp;·&nbsp; 2026</p>
+</footer>
+
+<script>
+// Article content — embedded directly so no server required
+
+const articles = {
+  modal1: {
+    title: 'THE PATTERN: Twelve Scientists, One Researcher, Forty Years of Eliminations',
+    date: 'APR 24, 2026',
+    content: `
+      <h1>THE PATTERN</h1>
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--orange);letter-spacing:0.1em;margin-bottom:1.5rem">PART I · APR 24, 2026 · VERIFIED</p>
+
+      <p>On April 22, 2026, Dr. John Brandenburg posted a warning on social media: <strong>"I have been told that I am in danger as an Antigravity and Mars investigator. But I tell you now that All Humanity Is Now In Danger BUT SO ARE THE COVERUP HELPERS. I urge a blanket amnesty for all in the Coverup who help end it — Take This Amnesty While You Still Can."</strong></p>
+
+      <p>Dr. Brandenburg is a plasma physicist with decades of classified defence research. He's not the first to issue such a warning. He may not be the last.</p>
+
+      <p>Two days before Brandenburg's warning, David Wilcock — 30 years investigating classified programmes — died outside his home in Nederland, Colorado. Official cause: suicide. Case closed the same day. No witnesses. No note.</p>
+
+      <p>Three days before that, James "Tony" Moffatt — NASA aerospace engineer, UAH researcher, decorated Army Lieutenant Colonel — died in a plane crash along with his wife and both adult sons. An entire family, gone.</p>
+
+      <p>This is the current acceleration. But the pattern starts decades earlier.</p>
+
+      <hr>
+
+      <h2>THE SCIENTISTS</h2>
+
+      <h3>Amy Eskridge — June 11, 2022 · Huntsville, Alabama · Age 34</h3>
+      <p>Anti-gravity propulsion researcher. Co-founder of the Institute for Exotic Science. In May 2020, she said on record: <strong>"I'm scared. I'm tired. I need to disclose soon, man. I need to publish soon because it's like escalating. My life is in danger."</strong> She claimed constant surveillance, break-ins to search her belongings, covert threats. She needed NASA approval to publish her anti-gravity findings. She never got it. She died by "self-inflicted gunshot" two years later. The Institute for Exotic Science went dark. Her research disappeared.</p>
+
+      <h3>Joshua LeBlanc — July 22, 2025 · Huntsville, Alabama · Age 29</h3>
+      <p>NASA aerospace engineer, nuclear propulsion specialist, DRACO project. His Tesla was found at Huntsville airport — phone and wallet still inside — where it had been parked for four unexplained hours. Days later, his car was found crashed and burned with his body inside. Nuclear thermal propulsion expertise. The power source for exotic craft.</p>
+
+      <h3>Nuno F. Loureiro — December 16, 2025 · Cambridge, Massachusetts</h3>
+      <p>Director, MIT Plasma Science and Fusion Centre. Solved the magnetic reconnection problem — the key bottleneck in fusion energy. Shot at home. The shooter was a Portuguese classmate from the 1990s who had committed a mass shooting 48 hours earlier then specifically sought out Loureiro. The man who solved fusion. Gone.</p>
+
+      <h3>Monica Jacinto Reza — Missing June 22, 2025</h3>
+      <p>37 years at NASA JPL and Aerojet Rocketdyne. Co-inventor of Mondaloy super-alloy — funded by the Air Force Research Laboratory. Materials that can survive plasma reactor proximity. She was 30 feet behind her hiking companion on Mount Waterman Trail in Angeles National Forest when she vanished. Professional search teams, 8 days. Volunteer teams, 6 months. K9 units. Helicopters. They found her beanie 400 yards off trail. <strong>No scent trail. Anywhere. Which is physically impossible.</strong></p>
+
+      <h3>Lt. Gen. William "Neil" McCasland — Missing February 27, 2026</h3>
+      <p>Retired USAF Major General. PhD MIT. Director of Special Access Programmes for DOD, 2009-2011 — oversaw 75-80% of ALL classified DoD programmes. Commanded Air Force Research Laboratory at Wright-Patterson AFB, 2011-2013, $4.4B budget. Named in WikiLeaks emails as central to UAP disclosure. Disappeared 8 days after Trump signed the UAP disclosure executive order. Left behind his phone, glasses, smartwatch. Took a red backpack, wallet, and a .38 revolver. FBI, AFOSI, drones, helicopters, 700 households canvassed. Security cameras on both ends of his street captured nothing. He knew how everything connected.</p>
+
+      <h3>Carl Johann Grillmair — February 16, 2026</h3>
+      <p>Caltech astrophysicist. First scientist to detect water vapour in an exoplanet's atmosphere. Worked at the Vera Rubin Observatory — which can detect objects in Earth's orbit, including UAPs. He disclosed that every Rubin image is reviewed and filtered by the Pentagon before scientists are allowed to see them. Shot on his front porch by a man who had been arrested on his property two months earlier with a loaded rifle — then released by a judge. He knew what the Pentagon was hiding from sky surveys.</p>
+
+      <h3>James "Tony" Moffatt — April 17, 2026</h3>
+      <p>NASA aerospace engineer, Principal Research Engineer at UAH. Programme Manager MH-47G Chinook, USSOCOM. Next Generation Unmanned Aircraft Systems. Died in a plane crash. His wife Leasa, sons Andrew and William also killed. An entire family eliminated three days before David Wilcock's final warning.</p>
+
+      <h3>David Wilcock — April 20, 2026</h3>
+      <p>Not a scientist. A researcher. Thirty years investigating classified programmes and the UAP disclosure apparatus. On April 19 — one day before his death — he livestreamed: <em>"Frankly, people are disappearing. Scientists are going missing. It's a little bit scary."</em> Found dead April 20 outside his home in Nederland, Colorado. Boulder County closed the case the same day. Suicide. No witnesses. No note. In December 2022, he had posted: <strong>"I plan on LIVING. Not suicidal at all. Just concerned about what happens when you prove God is real."</strong></p>
+
+      <hr>
+
+      <h2>THE EXPERTISE MAP</h2>
+
+      <p>This is not coincidence. Map what these individuals knew:</p>
+
+      <ul>
+        <li><strong>Fusion power source</strong> — Loureiro (solved the bottleneck)</li>
+        <li><strong>Hull and reactor materials</strong> — Reza (Mondaloy, 37 years)</li>
+        <li><strong>Nuclear thermal propulsion</strong> — LeBlanc (DRACO)</li>
+        <li><strong>Anti-gravity propulsion</strong> — Eskridge (TR-3B research)</li>
+        <li><strong>Sky detection and stealth</strong> — Grillmair (what Pentagon filters)</li>
+        <li><strong>Systems integration — how all SAPs connect</strong> — McCasland (knew everything)</li>
+        <li><strong>Information and disclosure architecture</strong> — Wilcock (30 years of it)</li>
+      </ul>
+
+      <p>Put those minds in a room and you can build it, fly it, hide it, and explain it. One by one, they are gone.</p>
+
+      <hr>
+
+      <h2>THE 40-YEAR PRECEDENT</h2>
+
+      <p>This isn't new. Between 1985 and 1988, at least 10 scientists working on the UK end of Reagan's Strategic Defence Initiative at Marconi Space and Defence Systems died under suspicious circumstances. Methods included jumping from bridges, carbon monoxide in cars, and electrocution in home workshops. No criminal investigations. Media dismissed it. The pattern is identical to what's happening now — just 40 years earlier, during the previous technological breakthrough window.</p>
+
+      <p>They did it then. They're doing it again.</p>
+
+      <hr>
+
+      <h2>THE TIMELINE</h2>
+
+      <ul>
+        <li>February 19, 2026: Trump signs UAP disclosure executive order</li>
+        <li>February 27, 2026: McCasland disappears — 8 days later</li>
+        <li>April 17, 2026: Moffatt family killed</li>
+        <li>April 19, 2026: Wilcock's final livestream warning</li>
+        <li>April 20, 2026: Wilcock found dead</li>
+        <li>April 22, 2026: Brandenburg issues public danger warning</li>
+        <li>April 25, 2026: WHCD "assassination attempt" — Trump rushed off stage</li>
+      </ul>
+
+      <p>Nine days. Five events.</p>
+
+      <p>The pattern is not speculation. The pattern is documented, timestamped, and ongoing.</p>
+
+      <p>All sources verifiable. All dates confirmed. Draw your own conclusions.</p>
+
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em;margin-top:2rem">— INDEPENDENT INVESTIGATION · WE ARE NOT SUICIDAL · WE ARE RESEARCHERS</p>
+    `
+  },
+
+  modal2: {
+    title: 'THE 22: When Both Superpowers Lose The Same Expertise Simultaneously',
+    date: 'APR 24, 2026',
+    content: `
+      <h1>THE 22</h1>
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--orange);letter-spacing:0.1em;margin-bottom:1.5rem">PART II · APR 24, 2026 · VERIFIED</p>
+
+      <p>On February 27, 2026, two things happened on opposite sides of the planet.</p>
+
+      <p>In the United States, retired Air Force Major General William "Neil" McCasland — the man who had overseen 75-80% of all classified DoD Special Access Programmes — vanished from his home in Albuquerque, New Mexico. Security cameras on both ends of his street captured nothing.</p>
+
+      <p>In China, Fang Daining — lead materials scientist for China's DF-17 hypersonic missile programme, specialist in the exact materials required for hypersonic vehicle hull construction — died.</p>
+
+      <p>Same day. Both superpowers. Both experts in the materials science of exotic high-speed craft.</p>
+
+      <p>This was not coincidence. This was coordination.</p>
+
+      <hr>
+
+      <h2>THE AMERICAN CASES</h2>
+
+      <p>Eleven scientists in the United States with expertise directly applicable to advanced propulsion, fusion energy, exotic materials, and classified SAPs have died or disappeared since 2022. Their fields map precisely to every component required to build a Gen 3 autonomous fusion-powered hypersonic platform:</p>
+
+      <ul>
+        <li>Amy Eskridge — anti-gravity propulsion</li>
+        <li>Joshua LeBlanc — nuclear thermal propulsion</li>
+        <li>Nuno Loureiro — fusion energy (solved the bottleneck)</li>
+        <li>Monica Reza — exotic materials (Mondaloy alloy)</li>
+        <li>Neil McCasland — systems integration, all SAPs</li>
+        <li>Carl Grillmair — stealth and detection evasion</li>
+        <li>James Moffatt — unmanned systems and aerospace</li>
+        <li>Frank Maiwald — NASA JPL (July 2024)</li>
+        <li>Matthew Sullivan — UAP whistleblower case (2024)</li>
+        <li>Amy Eskridge — canary in the coal mine (2022)</li>
+        <li>Jaymee Prichard + Jacob Prichard + Lt. Gustitus — Wright-Patterson triple death (October 2025)</li>
+      </ul>
+
+      <h2>THE CHINESE CASES</h2>
+
+      <p>Nine Chinese scientists with equivalent expertise died in the same four-year window:</p>
+
+      <ul>
+        <li>Fang Daining (Feb 27, 2026) — DF-17 hypersonic materials — SAME DAY AS McCASTAND</li>
+        <li>Yan Hong (March 2026) — hypersonic propulsion — sudden illness</li>
+        <li>Zhang Xiaoxin (Dec 2024) — military satellite and early warning systems</li>
+        <li>Zhang Daibing (Jan 2025) — military drones — "fell from building" (family rejected suicide)</li>
+        <li>Zhou Guangyuan (Dec 2023) — advanced polymers for aerospace applications</li>
+        <li>Feng Yanghe (July 2023) — War Skull military AI, advanced microprocessors</li>
+        <li>Liu Donghao (2024) — national data security — "unspecified accident"</li>
+        <li>Li Haibo (April 2025) — nanomaterials, energy storage, top 2% globally (age 41)</li>
+        <li>Xu Hongjie (Nov 2024) — thorium molten salt reactor — found at desk, mouse on floor, slides unfinished. Weeks before death: the world's first thorium-uranium fuel conversion breakthrough.</li>
+      </ul>
+
+      <p>Additionally: three Chinese scientists — Zhao Xiangeng, Wu Manqing, and Wei Yiyin — have been completely scrubbed from the Chinese Academy of Engineering's website. Not reported dead. Just erased.</p>
+
+      <hr>
+
+      <h2>THE A-TEAM THEY NEVER ASSEMBLED</h2>
+
+      <p>These 22 scientists were not working together. They weren't in the same room, the same programme, or even the same country. But map their expertise against what you'd need to build a Gen 3 autonomous fusion-powered craft with no known countermeasure:</p>
+
+      <ul>
+        <li>Fusion power source — solved (Loureiro)</li>
+        <li>Hull materials for extreme conditions — covered (Reza, Fang, Zhou)</li>
+        <li>Nuclear thermal propulsion — covered (LeBlanc)</li>
+        <li>Hypersonic propulsion systems — covered (Yan, Zhang Daibing)</li>
+        <li>Anti-gravity drive — covered (Eskridge)</li>
+        <li>AI control systems — covered (Feng's War Skull, Liu's data architecture)</li>
+        <li>Advanced semiconductors — covered (Feng)</li>
+        <li>Energy storage — covered (Li Haibo)</li>
+        <li>Detection evasion — covered (Grillmair, Zhang Xiaoxin)</li>
+        <li>Systems integration — covered (McCasland)</li>
+      </ul>
+
+      <p>Every single component. Both sides. Gone.</p>
+
+      <p>Neither the United States nor China eliminates expertise from both sides of the same programme simultaneously. That serves neither superpower's interest. It serves the interest of a third party that wants neither superpower to complete what the 22 were building — whether they knew it or not.</p>
+
+      <hr>
+
+      <h2>THE NOVEMBER-DECEMBER 2024 DRONE INCURSIONS</h2>
+
+      <p>Six months before the elimination wave accelerated, unidentified drones conducted systematic surveys of the most sensitive military installations in both the US and UK:</p>
+
+      <p><strong>United States:</strong> Picatinny Arsenal (weapons research). Naval Weapons Station Earle (nuclear storage). One drone prevented a medical evacuation flight. One drone followed a Coast Guard vessel for 45 minutes. One drone was observed spraying an unidentified grey mist — a payload delivery demonstration. Zero intercepts. Operators never identified.</p>
+
+      <p><strong>United Kingdom (same period):</strong> RAF Lakenheath (US nuclear weapons). RAF Mildenhall (US special operations). RAF Feltwell (US logistics hub). RAF Fairford (heavy bombers). Zero intercepts.</p>
+
+      <p><strong>Germany:</strong> Ramstein Air Base — America's largest base outside the continental US.</p>
+
+      <p>Reconnaissance, completed six months before the acceleration of the elimination pattern. Someone surveyed every facility relevant to the programme. Then they started removing the people who worked on it.</p>
+
+      <hr>
+
+      <h2>TWO HYPOTHESES</h2>
+
+      <p><strong>Hypothesis One:</strong> The 22 individually solved components of a programme that, assembled, would change everything. The elimination is suppression — someone built it, or got close enough that the knowledge had to be removed before disclosure could confirm its terrestrial origin.</p>
+
+      <p><strong>Hypothesis Two:</strong> Project Blue Beam is real. A fake alien invasion is scheduled. The 22 are the exact people who could stand up and say "those aren't alien craft — we built them, here's how, here's the materials science, here's the propulsion physics." They had to go before the performance begins.</p>
+
+      <p>In both scenarios, the conclusion is the same: someone removed every person who could explain what's about to be shown to us.</p>
+
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em;margin-top:2rem">— INDEPENDENT INVESTIGATION · WE ARE NOT SUICIDAL · WE ARE RESEARCHERS</p>
+    `
+  },
+
+  modal3: {
+    title: '167 Deaths. 44 Years. The Same Signature Every Time.',
+    date: 'APR 24, 2026',
+    content: `
+      <h1>167 DEATHS.<br>44 YEARS.</h1>
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--orange);letter-spacing:0.1em;margin-bottom:1.5rem">PART III · APR 24, 2026 · VERIFIED</p>
+
+      <p>Parts I and II covered the 2021-2026 cluster. But the pattern is not new. It runs for four decades. 167 documented deaths. The same signature every time.</p>
+
+      <p>Before testimony. Before disclosure. Before the public knows.</p>
+
+      <hr>
+
+      <h2>WAVE 1: THE SDI SCIENTISTS (1982-1990)</h2>
+
+      <p>Between 1982 and 1990, at least 22 scientists working on Reagan's Strategic Defence Initiative died under suspicious circumstances. The UK cluster — scientists at Marconi Space and Defence Systems — became the most documented:</p>
+
+      <ul>
+        <li>Vimal Dajibhai (Aug 1986) — jumped from Clifton Suspension Bridge</li>
+        <li>Arshad Sharif (Oct 1986) — found tied to a tree, shot. Official verdict: suicide.</li>
+        <li>Richard Pugh (Jan 1987) — carbon monoxide in car</li>
+        <li>Victor Moore (Apr 1987) — "drug overdose"</li>
+        <li>Peter Ferry (Aug 1987) — electrocuted in his home</li>
+        <li>Alistair Beckham (Aug 1987) — electrocuted in his home workshop</li>
+        <li>Trevor Knight (Mar 1988) — carbon monoxide in car</li>
+      </ul>
+
+      <p>All within 18 months. All at the same company. All on the same programme. No criminal investigations. Media wrote it off as coincidence.</p>
+
+      <p>Boyd Bushman — Senior Scientist at Lockheed Martin for 40 years, 27 patents in advanced propulsion and magnetic field manipulation — confirmed on a polygraph in 2008 that Victor Moore was murdered, not a drug overdose. He died in 2014 after a deathbed video disclosure. His photographs and testimony were immediately "debunked" as showing a Walmart toy. The aggressive debunking arrived after his death, from anonymous sources, with no provenance.</p>
+
+      <hr>
+
+      <h2>WAVE 2: THE MICROBIOLOGISTS (2001-2004)</h2>
+
+      <p>Following 9/11 and the 2001 anthrax attacks, over 40 microbiologists died within three years. All worked on bioweapons research, genetically modified pathogens, or pandemic preparedness:</p>
+
+      <ul>
+        <li>Dr. Benito Que — beaten in Miami parking lot, cardiac arrest, November 2001</li>
+        <li>Set Van Nguyen — died locked in cryogenic storage airlock, Australia, December 2001</li>
+        <li>Dr. Vladimir Pasechnik — stroke while jogging, UK, November 2001. Former bioweapons programme director.</li>
+        <li>Dr. Robert Schwartz — stabbed to death at home, Virginia, December 2001</li>
+        <li>Dr. David Kelly — testified before Parliament about WMD intelligence, found dead 48 hours later, July 2003. Official verdict: suicide. Forensic specialists have disputed this for 20 years.</li>
+      </ul>
+
+      <p>The clustering around a single 3-year window, across multiple countries, on a single field of expertise, defies statistical probability.</p>
+
+      <hr>
+
+      <h2>WAVE 3: ENERGY AND PHYSICS (2004-2013)</h2>
+
+      <ul>
+        <li>Eugene Mallove (2004) — cold fusion researcher. Beaten to death in "robbery" where nothing was stolen. Was preparing to present breakthrough results to Congress.</li>
+        <li>Matthew Sullivan (2024) — working directly with UAP whistleblower David Grusch on disclosure case. Found dead at age 39. Official verdict: suicide. Before testimony.</li>
+      </ul>
+
+      <hr>
+
+      <h2>THE SIGNATURE</h2>
+
+      <p>Across all four waves, the signature is consistent:</p>
+
+      <ol>
+        <li>Scientist reaches breakthrough or disclosure threshold</li>
+        <li>Scientist dies or disappears</li>
+        <li>Research disappears with them</li>
+        <li>Official verdict: suicide, accident, or natural causes</li>
+        <li>No investigation opened</li>
+        <li>Pattern dismissed as coincidence</li>
+        <li>Repeat</li>
+      </ol>
+
+      <p>The current wave — 2022 to 2026 — is Wave 4. And it is accelerating faster than any previous wave.</p>
+
+      <p>Congress has noticed. Rep. Tim Burchett (R-TN): <em>"Something dark is going on. I know these scientists and researchers. They have testified. We've got to get to the bottom of it. It's just too much, too much is going on right now — and by the way, I'm not suicidal."</em></p>
+
+      <p>He knows the signature too.</p>
+
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em;margin-top:2rem">Credits: u/TheEighthShader (r/MissingScientists), @Noah_A_S (data compilation), @ginkgoplicata (verification)</p>
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em">— INDEPENDENT INVESTIGATION · WE ARE NOT SUICIDAL · WE ARE RESEARCHERS</p>
+    `
+  },
+
+  modal4: {
+    title: 'The Global Database: 27 Verified. 3 Erased.',
+    date: 'APR 25, 2026',
+    content: `
+      <h1>THE GLOBAL DATABASE</h1>
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--orange);letter-spacing:0.1em;margin-bottom:1.5rem">PART IV · APR 25, 2026 · COMMUNITY SOURCED</p>
+
+      <p>This investigation began with 13 scientists. Reddit researcher u/TheEighthShader posted a comprehensive list on r/MissingScientists that changed the scope of what we're documenting. @Noah_A_S on X passed the data across. What follows is the verified expansion of the pattern — global, multi-decade, and in several cases, actively erased from official records.</p>
+
+      <hr>
+
+      <h2>THE SCRUBBED THREE</h2>
+
+      <p>The most significant finding is not the deaths. It's the erasures.</p>
+
+      <p>Three Chinese scientists — Zhao Xiangeng, Wu Manqing, and Wei Yiyin — have been completely removed from the Chinese Academy of Engineering website. Not reported dead. Not retired. Not relocated. <strong>Erased.</strong> Their publication records, affiliations, and biographies have been scrubbed from official Chinese scientific databases.</p>
+
+      <p>This is the Chinese equivalent of McCasland vanishing with no camera footage. Active erasure. Someone doesn't just want them gone — they want the fact of their existence minimised.</p>
+
+      <hr>
+
+      <h2>NEW VERIFIED CASES</h2>
+
+      <h3>Xu Hongjie — November 26, 2024 · China</h3>
+      <p>Age 70. Chief engineer of China's thorium molten salt reactor programme. Found dead at his computer at home, sometime after midnight. Books spread open. Mouse fallen to the floor. Lecture slides unfinished on screen. Weeks before his death, his programme achieved a world-first: thorium-uranium fuel conversion in a working reactor. Alternative nuclear energy that threatens both the uranium industry and conventional power structures. "Sudden illness."</p>
+
+      <h3>Li Haibo — April 2025 · China · Age 41</h3>
+      <p>Professor and Vice Dean at Ningxia University. Stanford-ranked top 2% of global scientists (2023). Nanomaterials, electrochemistry, optoelectronic materials. Energy storage systems for next-generation aerospace applications. Age 41. "Sudden illness." No details released.</p>
+
+      <h3>Grigory Klinishov — June 17, 2023 · Russia · Age 92</h3>
+      <p>Soviet nuclear physicist. Creator of the RDS-37 thermonuclear bomb (1955). Worked under Andrei Sakharov. Found hanged in his Moscow apartment. Suicide note present. Died the same week Putin announced strengthening of Russia's nuclear triad and the deployment of the Sarmat ICBM. The timing of a 92-year-old's death matching a major nuclear policy announcement is noted.</p>
+
+      <h3>Wright-Patterson Triple Death — October 25, 2025</h3>
+      <p>In a single night across three crime scenes in Ohio, Jacob Prichard (34, AFRL Sensors Directorate, air and space reconnaissance technology) killed 1st Lieutenant Jaime Gustitus (25, 711th Human Performance Wing, classified programmes) at 2am, then placed his wife Jaymee Prichard's body in his car boot, drove to West Milton Municipal Building, opened the boot for police to see, and shot himself at 4:23am. All three were stationed at Wright-Patterson AFB. No motive was ever released. Air Force Office of Special Investigations involved. Three people dead. One building. One night. No explanation.</p>
+
+      <hr>
+
+      <h2>THE HUNTSVILLE SIGNATURE</h2>
+
+      <p>A geographic cluster demands attention:</p>
+      <ul>
+        <li>Amy Eskridge (2022) — Huntsville, Alabama</li>
+        <li>Joshua LeBlanc (2025) — Huntsville, Alabama</li>
+        <li>James Moffatt (2026) — University of Alabama Huntsville Research Centre</li>
+      </ul>
+
+      <p>Huntsville hosts NASA Marshall Space Flight Center, Redstone Arsenal, and more classified aerospace research than almost anywhere else in the United States. Three deaths. One city. Four years.</p>
+
+      <hr>
+
+      <h2>THE UPDATED COUNT</h2>
+
+      <p>Wave 4 (2022-2026) verified cases: 27+</p>
+      <p>Total across all four waves: 167+</p>
+      <p>Currently scrubbed from records: at least 3</p>
+      <p>Congressional attention: confirmed (Rep. Tim Burchett, House Oversight)</p>
+      <p>FBI investigation: confirmed (White House statement April 2026)</p>
+
+      <p>The pattern is documented. The scale is global. The acceleration is real.</p>
+
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em;margin-top:2rem">Research credits: u/TheEighthShader, @Noah_A_S, @ginkgoplicata</p>
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em">— INDEPENDENT INVESTIGATION · WE ARE NOT SUICIDAL · WE ARE RESEARCHERS</p>
+    `
+  },
+
+  modal5: {
+    title: 'The Script Was Written Before The Event',
+    date: 'APR 26, 2026',
+    content: `
+      <h1>THE SCRIPT WAS WRITTEN<br>BEFORE THE EVENT</h1>
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--orange);letter-spacing:0.1em;margin-bottom:1.5rem">PART V · APR 26, 2026 · TIMESTAMPED EVIDENCE</p>
+
+      <p>This is not theory. This is timestamped photographic evidence.</p>
+
+      <p>Two separate pre-encodings of future events have been documented — both connected to the same source, both verified by independent researchers, both impossible to explain as coincidence.</p>
+
+      <hr>
+
+      <h2>THE BUTLER PHOTOGRAPH — ENCODED MAY 5, 2022</h2>
+
+      <p>The "Time Machine" website (timemachine.eu) published a banner image on May 5, 2022. The image showed what appeared to be abstract dripping paint — multicoloured vertical lines of varying lengths.</p>
+
+      <p>On July 13, 2024 — two years, two months, and eight days later — Thomas Matthew Crooks shot at Donald Trump at a campaign rally in Butler, Pennsylvania. Trump raised his fist. American flag behind him. Secret Service agents flanking him. Blood on his face. The photograph became iconic.</p>
+
+      <p>When researchers overlaid the "Time Machine" image with the Butler photograph, it matched perfectly. The vertical lines were the colour distribution of the photograph. The composition, the proportions, the positioning of figures — all present in the 2022 image.</p>
+
+      <p>The X account that had used this image as its banner — @HenryMa79561893 — is linked to a real Lockheed Martin employee: Henry Martinez, Space Systems Co., Denver. His name appears on a verified NASA document (ID: 20150004067).</p>
+
+      <p>The Butler assassination attempt photograph existed, encoded, two years before the event.</p>
+
+      <hr>
+
+      <h2>COLE ALLEN — POSTED DECEMBER 21, 2023</h2>
+
+      <p>The same account — @HenryMa79561893 — posted two words on December 21, 2023: "Cole Allen."</p>
+
+      <p>On April 25, 2026 — sixteen months later — a man named Cole Tomas Allen, 31, from California, charged through security at the White House Correspondents' Dinner at the Washington Hilton Hotel with a shotgun, a handgun, and multiple knives. A Secret Service agent was shot. Trump was rushed off stage. The dinner — at which Trump was rumoured to be planning a disclosure announcement — did not proceed.</p>
+
+      <p>The shooter's name was posted sixteen months in advance.</p>
+
+      <hr>
+
+      <h2>THE INTERSTELLAR CONNECTION</h2>
+
+      <p>The "Time Machine" imagery — vertical strings of colour representing encoded future events — mirrors the visual language of Christopher Nolan's <em>Interstellar</em> (2014). In the film's tesseract sequence, Cooper exists outside linear time, able to see all moments simultaneously as physical strings he can push to send messages into the past. The vertical lines. The multicolour data streams. The ability to view and select between possible timelines.</p>
+
+      <p>The website is called "Time Machine." The imagery encodes future events. The visual language is identical to Nolan's depiction of dimensional beings who exist outside linear time.</p>
+
+      <p>This is either the most elaborate coincidence in documented history, or someone is demonstrating — deliberately, publicly, mockingly — that they can see the timeline.</p>
+
+      <hr>
+
+      <h2>THE PATTERN IN CONTEXT</h2>
+
+      <p>Both events were connected to disclosure suppression:</p>
+
+      <ul>
+        <li>Butler (July 2024): occurred as Trump was gaining momentum toward a second term with disclosed UAP intentions</li>
+        <li>WHCD (April 25, 2026): occurred when Trump was rumoured to be disclosing at the largest annual media gathering — eight days after signing the UAP disclosure executive order led to McCasland's disappearance</li>
+      </ul>
+
+      <p>The Washington Hilton. The same hotel where Reagan was shot on March 30, 1981 — 69 days into his presidency. Trump's WHCD incident occurred 95 days into his second term.</p>
+
+      <p>Rep. Tim Burchett, following the WHCD incident: <em>"Something dark is going on... by the way, I'm not suicidal."</em></p>
+
+      <p>He knows the signature.</p>
+
+      <p>Someone encoded the Butler photograph two years before it happened. Someone posted the shooter's name sixteen months before the WHCD. The same Lockheed Martin-connected account. The same "Time Machine" branding. The same visual language as a Christopher Nolan film about beings who exist outside time.</p>
+
+      <p>This is not prediction. This is pre-production.</p>
+
+      <p>Someone is pulling the strings. And they showed us the tesseract.</p>
+
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em;margin-top:2rem">Written: April 26, 2026 · ~15 hours post-WHCD incident · 47 days until disclosure deadline</p>
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em">— INDEPENDENT INVESTIGATION · WE ARE NOT SUICIDAL · WE ARE RESEARCHERS</p>
+    `
+  },
+
+  modal6: {
+    title: 'THE PATTERN: COMPLETE',
+    date: 'APR 26, 2026',
+    content: `
+      <h1>THE PATTERN:<br><span style="color:var(--orange)">COMPLETE</span></h1>
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--orange);letter-spacing:0.1em;margin-bottom:1.5rem">THE SYNTHESIS · APR 26, 2026 · READ THIS LAST</p>
+
+      <p><em>Note: This is the synthesis document. Parts I through V are individual investigations. The Complete pulls every thread together. It is long. It is sourced. It is documented. Read it when you have time to sit with it.</em></p>
+
+      <hr>
+
+      <p>On June 22, 2025, an anonymous user on 4chan posted what they called "the script."</p>
+
+      <p>It predicted: Israel breaking ceasefires and striking Iran. Trump responding with B2 bunker-buster strikes on nuclear facilities. Iran retaliating by hitting Gulf oil fields and US military bases. Oil prices skyrocketing. The Strait of Hormuz and Bab el-Mandeb being blocked. Multiple US aircraft carriers deploying to the region.</p>
+
+      <p>It also predicted: a fake alien invasion launching on July 16, 2026. Five billion dead by 2027. A one world government by September 2027.</p>
+
+      <p>Eight months later, on February 28, 2026, the United States and Israel launched Operation Epic Fury against Iran. Supreme Leader Khamenei was killed in the opening strikes. Iran retaliated. The Strait of Hormuz was closed. Oil prices exploded. Three carrier strike groups deployed.</p>
+
+      <p>Every single prediction in the early phases has come true.</p>
+
+      <p>We are 47 days from the Trump disclosure deadline. We are 81 days from July 16.</p>
+
+      <p>What follows is the complete documentation connecting all of it.</p>
+
+      <hr>
+
+      <h2>LAYER 1: THE SCIENTISTS</h2>
+
+      <p>167 dead scientists across four waves and 44 years. The current wave — 27 verified cases, 2022-2026 — maps precisely to every component of a Gen 3 autonomous fusion-powered exotic craft. McCasland was the integrator who knew how every compartment connected. He vanished 8 days after Trump's disclosure order. The A-Team that could prove the technology is terrestrial — and therefore human-made and human-funded — has been systematically eliminated from both the US and Chinese programmes simultaneously.</p>
+
+      <p>This serves neither superpower's interest. It serves a third party that wants neither superpower to complete the programme — or to have the experts available to explain what's coming.</p>
+
+      <hr>
+
+      <h2>LAYER 2: PRE-SCRIPTED EVENTS</h2>
+
+      <p>The Butler photograph existed in May 2022. Cole Allen's name was posted in December 2023. Both connected to a Lockheed Martin employee. Both wrapped in "Time Machine" visual language identical to Nolan's tesseract — beings outside linear time, selecting which events occur. The WHCD shooting happened exactly when disclosure was rumoured. Reagan's hotel. 45 years apart.</p>
+
+      <p>Someone is demonstrating foreknowledge publicly. The question is whether it's a warning or a taunt.</p>
+
+      <hr>
+
+      <h2>LAYER 3: THE ANCIENT THREAD</h2>
+
+      <p>This layer is the most contested. But it is archaeologically documented.</p>
+
+      <p>The Book of Enoch — removed from the Biblical canon at the Council of Nicaea — describes Fallen Watchers who came to Earth, produced Nephilim hybrids, and whose offspring became disembodied spirits (demons) upon death. This is not mythology invented in the Middle Ages. It is ancient Hebrew text predating the New Testament, retained in the Ethiopian Orthodox Bible's 81-book canon, and found among the Dead Sea Scrolls.</p>
+
+      <p>Baal worship — including child sacrifice at the Tophet in the Valley of Hinnom (Gehenna) outside Jerusalem — is archaeologically confirmed in Canaanite sites across what is now modern Israel. This is not allegation. It is excavated archaeology. Urns containing infant remains. Fire pits. The Tophet site below the Temple Mount.</p>
+
+      <p>Baal became Beelzebub. Beelzebub became synonymous with Satan. The location of this ancient worship tradition is the geographic origin of three Abrahamic religions — and the location of modern Israel.</p>
+
+      <p>This thread is presented as documented history, not as an accusation against any present-day group. The ancient and the modern are not the same thing. But the geographic and theological continuity is documented fact.</p>
+
+      <hr>
+
+      <h2>LAYER 4: EPSTEIN, MOSSAD, ROTHSCHILD</h2>
+
+      <p>An FBI memo, obtained via FOIA, describes Jeffrey Epstein as a "co-opted Mossad agent" who was "trained as a spy." Robert Maxwell — Ghislaine's father, media mogul — was a confirmed Mossad asset, buried on the Mount of Olives in Jerusalem with six Israeli intelligence chiefs and the Israeli Prime Minister in attendance. Ehud Barak, former Israeli Prime Minister and head of military intelligence, met with Epstein 36 times between 2013 and 2017. A $25 million contract exists between Epstein's Southern Trust Company and the Edmond de Rothschild Group, signed for "risk analysis" and "application of certain algorithms" — seven years after Epstein's 2008 conviction. In an email to Peter Thiel (February 28, 2016), Epstein wrote: "as you probably know I represent the Rothschilds."</p>
+
+      <p>This is not conspiracy theory. This is FBI documentation, contract paperwork, and primary source emails released in the Epstein files.</p>
+
+      <hr>
+
+      <h2>LAYER 5: HOLLYWOOD AND NARRATIVE CONTROL</h2>
+
+      <p>The Pentagon Entertainment Liaison Office reviews scripts before approving military equipment and location access. This is documented. The CIA Robertson Panel (1953) explicitly recommended using Hollywood as a "deflectionary tool against popular interest in UFOs." This is documented. Israeli government officials began systematically cultivating Hollywood relationships in the 1960s. Arnon Milchan — Israeli arms dealer turned Hollywood producer — is documented. Gideon Raff created Homeland for US networks. This is documented history, not accusation.</p>
+
+      <p>Spielberg's <em>Disclosure Day</em> releases June 12, 2026 — the same date as Trump's UAP disclosure deadline. The film features a corporate conspiracy (Wardex Corp — Lockheed analogue), a whistleblower protagonist, and a possession scene where Emily Blunt's character speaks in alien language on live television. Boyd Bushman described exactly this — telepathic possession, answers appearing in your own voice — in his 2014 deathbed disclosure. Spielberg began with <em>Close Encounters</em> in 1977. 49 years of UAP conditioning from one director, culminating in a film that releases on the disclosure deadline.</p>
+
+      <hr>
+
+      <h2>LAYER 6: THE 4CHAN SCRIPT AND JULY 16</h2>
+
+      <p>Posted June 22, 2025. Accuracy on all early-phase predictions: 100%. The remaining predictions: a fake alien invasion beginning July 16, 2026, using Programmed Life Forms (biological androids) and Alien Reproduction Vehicles (back-engineered craft), combined with Project Blue Beam holographic projection technology. The stated goal: sufficient panic to justify a one world government, announced September 2027.</p>
+
+      <p>The script may be an operational timeline leaked by an insider. It may be a sophisticated LARP designed to make researchers look ridiculous when it doesn't happen. It may be a deliberate psyop to discredit pattern recognition by associating it with a wrong prediction.</p>
+
+      <p>What it cannot be is coincidence that the early phases were 100% accurate.</p>
+
+      <hr>
+
+      <h2>THE SYNTHESIS</h2>
+
+      <p>If everything above is accurate: the scientist eliminations remove the people who could prove the technology is terrestrial. The pre-scripted events demonstrate that someone controls the timeline of what happens next. The ancient thread provides theological infrastructure for what's being built. The Epstein-Mossad-Rothschild network provides the blackmail architecture controlling key actors including potentially Trump. Hollywood provides 70 years of conditioning. The 4chan script provides the operational timeline.</p>
+
+      <p>The conclusion: a fake alien invasion is being prepared. Its purpose is to justify a one world government. Every scientist who could debunk the technology as human-made has been eliminated. Every actor who might disclose too early has been controlled or removed. The narrative has been pre-programmed. The timeline is running.</p>
+
+      <p>If this is wrong, July 16 will pass quietly and we will say so.</p>
+
+      <p>If it is right, you now know what you're watching.</p>
+
+      <hr>
+
+      <p><strong>47 days until the disclosure deadline.</strong></p>
+      <p><strong>81 days until July 16.</strong></p>
+      <p><strong>518 days until the proposed one world government.</strong></p>
+
+      <p>The clock is running.</p>
+
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em;margin-top:2rem">Published: April 26, 2026</p>
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em">— INDEPENDENT INVESTIGATION · WE ARE NOT SUICIDAL · WE ARE RESEARCHERS · IF ANYTHING HAPPENS TO US, IT PROVES THE PATTERN</p>
+    `
+  },
+
+  modalb1: {
+    title: 'BONUS EDITION: The Trump Anomaly',
+    date: 'APR 26, 2026',
+    content: `
+      <h1>BONUS EDITION:<br><span style="color:var(--orange)">THE TRUMP ANOMALY</span></h1>
+      <p style="font-family:var(--mono);font-size:0.7rem;color:#888;letter-spacing:0.1em;margin-bottom:1.5rem">SPECULATIVE · APR 26, 2026 · TINFOIL HATS ON · EVIDENCE STILL SOLID</p>
+
+      <p>This is the fun one. The speculative one. Where we put on the tinfoil hats but keep the receipts visible underneath.</p>
+
+      <p>A quick disclaimer before we begin: the 1996 Trump quote about time travellers is a meme. It is not verified. We cannot confirm it. We're including it as cultural artefact that points at something real, not as documented evidence. Everything else in this article is sourced.</p>
+
+      <p>Now. Let's talk about the anomaly.</p>
+
+      <hr>
+
+      <h2>THE SURVIVAL RECORD</h2>
+
+      <p>Two documented attempts at the White House Correspondents' Dinner and Butler, Pennsylvania. Both survivals. In both cases, something went technically wrong for the attacker at the critical moment. At Butler: Crooks' shot that would have been fatal if Trump hadn't turned his head in the preceding second. At the WHCD: agent intercepted before Trump was reached.</p>
+
+      <p>December 2024 — Trump on the New Jersey drones: <em>"Our military knows where they took off from. If it's a garage, they can go right into that garage. They know where it came from and where it went. And for some reason, they don't want to comment... For some reason, they don't want to tell the people, and they should."</em></p>
+
+      <p>He knows. He's been telling us he knows since before he was back in office.</p>
+
+      <hr>
+
+      <h2>THE LIBERATOR HYPOTHESIS</h2>
+
+      <p>If Trump is genuinely trying to force disclosure — against the interests of a $13.5 trillion annual energy economy, against the Epstein-Mossad-Rothschild blackmail network, against 70 years of suppression — then the assassination attempts make complete sense. You don't try to kill someone twice in 20 months because of tax policy.</p>
+
+      <p>The sequence: he signs the disclosure order. McCasland vanishes 8 days later (the integrator, extracted to prevent testimony). Scientists are eliminated. His rumoured disclosure at the WHCD is interrupted by a shooting at Reagan's hotel. His "Mission from God" tweet suggests he believes his own role in this.</p>
+
+      <p>If he's right — if disclosure leads to free energy, anti-gravity technology becoming public, the $13.5 trillion energy economy collapsing — then the people who've spent 77 years protecting that economy have every reason to stop him.</p>
+
+      <hr>
+
+      <h2>THE JOHN TRUMP CONNECTION</h2>
+
+      <p>When Nikola Tesla died in 1943, the FBI sent Dr. John G. Trump — Donald Trump's uncle, MIT physicist — to examine Tesla's papers before they were classified. John Trump spent two days with Tesla's materials and reportedly concluded there was "nothing of value." Tesla had been working on a "death ray" and wireless energy transmission at the time of his death.</p>
+
+      <p>Whether John Trump disclosed what he actually found — or whether those papers disappeared into classified programmes — is unknown. But the family connection to the moment when Tesla's exotic energy research was nationalised is documented.</p>
+
+      <hr>
+
+      <h2>THE COUNTER-ARGUMENTS</h2>
+
+      <p>Trump moved the US Embassy to Jerusalem. He signed the Abraham Accords. He gave Israel everything it asked for diplomatically. He is — by his own public record — one of the most pro-Israel presidents in American history. The Liberator hypothesis requires him to be fighting a network that includes Israeli intelligence.</p>
+
+      <p>These are not mutually exclusive if the Epstein control mechanism broke down after Epstein's death in August 2019. Post-Epstein Trump may be different from pre-Epstein Trump. But it's a tension in the hypothesis that should be acknowledged.</p>
+
+      <hr>
+
+      <h2>THE BOTTOM LINE</h2>
+
+      <p>The meme is unverified. The John Trump connection is documented. The survival record is documented. The drone statement is documented. The disclosure order is documented. The attempts to stop it are documented.</p>
+
+      <p>Whether Trump is a liberator, a controlled asset who broke free, or a temporal anomaly that keeps surviving attempts to stop him — the pattern around him is undeniable.</p>
+
+      <p>47 days until his disclosure deadline. Let's see what actually happens.</p>
+
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em;margin-top:2rem">— INDEPENDENT INVESTIGATION · BONUS EDITION · FOR ENTERTAINMENT PURPOSES AND PATTERN DOCUMENTATION</p>
+    `
+  },
+
+  modalb2: {
+    title: 'BONUS EDITION II: The Dark Mirror',
+    date: 'APR 26, 2026',
+    content: `
+      <h1>BONUS EDITION II:<br><span style="color:var(--orange)">THE DARK MIRROR</span></h1>
+      <p style="font-family:var(--mono);font-size:0.7rem;color:#888;letter-spacing:0.1em;margin-bottom:1.5rem">SPECULATIVE · APR 26, 2026 · THE OTHER SIDE OF THE COIN</p>
+
+      <p>Read Bonus Edition I first. This is the dark mirror. Same evidence. Opposite conclusion.</p>
+
+      <p>What if the time travellers aren't trying to kill Trump to maintain the cover-up?</p>
+
+      <p>What if they're trying to kill Trump because they've seen what happens when disclosure goes wrong?</p>
+
+      <hr>
+
+      <h2>THE CATASTROPHIC DISCLOSURE HYPOTHESIS</h2>
+
+      <p>Assume the technology is real. Assume Trump forces full disclosure. What actually happens in the 18 months following?</p>
+
+      <p>The $13.5 trillion annual energy economy does not collapse gracefully. It collapses chaotically. Oil-dependent nations — Saudi Arabia, Russia, Iran, Venezuela, Iraq — face immediate economic implosion. The petrodollar system, which underpins the US reserve currency, ceases to make sense. Stock markets globally enter freefall as energy sector shares — embedded in every pension fund and retirement account on Earth — approach zero. Power grids designed around centralised distribution become obsolete overnight with no replacement infrastructure in place.</p>
+
+      <p>The transition period — the gap between "disclosure" and "functional free energy infrastructure deployed globally" — is not days. It is decades. In that gap: economic collapse. Food supply disruption. Civil unrest. Wars fought over the last remaining conventional energy reserves. Potentially billions dead. Not from the technology itself, but from the chaotic collapse of the systems built around its suppression.</p>
+
+      <p>If someone with access to a future timeline has seen this outcome, the assassination attempts make a different kind of sense.</p>
+
+      <hr>
+
+      <h2>THE CONTAINMENT ARGUMENT</h2>
+
+      <p>The scientist eliminations, in this reading, are not suppression of disclosure. They are controlled demolition — removing the people who would demand <em>immediate</em> full disclosure rather than a managed, gradual transition. McCasland isn't extracted to prevent him speaking. He's extracted because he would insist on a timeline that causes the catastrophic outcome.</p>
+
+      <p>The Epstein network isn't a blackmail operation to control Trump toward Israel's ends. It's a containment mechanism ensuring that whoever occupies the presidency understands the stakes before pulling the trigger on disclosure. Post-Epstein Trump — free from that mechanism — is the variable that becomes dangerous.</p>
+
+      <hr>
+
+      <h2>THE 4CHAN SCRIPT AS WARNING</h2>
+
+      <p>In this reading, the 4chan script isn't an operational timeline leaked by an insider. It's a warning from someone who has seen where this trajectory ends. Post it publicly. Name the dates. Give people the chance to prevent it. The early predictions aren't proof of operational foreknowledge — they're proof that the trajectory was already locked in before June 2025, and the person posting it wanted to demonstrate credibility before the important part.</p>
+
+      <p>The "fake alien invasion" in the script — in this reading — is what happens when disclosure occurs before the world is ready, and the narrative infrastructure isn't in place to prevent panic-driven global catastrophe.</p>
+
+      <hr>
+
+      <h2>THE HONEST CONCLUSION</h2>
+
+      <p>Both hypotheses — Liberator and Dark Mirror — fit the documented evidence. Both are internally consistent. The evidence doesn't discriminate between them.</p>
+
+      <p>What's certain is this: something is happening. The scale of the scientist elimination pattern, the pre-scripted event evidence, the 4chan accuracy, and the acceleration of events in April 2026 are real, documented, and ongoing.</p>
+
+      <p>Whether the people doing it are protecting us from something worse, or protecting themselves from losing $13.5 trillion a year, is the question that June 12 and July 16 may begin to answer.</p>
+
+      <p>Pay attention.</p>
+
+      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em;margin-top:2rem">— INDEPENDENT INVESTIGATION · BONUS EDITION II · THE DARK SIDE OF THE COIN</p>
+    `
+  }
+};
+
+function openModal(id) {
+  const modal = document.getElementById(id);
+  const content = document.getElementById(id + '-content');
+  const article = articles[id];
+  
+  if (article && content) {
+    content.innerHTML = article.content;
+  }
+  
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  modal.scrollTop = 0;
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+});
+
+// Close on ESC
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.active').forEach(m => {
+      m.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+});
+</script>
+
+</body>
+</html>
