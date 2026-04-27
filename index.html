@@ -15,7 +15,7 @@ body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.15em;color:#fff;text-decoration:none}
 .nav-logo em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
 .nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s}
+.nav-links a{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
 .nav-links a:hover{color:#c8a040}
 
 /* HERO */
@@ -24,10 +24,10 @@ body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
 .hero-tags{display:flex;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap}
 .tag{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;border:1px solid;padding:4px 12px}
 .tag-gold{border-color:rgba(200,160,60,0.5);color:rgba(200,160,60,0.8)}
-.tag-dim{border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.3)}
+.tag-dim{border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.65)}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,8vw,7.5rem);letter-spacing:0.08em;line-height:0.92;margin-bottom:2rem;color:#fff}
 .hero-title em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
-.hero-sub{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);max-width:600px;line-height:2}
+.hero-sub{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.7);max-width:600px;line-height:2}
 .hero-rule{width:100%;height:1px;background:linear-gradient(to right,rgba(200,160,60,0.4),transparent);margin-top:4rem}
 
 /* TICKER */
@@ -39,7 +39,7 @@ body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
 /* SECTION LABEL */
 .section-header{display:flex;align-items:center;justify-content:space-between;padding:3rem 3rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.06)}
 .section-label{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5)}
-.section-count{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.2)}
+.section-count{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.55)}
 
 /* GRID */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1px;background:rgba(255,255,255,0.06);margin:0}
@@ -51,14 +51,14 @@ body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
 .card:hover::before{opacity:1}
 .card-number{font-size:9px;letter-spacing:0.4em;color:rgba(200,160,60,0.3)}
 .card-file{display:flex;align-items:center;justify-content:space-between}
-.card-fileid{font-size:9px;letter-spacing:0.3em;color:rgba(255,255,255,0.2)}
+.card-fileid{font-size:9px;letter-spacing:0.3em;color:rgba(255,255,255,0.55)}
 .card-status{font-size:9px;letter-spacing:0.25em;border:1px solid;padding:2px 8px}
 .status-active{border-color:rgba(200,160,60,0.4);color:rgba(200,160,60,0.7)}
 .status-building{border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.3)}
 .status-coming{border-color:rgba(255,255,255,0.1);color:rgba(255,255,255,0.2)}
 .card-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3vw,2.4rem);letter-spacing:0.1em;color:#fff;line-height:1}
 .card-title em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
-.card-desc{font-size:10px;letter-spacing:0.05em;line-height:1.9;color:rgba(255,255,255,0.4)}
+.card-desc{font-size:10px;letter-spacing:0.05em;line-height:1.9;color:rgba(255,255,255,0.7)}
 .card-tags{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:auto;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.06)}
 .card-tag{font-size:8px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.4);padding:2px 0}
 .card-arrow{font-size:10px;letter-spacing:0.2em;color:rgba(200,160,60,0.5);margin-top:0.5rem;transition:letter-spacing 0.2s}
@@ -104,6 +104,7 @@ body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
     <li><a href="wrestling.html">Wrestling</a></li>
     <li><a href="music.html">Music</a></li>
     <li><a href="archive.html">The Archive</a></li>
+    <li><a href="predictive-programming.html">Predictive Programming</a></li>
   </ul>
 </nav>
 
@@ -116,6 +117,7 @@ body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
   </div>
   <h1 class="hero-title">One Mind.<br><em>Every</em><br>Rabbit Hole.</h1>
   <p class="hero-sub">Wrestling. Ancient texts. UAP disclosure. Music production.<br>Consciousness. Culture. All of it documented. None of it filtered.</p>
+  <img src="hero-brain.png" alt="" style="width:100%;max-width:900px;display:block;margin:2.5rem auto 0;opacity:0.9;border-radius:2px;">
   <div class="hero-rule"></div>
 </section>
 
