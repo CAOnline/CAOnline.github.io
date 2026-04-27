@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predictive Programming — I See Everything</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100vh;background:#000;color:#e8e8e8}
+body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.95);border-bottom:1px solid rgba(255,80,0,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:50px;backdrop-filter:blur(8px)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.2em;color:#fff;text-decoration:none}
+.nav-logo span{color:#ff5000}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover,.nav-links a.active{color:#ff5000}
+
+/* TICKER */
+.ticker-wrap{overflow:hidden;border-bottom:1px solid rgba(255,80,0,0.1);padding:8px 0;background:rgba(255,80,0,0.02)}
+.ticker-inner{display:flex;white-space:nowrap;animation:ticker 45s linear infinite}
+.ticker-inner span{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,80,0,0.35);padding:0 2.5rem}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* HERO */
+.hero{padding:4rem 2.5rem 3rem;border-bottom:1px solid rgba(255,80,0,0.1);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(255,80,0,0.05) 0%,transparent 70%)}
+.hero-tags{display:flex;gap:0.8rem;margin-bottom:2rem;flex-wrap:wrap}
+.tag{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;border:1px solid;padding:3px 10px}
+.tag-red{border-color:rgba(255,80,0,0.5);color:rgba(255,80,0,0.8)}
+.tag-dim{border-color:rgba(255,255,255,0.12);color:rgba(255,255,255,0.25)}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,7rem);letter-spacing:0.06em;line-height:0.9;margin-bottom:1.5rem;color:#fff}
+.hero-title .accent{color:#ff5000}
+.hero-sub{font-size:10px;letter-spacing:0.15em;line-height:2;color:rgba(255,255,255,0.3);max-width:620px;margin-bottom:2.5rem}
+.stats-row{display:flex;gap:3rem;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column;gap:0.3rem}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#ff5000;letter-spacing:0.1em;line-height:1}
+.stat-label{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+.hero-rule{width:100%;height:1px;background:linear-gradient(to right,rgba(255,80,0,0.4),transparent);margin-top:3rem}
+
+/* SECTION HEADER */
+.sec-header{display:flex;align-items:center;justify-content:space-between;padding:2.5rem 2.5rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.05)}
+.sec-label{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(255,80,0,0.45)}
+.sec-count{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.18)}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1px;background:rgba(255,255,255,0.05)}
+.grid-bonus{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1px;background:rgba(255,255,255,0.04)}
+
+/* CARD */
+.card{background:#000;cursor:pointer;display:flex;flex-direction:column;transition:background 0.2s;text-decoration:none;overflow:hidden;position:relative}
+.card:hover{background:rgba(255,80,0,0.03)}
+.card-img{width:100%;aspect-ratio:16/7;object-fit:cover;display:block;filter:brightness(0.85)}
+.card:hover .card-img{filter:brightness(1)}
+.card-img-placeholder{width:100%;aspect-ratio:16/7;background:linear-gradient(135deg,#0a0a0a 0%,#111 50%,#0a0a0a 100%);display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(255,80,0,0.08)}
+.card-img-placeholder span{font-size:9px;letter-spacing:0.3em;color:rgba(255,80,0,0.2);text-transform:uppercase}
+.card-body{padding:1.8rem}
+.card-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.card-id{font-size:8px;letter-spacing:0.3em;color:rgba(255,255,255,0.2)}
+.badge{font-size:8px;letter-spacing:0.2em;border:1px solid;padding:2px 7px}
+.badge-active{border-color:rgba(255,80,0,0.4);color:rgba(255,80,0,0.7)}
+.badge-verify{border-color:rgba(255,140,0,0.4);color:rgba(255,140,0,0.7)}
+.card-part{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,80,0,0.5);margin-bottom:0.4rem}
+.card-title{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:0.08em;color:#fff;line-height:1.05;margin-bottom:0.8rem}
+.card-desc{font-size:10px;letter-spacing:0.04em;line-height:1.85;color:rgba(255,255,255,0.38);margin-bottom:1.2rem}
+.card-footer{margin-top:auto;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between}
+.card-date{font-size:8px;letter-spacing:0.2em;color:rgba(255,255,255,0.18)}
+.card-read{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,80,0,0.5);transition:color 0.2s,letter-spacing 0.2s}
+.card:hover .card-read{color:#ff5000;letter-spacing:0.4em}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.96);z-index:1000;display:none;overflow-y:auto;backdrop-filter:blur(4px)}
+.modal-bg.open{display:block}
+.modal{max-width:820px;margin:0 auto;padding:4rem 2.5rem 6rem;position:relative}
+.modal-close{position:fixed;top:1.5rem;right:2rem;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.3);cursor:pointer;border:1px solid rgba(255,255,255,0.15);padding:6px 14px;transition:all 0.2s;z-index:1001;background:#000}
+.modal-close:hover{color:#ff5000;border-color:rgba(255,80,0,0.4)}
+.modal-tag-row{display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.modal-tag{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;border:1px solid;padding:3px 9px}
+.modal-tag-red{border-color:rgba(255,80,0,0.4);color:rgba(255,80,0,0.6)}
+.modal-tag-dim{border-color:rgba(255,255,255,0.1);color:rgba(255,255,255,0.25)}
+.modal-part{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(255,80,0,0.5);margin-bottom:0.6rem}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4rem);letter-spacing:0.06em;line-height:0.95;color:#fff;margin-bottom:0.8rem}
+.modal-subtitle{font-size:10px;letter-spacing:0.15em;color:rgba(255,255,255,0.3);line-height:1.8;margin-bottom:2.5rem}
+.modal-rule{width:100%;height:1px;background:linear-gradient(to right,rgba(255,80,0,0.3),transparent);margin-bottom:2.5rem}
+.modal-body{font-size:11px;letter-spacing:0.04em;line-height:2;color:rgba(255,255,255,0.65)}
+.modal-body p{margin-bottom:1.4rem}
+.modal-body h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.12em;color:#fff;margin:2.5rem 0 1rem;border-left:2px solid #ff5000;padding-left:1rem}
+.modal-body ul{margin:0.5rem 0 1.4rem 1.5rem}
+.modal-body ul li{margin-bottom:0.5rem}
+.modal-body strong{color:rgba(255,255,255,0.85)}
+.modal-body em{color:rgba(255,80,0,0.8);font-style:normal}
+.modal-date{font-size:8px;letter-spacing:0.25em;color:rgba(255,255,255,0.15);margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06)}
+
+@media(max-width:768px){
+  .nav{padding:0 1.2rem}.hero{padding:3rem 1.2rem 2rem}
+  .sec-header{padding:1.5rem 1.2rem 1rem}.modal{padding:2rem 1.2rem 4rem}
+  .stats-row{gap:1.5rem}.grid,.grid-bonus{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">I SEE <span>EVERYTHING</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="the-pattern.html">The Pattern</a></li>
+    <li><a href="predictive-programming.html" class="active">Predictive Programming</a></li>
+  </ul>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>THE SIMPSONS HAS BEEN TELLING YOU FOR 37 YEARS</span><span>|</span>
+    <span>ETERNALS IS THE BOOK OF ENOCH</span><span>|</span>
+    <span>INTERSTELLAR IS A PHYSICS MANUAL</span><span>|</span>
+    <span>BUTLER PHOTOGRAPH ENCODED MAY 2022</span><span>|</span>
+    <span>COLE ALLEN POSTED DECEMBER 2023</span><span>|</span>
+    <span>LOCKHEED MARTIN EMPLOYEE</span><span>|</span>
+    <span>DISCLOSURE DAY — JUNE 12 2026</span><span>|</span>
+    <span>47 DAYS</span><span>|</span>
+    <span>CONSENT OBTAINED THROUGH NON-RESISTANCE</span><span>|</span>
+    <span>THE SCRIPT WAS WRITTEN BEFORE THE EVENT</span><span>|</span>
+    <span>THE SIMPSONS HAS BEEN TELLING YOU FOR 37 YEARS</span><span>|</span>
+    <span>ETERNALS IS THE BOOK OF ENOCH</span><span>|</span>
+    <span>INTERSTELLAR IS A PHYSICS MANUAL</span><span>|</span>
+    <span>BUTLER PHOTOGRAPH ENCODED MAY 2022</span><span>|</span>
+    <span>COLE ALLEN POSTED DECEMBER 2023</span><span>|</span>
+    <span>LOCKHEED MARTIN EMPLOYEE</span><span>|</span>
+    <span>DISCLOSURE DAY — JUNE 12 2026</span><span>|</span>
+    <span>47 DAYS</span><span>|</span>
+    <span>CONSENT OBTAINED THROUGH NON-RESISTANCE</span><span>|</span>
+    <span>THE SCRIPT WAS WRITTEN BEFORE THE EVENT</span><span>|</span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-tags">
+    <span class="tag tag-red">SIGMA BLACK</span>
+    <span class="tag tag-red">EYES ONLY</span>
+    <span class="tag tag-dim">SERIES: ACTIVE</span>
+    <span class="tag tag-dim">PUBLISHED: APR 2026</span>
+  </div>
+  <h1 class="hero-title">PREDICTIVE<br><span class="accent">PROGRAMMING</span></h1>
+  <p class="hero-sub">They told us everything. In cartoons, blockbusters, halftime shows and album covers. The Simpsons predicted Trump 16 years early. Eternals is the Book of Enoch. The Butler photograph existed 800 days before the shooting. This is the documentation of a consent mechanism that has been running for 70 years — and is about to deliver its payload.</p>
+  <div class="stats-row">
+    <div class="stat"><span class="stat-num">37</span><span class="stat-label">Years of Simpsons</span></div>
+    <div class="stat"><span class="stat-num">8+</span><span class="stat-label">Verified Predictions</span></div>
+    <div class="stat"><span class="stat-num">800</span><span class="stat-label">Days Early (Butler)</span></div>
+    <div class="stat"><span class="stat-num">47</span><span class="stat-label">Days to June 12</span></div>
+  </div>
+  <div class="hero-rule"></div>
+</section>
+
+<div class="sec-header">
+  <span class="sec-label">// Main Series</span>
+  <span class="sec-count">4 Parts</span>
+</div>
+
+<div class="grid">
+
+  <!-- PART I -->
+  <div class="card" onclick="openModal('pp1')">
+    <div class="card-img-placeholder" id="img-pp1"><span>PP-PART-I — LOADING</span></div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-id">PP-SIGMA-01</span>
+        <span class="badge badge-active">VERIFIED</span>
+      </div>
+      <div class="card-part">Part I</div>
+      <div class="card-title">THE PREVIEW SHOW</div>
+      <p class="card-desc">The Simpsons has run for 37 years and accurately depicted Trump's presidency, 9/11, the Disney/Fox acquisition, the Higgs Boson, and five more future events with precision that defies statistical possibility. It isn't a lucky streak. It's the world's longest-running consent mechanism.</p>
+      <div class="card-footer">
+        <span class="card-date">APR 27, 2026</span>
+        <span class="card-read">READ →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART II -->
+  <div class="card" onclick="openModal('pp2')">
+    <div class="card-img-placeholder" id="img-pp2"><span>PP-PART-II — LOADING</span></div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-id">PP-SIGMA-02</span>
+        <span class="badge badge-active">VERIFIED</span>
+      </div>
+      <div class="card-part">Part II</div>
+      <div class="card-title">HOLLYWOOD KNOWS</div>
+      <p class="card-desc">Eternals is the Book of Enoch on film — celestial beings descending, teaching humanity tools and jewellery, a giant cosmic entity waiting for consciousness to reach critical mass before splitting the planet. Interstellar is a physics manual for dimensional time navigation. Christopher Nolan knows something. The MCU knows something. And 70 years of Israeli narrative control over Hollywood tells you who's steering the machine.</p>
+      <div class="card-footer">
+        <span class="card-date">APR 27, 2026</span>
+        <span class="card-read">READ →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART III -->
+  <div class="card" onclick="openModal('pp3')">
+    <div class="card-img-placeholder" id="img-pp3"><span>PP-PART-III — LOADING</span></div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-id">PP-SIGMA-03</span>
+        <span class="badge badge-verify">PHOTOGRAPHIC PROOF</span>
+      </div>
+      <div class="card-part">Part III</div>
+      <div class="card-title">THE SCRIPT WAS ALREADY WRITTEN</div>
+      <p class="card-desc">The Butler photograph existed 800 days before the shooting. Cole Allen's name was posted 492 days before the WHCD attack. Both from the same source. Same Lockheed Martin employee. Same Interstellar visual language. This is not pattern recognition — this is timestamped proof of pre-scripted events.</p>
+      <div class="card-footer">
+        <span class="card-date">APR 27, 2026</span>
+        <span class="card-read">READ →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART IV -->
+  <div class="card" onclick="openModal('pp4')">
+    <div class="card-img-placeholder" id="img-pp4"><span>PP-PART-IV — LOADING</span></div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-id">PP-SIGMA-04</span>
+        <span class="badge badge-active">47 DAYS</span>
+      </div>
+      <div class="card-part">Part IV</div>
+      <div class="card-title">DISCLOSURE DAY</div>
+      <p class="card-desc">June 12, 2026. Spielberg's new film releases on the exact date Trump's executive order mandates full government UAP disclosure. Close Encounters. E.T. War of the Worlds. 49 years of building the filing cabinets. Now delivering the payload — depicting telepathic contact, the exact mechanism Boyd Bushman described from inside Lockheed Martin before he died.</p>
+      <div class="card-footer">
+        <span class="card-date">APR 27, 2026</span>
+        <span class="card-read">READ →</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal-bg" onclick="handleBgClick(event)">
+  <span class="modal-close" onclick="closeModal()">✕ CLOSE</span>
+  <div class="modal" id="modal-content">
+    <div class="modal-tag-row">
+      <span class="modal-tag modal-tag-red">SIGMA BLACK</span>
+      <span class="modal-tag modal-tag-red">EYES ONLY</span>
+      <span class="modal-tag modal-tag-dim" id="modal-file"></span>
+    </div>
+    <div class="modal-part" id="modal-part"></div>
+    <h1 class="modal-title" id="modal-title"></h1>
+    <p class="modal-subtitle" id="modal-subtitle"></p>
+    <div class="modal-rule"></div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-date" id="modal-date"></div>
+  </div>
+</div>
+
+<script>
+const data = {
+  pp1: {
+    part: "PART I",
+    title: "THE PREVIEW SHOW",
+    subtitle: "How The Simpsons Has Been Telling You What's Planned For 37 Years",
+    file: "PP-SIGMA-01",
+    date: "PUBLISHED: APR 27, 2026",
+    body: `<p>The Simpsons debuted on December 17, 1989. It has run for 37 years. Over 750 episodes. Multiple generations of global audiences. At its peak in the 1990s and early 2000s, it was the most-watched television programme on earth.</p><p>That reach isn't a footnote. It's the point.</p><p>Because The Simpsons has accurately depicted future events with a precision that defies statistical possibility. Not once. Not twice. At least eight times on a scale that, when documented systematically, stops being explainable as coincidence and starts demanding a different explanation.</p><h3>THE DOCUMENTED PREDICTIONS</h3><p><strong>Trump Presidency (March 19, 2000 — 16 years early):</strong> Episode "Bart to the Future" depicted Lisa Simpson becoming president and inheriting a financial disaster from her predecessor: Donald Trump. The specific scenario — Trump presidency followed by an inexperienced outsider dealing with the consequences — aired 16 years before Trump announced his 2016 candidacy. The show didn't guess Trump would be famous. It specifically placed him in the Oval Office.</p><p><strong>9/11 Visual Reference (1997 — 4 years early):</strong> A 1997 episode featured a travel brochure showing New York City with a "$9" price tag positioned directly in front of the Twin Towers. The visual read: $9/11. Four years before September 11, 2001.</p><p><strong>Disney Acquiring Fox (1998 — 21 years early):</strong> An episode showed the 20th Century Fox studio logo with the subtitle "A Division of Walt Disney Co." The actual acquisition of Fox by Disney completed in 2019 — 21 years after the episode aired.</p><p><strong>Smart Watches (1995 — 20 years early):</strong> Homer communicates via a wrist device in a 1995 episode. Apple Watch launched in 2015.</p><p><strong>Video Calling (1995 — 10+ years early):</strong> The show depicted face-to-face video calls a decade before Skype and FaceTime became common technology.</p><p><strong>Lady Gaga Super Bowl Performance (2012 — 5 years early):</strong> An episode showed Lady Gaga performing at the Super Bowl, flying above the stadium in a manner closely matching her actual 2017 performance — including similar costuming.</p><p><strong>Higgs Boson Mass (1998 — 14 years early):</strong> In a brief background gag, Homer writes an equation on a chalkboard. Physicist Simon Singh later confirmed the equation predicted the mass of the Higgs boson — 14 years before CERN's official discovery in 2012.</p><p><strong>Autocorrect Failures (1994 — 15+ years early):</strong> An episode mocked the Newton device's predictive text errors — the exact type of autocorrect humiliation that wouldn't enter public consciousness until smartphones made it universal more than 15 years later.</p><h3>THE IMPOSSIBLE MATHS</h3><p>Each of these could individually be dismissed. Television writers make thousands of predictions. Some will hit. That's the standard rebuttal and it's mathematically weak when applied to this specific cluster.</p><p>The Trump prediction requires not just naming the right person but placing them in the specific office at approximately the right time. The Disney/Fox acquisition requires naming the exact acquiring company 21 years out. The Higgs Boson equation requires advanced particle physics knowledge placed in a background gag — not even a plot point.</p><p>The probability of all eight occurring by chance approaches zero.</p><h3>WHY THE SIMPSONS SPECIFICALLY</h3><p>The format is the key. A cartoon can depict anything without triggering the suspension of disbelief that live action requires. A character can wear a specific outfit, stand in a specific location, make a specific gesture — and because it's animated, audiences file it under entertainment rather than information.</p><p>Comedy lowers critical thinking. When something makes you laugh, your analytical defences drop. The content slides through without triggering scrutiny.</p><p>And crucially: when the event depicted eventually happens, the public response is invariably "oh, like The Simpsons." The prediction is acknowledged — and immediately dismissed as a quirky coincidence. The truth hides inside the acknowledgement.</p><p>You can't unknow it. But you also don't take it seriously. That's the mechanism.</p><h3>THE OCCULT CONSENT LAW</h3><p>David Wilcock — who warned publicly that scientists were disappearing and was found dead 48 hours later — spent years documenting what he called the occult law of consent: a principle by which those operating the control system are spiritually required to disclose their intentions before executing them.</p><p>The mechanism: if they show you what they're going to do, and you don't object, you have consented by silence. Silence equals agreement. Your non-resistance grants permission.</p><p>Framed as entertainment. Shown to billions. Not objected to — because who objects to a cartoon? Consent obtained.</p><p>The Simpsons isn't predicting the future.</p><p>It's the world's longest-running consent mechanism.</p><p>37 years. 750+ episodes. Hundreds of millions of viewers who saw everything that was coming and filed it under "it's just a cartoon."</p><p><em>The preview show is still running.</em></p>`
+  },
+  pp2: {
+    part: "PART II",
+    title: "HOLLYWOOD KNOWS",
+    subtitle: "The MCU, Christopher Nolan, and the Ancient Knowledge Hidden in Plain Sight",
+    file: "PP-SIGMA-02",
+    date: "PUBLISHED: APR 27, 2026",
+    body: `<p>There is a specific kind of film that Hollywood produces every decade or so — expensive, ambitious, culturally dominant. The kind that wins awards, makes billions, and gets studied in film school. The kind everyone watches.</p><p>These films share something beyond production budget and box office. They contain, embedded in their narrative structures, an accurate account of suppressed knowledge. Dimensional physics. Ancient theology. Classified technology. The nature of consciousness.</p><p>Not as metaphor. As documentation.</p><h3>ETERNALS: THE BOOK OF ENOCH ON FILM</h3><p>The Marvel film Eternals (2021) is, on the surface, a superhero origin story. Watch it again knowing what the Book of Enoch says.</p><p>The Eternals are powerful beings sent to Earth by a cosmic intelligence called Arishem. They arrive millennia ago and integrate with human civilisation. They teach humanity — tools, agriculture, stories, language. They protect humans from destruction. They live among us. Some take human partners. The line between the divine and the human blurs.</p><p>This is the Book of Enoch. Verbatim. The Watchers — 200 angels who descended to Earth, integrated with humanity, taught them metallurgy, cosmetics, warfare, jewellery, and sorcery. The line between divine and human blurred. Some took human partners. Their offspring — the Nephilim — changed everything.</p><p>But Eternals doesn't stop at the arrival. It goes further.</p><p>The climax of the film reveals that a Celestial — a being of incomprehensible cosmic scale — is gestating inside the Earth. Waiting. The Earth's population serves as an energy source. When consciousness on the planet reaches a specific threshold, the Celestial awakens, splits the Earth apart, and a new cosmic entity is born from the debris.</p><p>Read that again.</p><p>A giant cosmic being. Waiting beneath the surface. Triggered by collective consciousness reaching a critical mass. The planet split in two as the event horizon. End of days as a birth event.</p><p>This is not a superhero story. This is the theological framework of the Book of Enoch, the Nephilim narrative, and the convergence window — packaged as Marvel entertainment, placed in front of three billion people, filed under fiction.</p><p>The Eternals even reference Hiroshima. One of them was there, watching, deciding whether to intervene. The bomb that ended one world age and began another — witnessed by beings who operate outside human time.</p><p><em>Consent obtained. Via Marvel Studios. Grossed $402 million worldwide.</em></p><h3>INTERSTELLAR: THE PHYSICS THEY WON'T TEACH YOU</h3><p>Christopher Nolan's Interstellar (2014) was developed in collaboration with theoretical physicist Kip Thorne, whose work on wormholes and spacetime manipulation provided the scientific foundation. Thorne later won the Nobel Prize in Physics. This is not a film made by people guessing at physics. This is a film made by people who understand it.</p><p>What Interstellar depicts: time as a physical dimension that can be navigated spatially. Not as a metaphor. As a literal physical space. The tesseract sequence — Cooper inside a higher-dimensional structure where he can access any point in his daughter's timeline by moving physically through the space — is not science fiction. It is the logical extension of string theory's additional dimensions made visual.</p><p>String theory proposes 10-11 dimensions. We perceive three spatial dimensions plus time. A being operating in higher dimensions would perceive our entire timeline as a physical object — past, present, and future simultaneously accessible as coordinate points.</p><p>Interstellar shows this. The "bulk beings" — entities operating in five dimensions — can see our entire timeline laid out spatially. They can reach into it. Influence specific moments by selecting the correct position in the higher-dimensional space.</p><p>Now look at the "Time Machine" website image. Dated May 5, 2022. Vertical strings of dripping colour — identical visual language to Interstellar's timeline-string representation. The image that, when overlaid with the Butler photograph from July 2024, produces a perfect structural match.</p><p><em>It's not predicting the future. It's showing which timeline was selected.</em></p><p>Interstellar also depicts the mechanism by which suppressed knowledge travels across time: gravity. Cooper communicating through the bookshelf to his daughter Murph — transmitting information backwards through time — is structurally identical to the Book of Enoch's description of Enoch being "taken" by God and returning with forbidden knowledge. The knowledge came from outside linear time. It was transmitted to a receiver on Earth. They wrote it down.</p><h3>THE PRESTIGE: TESLA AND SUPPRESSED TECHNOLOGY</h3><p>Also Christopher Nolan. The Prestige (2006) is explicitly about suppressed technology — specifically, Nikola Tesla's ability to transmit electricity wirelessly and teleport matter across distance. In the film, Tesla's machine works. The technology is real. It is suppressed because of what it means in the wrong hands.</p><p>The historical Tesla held 300+ patents. His wireless energy transmission — funded by J.P. Morgan until Morgan realised it couldn't be metered and therefore monetised — was shut down. The Wardenclyffe Tower demolished. Tesla died in poverty. His papers were seized by the FBI.</p><p>John G. Trump — Donald Trump's uncle, MIT professor of electrical engineering — was given access to Tesla's confiscated papers by the FBI in 1943. He reported they contained nothing of significance. He later worked on classified government projects.</p><p>Nolan puts suppressed Tesla technology at the centre of a film about illusion and the price of obsessive knowledge. He is not being subtle about what he thinks happened to Tesla's work.</p><h3>THE MCU'S DIMENSIONAL ARCHITECTURE</h3><p>Doctor Strange depicts dimensional travel as accessible to trained practitioners — consistent with the CIA's classified Gateway Process documents, which confirm that consciousness can access non-physical dimensions through specific altered states. The documents are real. They were declassified. They describe the same mechanism Strange uses.</p><p>Thor depicts beings from another dimensional realm who were mistaken for gods by ancient humans. The Asgardians didn't present themselves as gods. Humans interpreted them that way because their technology was indistinguishable from divinity. This is the ancient astronaut hypothesis packaged as family entertainment.</p><p>None of these films require you to believe anything. You watch them, enjoy them, file them under Marvel universe mythology, and move on. But the information was transmitted. The framework was deposited. When disclosure happens — when the government confirms non-human intelligence and suppressed technology — your brain will already have the filing cabinet for it.</p><p>Spielberg built the first drawer in 1977. The MCU filled the rest.</p><h3>WHO CONTROLS THE MACHINE</h3><p>The major Hollywood studios were founded in the 1910s-1930s by Jewish immigrants — Laemmle at Universal, Zukor at Paramount, Fox at Fox, Mayer at MGM, Warner at Warner Bros. They built Hollywood from nothing because other industries were closed to them. This is documented history.</p><p>From the 1960s onwards, the Israeli government began actively cultivating Hollywood relationships. Officials solicited filmmakers to visit Israel, produce positive portrayals. Post-9/11 the pattern intensified — Homeland, created with Israeli writer Gideon Raff, ran for nine seasons framing Middle Eastern geopolitics through a specific lens.</p><p>Arnon Milchan — Israeli arms dealer turned Hollywood producer — produced Pretty Woman, Fight Club, L.A. Confidential and dozens more while operating as what historians Tony Shaw and Giora Goodman documented as a dual entertainment/political operative: promoting Israeli narratives and suppressing criticism behind the scenes.</p><p>This is not ethnic conspiracy. China influences Hollywood to avoid negative China portrayals — it's openly documented. The US military provides equipment in exchange for script approval — it's contractual. Nation-states use cultural influence as geopolitical tools. The Israel case is notable for its duration (70+ years), depth, and success.</p><p><em>When Spielberg releases Disclosure Day on June 12, 2026 — on the Trump UAP disclosure deadline — it sits at the intersection of all of this. The narrative machine has been running for 70 years. June 12 is when it delivers its payload.</em></p>`
+  },
+  pp3: {
+    part: "PART III",
+    title: "THE SCRIPT WAS ALREADY WRITTEN",
+    subtitle: "Photographic Proof That Future Events Were Encoded Years Before They Occurred",
+    file: "PP-SIGMA-03",
+    date: "PUBLISHED: APR 27, 2026",
+    body: `<p>Everything documented in Parts I and II is theoretical. Statistical anomalies. Narrative patterns. Possible interpretations.</p><p>Part III is different.</p><p>Part III contains photographic evidence that future events were encoded in publicly accessible images years before they occurred. Timestamped. Archived. Verifiable. Not interpretation — proof.</p><h3>THE BUTLER PHOTOGRAPH</h3><p>On July 13, 2024, Thomas Matthew Crooks fired eight rounds at Donald Trump during a rally in Butler, Pennsylvania. One bullet grazed Trump's ear. Trump raised his fist. Blood on his face. American flag behind him. Secret Service agents surrounding him.</p><p>The photograph became one of the most recognisable images of the decade.</p><p>It already existed.</p><p><strong>The Time Machine Image — May 5, 2022:</strong> A website called timemachine.eu published a page titled "Study on Quality in 3D Digitisation of Tangible Cultural Heritage." The banner image showed vertical strings of multicoloured pixels dripping downward — abstract digital art.</p><p>Independent researchers overlaid this image with the Butler photograph. The structural match was exact: Trump's fist position, American flag placement, Secret Service agent positions, Trump's head tilt, blood streak on face, overall compositional structure.</p><p><em>The "Time Machine" image was timestamped May 5, 2022 — 800+ days before the Butler shooting occurred.</em></p><h3>COLE ALLEN — 16 MONTHS EARLY</h3><p>On April 25, 2026, Cole Tomas Allen (31, California) approached a security checkpoint at the White House Correspondents' Dinner at the Washington Hilton carrying a shotgun, handgun, and multiple knives. A Secret Service agent was shot but saved by body armour. Trump was evacuated. The event — at which rumours had been circulating that Trump would make UAP disclosures to hundreds of journalists — was cancelled.</p><p>No disclosure occurred.</p><p>The same hotel where Reagan was shot in 1981 — 45 years earlier to the month. Reagan never challenged the deep state again.</p><p>On December 21, 2023 — 16 months before the WHCD shooting — an X account with the handle @HenryMa79561893 posted a single tweet. Two words: <strong>"Cole Allen"</strong>. That was the only post the account ever made.</p><p><strong>The Account's Banner Image:</strong> The same "Time Machine" visual from timemachine.eu. The same image that, when overlaid with the Butler photograph, produces a perfect structural match.</p><p><strong>Henry Martinez is real:</strong> The account traces to NASA Goddard Space Flight Center document 20150004067 — authored by Martinez, Henry (Lockheed Martin Space Systems Co., Denver, CO). Lockheed Martin is the primary contractor for the most classified aerospace programmes in the United States. Boyd Bushman worked at Lockheed Martin for 40 years as a Senior Scientist on advanced propulsion systems before his 2014 deathbed disclosure about anti-gravity technology and non-human intelligence.</p><p><em>A Lockheed Martin employee posted a future shooter's name 16 months before the shooting. Using the same Time Machine imagery that encoded the Butler photograph 800 days before that event. Both connected to UAP disclosure. Both resulting in disclosure being prevented.</em></p><h3>THE INTERSTELLAR LANGUAGE</h3><p>The visual language of the "Time Machine" image is not random. Vertical strings. Dripping colour. A timeline interface. This is the exact visual language Christopher Nolan used in Interstellar (2014) to represent higher-dimensional beings navigating human timelines as physical objects — the tesseract, the string lattice, past and future accessible as coordinate points by entities operating outside linear time.</p><p>Whoever created the "Time Machine" image chose this specific visual language deliberately. Not because it looks nice. Because it communicates something to those who understand it: this is not prediction. This is timeline selection. The image isn't forecasting a future event. It's showing which future was chosen.</p><h3>BEFORE DISCLOSURE = DISRUPTION. EVERY TIME.</h3><p><strong>Stefan Marinov (1997):</strong> Preparing to present free energy research to European Parliament. Fell from the EU Parliament building before the presentation.</p><p><strong>Dr. David Kelly (2003):</strong> Testified before British parliamentary intelligence committees July 15 about distorted Iraq WMD intelligence. Found dead July 17 — two days later.</p><p><strong>Mark McCandlish (2021):</strong> Contacted Senator Rubio's office offering to testify about ARV technology he had personally witnessed at classified facilities. Died of shotgun wound, ruled suicide, before the hearing.</p><p><strong>Matthew Sullivan (2024):</strong> Deputy Director of National Air and Space Intelligence Center, Wright-Patterson AFB. Working with David Grusch to bring a UAP whistleblower case to Congress. Died age 39, ruled suicide, before testimony.</p><p><strong>David Wilcock (2026):</strong> Warned publicly about disappearing scientists April 19. Dead 48 hours later. Boulder County closed the case the same day.</p><p><strong>Trump at WHCD (2026):</strong> Rumoured to disclose UAP information to hundreds of journalists. Armed gunman disrupts. Same hotel as Reagan 1981. No disclosure.</p><p><em>Same pattern. Different methods. Same result: disclosure prevented.</em></p><h3>THE ACCELERATION</h3><p>The timeline is compressing. April 17: Tony Moffatt, entire family killed in plane crash. April 20: Wilcock dead, 48 hours after final warning. April 22: Brandenburg issues public danger warning. April 25: WHCD shooting, Trump evacuated.</p><p>Nine days. Four incidents. Events that used to be separated by months are now happening within a week. The pattern is accelerating towards the June 12 disclosure deadline.</p><h3>WHAT THIS MEANS</h3><p>Someone or some group has demonstrated — twice, with timestamped evidence — the ability to encode future events in publicly accessible images years before those events occur.</p><p>Three possible explanations. Advanced institutional planning: events scripted years in advance by a group with sufficient control to execute them precisely on schedule. Higher-dimensional access: following the Interstellar framework, entities operating outside linear time selecting specific futures and encoding proof of that selection. Non-human intelligence: with the capability to navigate timelines, leaving evidence for those paying attention.</p><p>The operational result is identical across all three: the timeline is being controlled. Disclosure is being prevented. And someone is showing us the script — either because they want us to see it, or because they're so confident we cannot stop it that concealment is no longer worth the effort.</p><p><em>The Butler photograph existed 800 days early. Cole Allen's name was posted 492 days early. Both connected to the same source. Same visual language. Same Lockheed Martin employee. We are not looking at coincidences. We are looking at a script. And the script is visible.</em></p>`
+  },
+  pp4: {
+    part: "PART IV",
+    title: "DISCLOSURE DAY",
+    subtitle: "Why Steven Spielberg Is Releasing That Film On That Date",
+    file: "PP-SIGMA-04",
+    date: "PUBLISHED: APR 27, 2026",
+    body: `<p>June 12, 2026 is 47 days from the writing of this article.</p><p>It is also the date President Trump's executive order — signed February 19, 2026 — mandates the full release of all UAP-related government files and information.</p><p>And it is the release date of Steven Spielberg's new film: Disclosure Day.</p><p>That is not a coincidence. Nothing about this is a coincidence.</p><h3>WHO STEVEN SPIELBERG IS</h3><p>Spielberg is the highest-grossing film director in history. His work doesn't just entertain — it shapes cultural reality. When Spielberg makes a film about something, that thing becomes part of the global psychological furniture in a way nothing else can replicate.</p><p>His record on alien/government contact is comprehensive and specific:</p><p><strong>Close Encounters of the Third Kind (1977):</strong> The government knows about alien contact. They are actively hiding it. When the truth finally emerges, it is benevolent — the contact is real, the cover-up is real, and ordinary people who had genuine experiences were correct all along. Spielberg positioned the government as the deceiver and the experiencers as the truth-tellers. He did this in 1977.</p><p><strong>E.T. the Extra-Terrestrial (1982):</strong> Non-human intelligence as fundamentally benevolent. The threat is not the alien — it is the government attempting to capture and contain it. The child who forms a genuine bond with the non-human entity is the moral centre. The government scientists are the antagonists.</p><p><strong>Raiders of the Lost Ark (1981):</strong> The Ark of the Covenant is real, powerful, and being suppressed by bureaucratic indifference. "Top men," says the government official. The Ark goes in a warehouse. Truth buried in plain sight.</p><p><strong>War of the Worlds (2005):</strong> The opposite scenario. Alien contact as existential catastrophe. Humanity helpless against non-human intelligence. The government fails entirely.</p><p>Over 49 years, Spielberg has built a complete matrix of alien contact scenarios in the public imagination. Every possible public response to disclosure has been pre-loaded with his emotional framing. When disclosure happens — whatever form it takes — global audiences will process it through frameworks Spielberg built.</p><h3>DISCLOSURE DAY: WHAT WE KNOW</h3><p>Disclosure Day is explicitly framed as Spielberg answering the questions posed by Close Encounters 49 years later. The plot centres on a whistleblower who reveals the truth about non-human intelligence and encounters a corporate/government conspiracy attempting to suppress it.</p><p>One specific detail: the film depicts <strong>telepathic possession</strong> as the mechanism of contact. Non-human intelligence interfacing directly with human consciousness.</p><p>This is not Spielberg's invention. Boyd Bushman — Senior Scientist at Lockheed Martin for 40 years, the same company that employs Henry Martinez, the employee who pre-posted Cole Allen's name — gave a deathbed interview in 2014 describing anti-gravity technology and non-human intelligence. Bushman specifically described telepathic communication as the contact mechanism: direct consciousness-to-consciousness interface.</p><p><em>Spielberg's film depicts what Lockheed Martin's Senior Scientist described from direct knowledge before he died. Released on the same date as the government's mandatory disclosure deadline.</em></p><h3>THE SOFT DISCLOSURE FUNCTION</h3><p>You cannot tell billions of people who have been systematically misled for 80 years that everything they were told about the nature of reality was a lie — without preparation. The psychological disruption would be catastrophic.</p><p>Soft disclosure prepares the cognitive ground first. You introduce the ideas in emotional contexts — entertainment — where audiences process them safely, without direct threat to their worldview. You build the filing cabinets before you fill them. You make the concepts familiar before they become real.</p><p>Spielberg started building those filing cabinets in 1977 with Close Encounters. He's been filling them ever since. Disclosure Day releases 47 days before the deadline. The public watches it. The framework is refreshed. Two weeks later, the government releases the files. The filing cabinet is already labelled. The information slides in without destabilising everything.</p><h3>THE AI IMAGE PROBLEM</h3><p>There is a specific operation running parallel to the disclosure timeline. AI image and video generation technology was released to the public between 2022 and 2024 — DALL-E, Midjourney, Sora. Tools capable of producing photorealistic images and video of events that never occurred.</p><p>The timing matches the UAP disclosure pressure timeline precisely.</p><p>The effect: any photographic or video evidence of non-human craft, non-human entities, or suppressed technology can now be dismissed as AI-generated. The evidence was always going to be visual. The one category of evidence that would be undeniable is now categorically deniable.</p><p>Weaponised epistemology. The tool for fabricating false evidence was released at the exact moment real evidence was accumulating. When the disclosure files come out on June 12, the images will immediately face AI authenticity challenges. When UAP events occur, the footage will be called AI.</p><p><em>The consent machine doesn't just obtain consent. It builds the framework for dismissing the thing it's consenting to.</em></p><h3>47 DAYS</h3><p>In 47 days, Spielberg's film releases on the same date the government must legally release its UAP files under Trump's executive order.</p><p>The scientists who could prove the technology is terrestrial — built by humans, in classified programmes, over decades — are dead or missing. McCasland, the integrator who knew how all the compartmentalized programmes connected, has been gone since February 27. Wilcock, who documented the pattern, has been gone since April 20.</p><p>The narrative machine has been running for 70 years. It has prepared the public for benevolent contact. It has embedded the emotional frameworks. It has obtained the consent.</p><p>Whatever comes on June 12 will land in a consciousness that was prepared for it decades ago.</p><p>The question is not whether disclosure happens. The question is: disclosure of what? And by whom? And for what purpose?</p><p>The scientists who could have told us the technology was ours are gone. The man who knew everything about the classified programmes has vanished. The filmmaker who's been building the filing cabinets since 1977 is ready.</p><p><em>47 days. The clock is running.</em></p>`
+  }
+};
+
+function openModal(id) {
+  const d = data[id];
+  if (!d) return;
+  document.getElementById('modal-part').textContent = d.part;
+  document.getElementById('modal-title').textContent = d.title;
+  document.getElementById('modal-subtitle').textContent = d.subtitle;
+  document.getElementById('modal-file').textContent = d.file;
+  document.getElementById('modal-date').textContent = d.date;
+  document.getElementById('modal-body').innerHTML = d.body;
+  document.getElementById('modal-bg').classList.add('open');
+  document.getElementById('modal-bg').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-bg').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleBgClick(e) {
+  if (e.target === document.getElementById('modal-bg')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>
