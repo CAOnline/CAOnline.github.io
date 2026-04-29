@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jim Johnston — The Real Ones Hall of Fame — I See Everything</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400&family=Playfair+Display:ital,wght@0,900;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;background:#000;color:#fff}
+body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.92);border-bottom:1px solid rgba(200,160,60,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:52px;backdrop-filter:blur(8px)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.15em;color:#fff;text-decoration:none}
+.nav-logo em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:#c8a040}
+
+.ticker-wrap{overflow:hidden;border-bottom:1px solid rgba(200,160,60,0.1);padding:10px 0;background:rgba(200,160,60,0.02)}
+.ticker-inner{display:flex;white-space:nowrap;animation:ticker 50s linear infinite}
+.ticker-inner span{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.4);padding:0 3rem}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* HERO */
+.article-hero{position:relative;min-height:80vh;display:flex;align-items:flex-end;padding:4rem 3rem;border-bottom:1px solid rgba(200,160,60,0.12);overflow:hidden;background:#000}
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.hero-bg-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 20% 50%,rgba(200,160,60,0.06) 0%,transparent 70%)}
+.hero-bg-text{position:absolute;right:-1rem;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(10rem,22vw,26rem);letter-spacing:-0.02em;color:rgba(255,255,255,0.018);line-height:1;user-select:none;white-space:nowrap}
+.hero-bg-fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,0.5) 45%,rgba(0,0,0,0.1) 100%)}
+.hero-bg-left{position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,rgba(200,160,60,0.5),transparent)}
+
+/* HOF BADGE */
+.hof-badge{display:inline-flex;align-items:center;gap:1rem;margin-bottom:2rem;padding:0.8rem 1.5rem;border:1px solid rgba(200,160,60,0.3);background:rgba(200,160,60,0.05)}
+.hof-badge-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#c8a040;letter-spacing:0.1em;line-height:1}
+.hof-badge-text{display:flex;flex-direction:column;gap:0.2rem}
+.hof-badge-title{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.6)}
+.hof-badge-sub{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+
+.hero-content{position:relative;z-index:2;max-width:820px}
+.article-kicker{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5);margin-bottom:1.2rem}
+.article-tags{display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+.tag{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;border:1px solid;padding:4px 12px}
+.tag-gold{border-color:rgba(200,160,60,0.5);color:rgba(200,160,60,0.8)}
+.tag-dim{border-color:rgba(255,255,255,0.25);color:rgba(255,255,255,0.55)}
+
+.article-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,7rem);letter-spacing:0.06em;line-height:0.9;color:#fff;margin-bottom:1.8rem}
+.article-title em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.article-deck{font-size:12px;letter-spacing:0.1em;line-height:2.2;color:rgba(255,255,255,0.6);max-width:660px;text-transform:uppercase}
+.article-byline{margin-top:2rem;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);border-top:1px solid rgba(200,160,60,0.1);padding-top:1.2rem;display:flex;gap:2rem;flex-wrap:wrap}
+.article-byline span{color:rgba(200,160,60,0.5)}
+
+/* PULL QUOTE */
+.pull-quote-bleed{padding:4rem 3rem;border-bottom:1px solid rgba(200,160,60,0.1);background:rgba(200,160,60,0.015);text-align:center}
+.pull-quote-bleed blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.2rem,2.5vw,2.1rem);line-height:1.6;color:#c8a040;max-width:900px;margin:0 auto}
+.pull-quote-bleed cite{display:block;margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+
+/* ARTICLE BODY */
+.article-body{max-width:800px;margin:0 auto;padding:5rem 3rem}
+.article-body p{font-size:13px;letter-spacing:0.04em;line-height:2.4;color:rgba(255,255,255,0.8);margin-bottom:2rem}
+.article-body p strong{color:#fff;letter-spacing:0.06em}
+.article-body p em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040;font-size:14px}
+.article-body h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:0.1em;color:#fff;margin:4rem 0 1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(200,160,60,0.15)}
+.article-body h2 em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+
+/* THEME CATALOGUE */
+.theme-grid{margin:3rem 0;display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,0.05)}
+.theme-item{background:#000;padding:1.5rem 2rem;display:flex;align-items:baseline;gap:2rem;transition:background 0.2s}
+.theme-item:hover{background:rgba(200,160,60,0.02)}
+.theme-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.08em;color:#fff;min-width:220px;flex-shrink:0;line-height:1}
+.theme-name em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.theme-desc{font-size:10px;letter-spacing:0.05em;line-height:1.9;color:rgba(255,255,255,0.45)}
+.theme-reaction{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(200,160,60,0.4);margin-left:auto;flex-shrink:0;white-space:nowrap}
+
+/* INLINE QUOTE */
+.inline-quote{margin:3rem 0;padding:2rem 2.5rem;border-left:3px solid #c8a040;background:rgba(200,160,60,0.03)}
+.inline-quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.8;color:rgba(200,160,60,0.85);margin:0}
+.inline-quote cite{display:block;margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+
+/* ALBUM BOX */
+.album-box{margin:3rem 0;border:1px solid rgba(200,160,60,0.2);background:rgba(200,160,60,0.02);display:flex;gap:0}
+.album-spine{width:6px;background:linear-gradient(to bottom,rgba(200,160,60,0.6),rgba(200,160,60,0.1));flex-shrink:0}
+.album-content{padding:2rem 2.5rem;flex:1}
+.album-label{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5);margin-bottom:1rem;display:block}
+.album-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.08em;color:#fff;line-height:1;margin-bottom:0.8rem}
+.album-title em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.album-desc{font-size:11px;letter-spacing:0.05em;line-height:2;color:rgba(255,255,255,0.55)}
+
+/* INDUCTION STATEMENT */
+.induction{margin:4rem 0;padding:3rem;background:rgba(200,160,60,0.03);border:1px solid rgba(200,160,60,0.2);position:relative;overflow:hidden}
+.induction::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,#c8a040,transparent)}
+.induction-label{font-size:8px;letter-spacing:0.5em;text-transform:uppercase;color:rgba(200,160,60,0.4);margin-bottom:2rem;display:block;text-align:center}
+.induction-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);letter-spacing:0.08em;color:#fff;text-align:center;line-height:1;margin-bottom:0.5rem}
+.induction-name em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.induction-title{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5);text-align:center;margin-bottom:2rem;display:block}
+.induction-rule{width:120px;height:1px;background:rgba(200,160,60,0.3);margin:0 auto 2rem}
+.induction-reason{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:2;color:rgba(255,255,255,0.7);text-align:center;max-width:600px;margin:0 auto}
+
+/* CLOSING */
+.closing{margin:4rem 0 0;padding:3rem;border:1px solid rgba(200,160,60,0.15);background:rgba(200,160,60,0.02);text-align:center}
+.closing p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,2vw,1.4rem);line-height:1.9;color:rgba(200,160,60,0.8);margin:0}
+.closing .author{display:block;margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.2)}
+
+.article-footer-nav{padding:3rem;border-top:1px solid rgba(200,160,60,0.1);display:flex;justify-content:space-between;align-items:center}
+.back-link{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(200,160,60,0.5);text-decoration:none;transition:color 0.2s}
+.back-link:hover{color:#c8a040}
+.article-id{font-size:9px;letter-spacing:0.3em;color:rgba(255,255,255,0.15)}
+
+.footer{border-top:1px solid rgba(200,160,60,0.1);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between}
+.footer-left{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.15);line-height:2}
+.footer-right{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.25);text-align:right;line-height:2}
+
+@media(max-width:768px){
+  .nav{padding:0 1.5rem}
+  .nav-links{gap:1.2rem}
+  .article-hero{padding:3rem 1.5rem;min-height:70vh}
+  .article-body{padding:3rem 1.5rem}
+  .pull-quote-bleed{padding:3rem 1.5rem}
+  .theme-item{flex-direction:column;gap:0.5rem;padding:1.2rem 1.5rem}
+  .theme-name{min-width:unset}
+  .theme-reaction{margin-left:0}
+  .album-box{flex-direction:column}
+  .album-spine{width:100%;height:4px}
+  .article-footer-nav{padding:2rem 1.5rem;flex-direction:column;gap:1rem;text-align:center}
+  .footer{flex-direction:column;gap:1.5rem;padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">I See <em>Everything</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="wrestling.html">Wrestling</a></li>
+    <li><a href="wrestling.html">← The Real Ones</a></li>
+  </ul>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>Jim Johnston · 30 Years · The Undertaker · Steve Austin · DX · Mankind · The Hart Foundation · The WrestleMania Album · The Soundtrack To Your Wrestling Life · Long Overdue · &nbsp;</span>
+    <span>Jim Johnston · 30 Years · The Undertaker · Steve Austin · DX · Mankind · The Hart Foundation · The WrestleMania Album · The Soundtrack To Your Wrestling Life · Long Overdue · &nbsp;</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="article-hero">
+  <div class="hero-bg">
+    <div class="hero-bg-glow"></div>
+    <div class="hero-bg-text">JOHNSTON</div>
+    <div class="hero-bg-fade"></div>
+    <div class="hero-bg-left"></div>
+  </div>
+  <div class="hero-content">
+    <div class="article-kicker">HOF-001 · The Real Ones · First Inductee</div>
+    <div class="hof-badge">
+      <div class="hof-badge-num">01</div>
+      <div class="hof-badge-text">
+        <span class="hof-badge-title">The Real Ones · Hall Of Fame</span>
+        <span class="hof-badge-sub">First Inductee · Long Overdue</span>
+      </div>
+    </div>
+    <div class="article-tags">
+      <span class="tag tag-gold">Inductee #01</span>
+      <span class="tag tag-dim">Composer · 1985–2017</span>
+      <span class="tag tag-dim">The Unsung Architect</span>
+    </div>
+    <h1 class="article-title">Jim <em>Johnston</em></h1>
+    <p class="article-deck">300 million people know his music. Most couldn't tell you his name. He wrote the sonic identity of professional wrestling's greatest era and never once stood in a spotlight. This is long overdue.</p>
+    <div class="article-byline">
+      <div>Archive <span>HOF-001</span></div>
+      <div>Section <span>The Real Ones</span></div>
+      <div>Active <span>1985–2017 · WWF/WWE</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PULL QUOTE -->
+<div class="pull-quote-bleed">
+  <blockquote>"You know exactly who's coming before you've even seen them. That's not music. That's emotional architecture. And one man built almost all of it."</blockquote>
+  <cite>— Jim Johnston · The Real Ones · HOF-001</cite>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+
+  <p>Let me ask you something. Think about The Undertaker's entrance. The gong. The darkness. The slow walk. Now ask yourself — how much of what you feel in that moment is Paul Bearer, the lighting, the costume, the performance? And how much of it is that music? That specific, unmistakable, utterly perfect piece of music that tells you something enormous and ancient and unstoppable is coming?</p>
+
+  <p>Now do the same with Steve Austin. The glass shattering. The horns. The stomp. DX. Mankind. Bret Hart. The Hart Foundation. Shawn Michaels. Every entrance that ever made you lose your mind in an arena or leap off your sofa or feel something real despite yourself — <strong>almost all of it is the same man.</strong> One composer. Thirty years. The complete sonic identity of professional wrestling's greatest era.</p>
+
+  <p>His name is Jim Johnston. And he is the most important person in the history of WWE that most fans have never once thought to mention. <em>That ends here.</em></p>
+
+  <h2>What He <em>Actually Did</em></h2>
+
+  <p>Jim Johnston joined the WWF in 1985. He stayed for over thirty years. In that time he composed, produced and arranged the entrance music for virtually every significant performer in the company's history. He wasn't just writing catchy themes — he was building characters. Creating identities. Telling you in thirty seconds of music everything you needed to know about who was coming and how you were supposed to feel about them.</p>
+
+  <p>Think about how hard that job actually is. You have a performer. A character. A personality. A history. And you have to distil all of that into a piece of music that plays for thirty seconds in an arena and makes 20,000 people react instantly and correctly. Every time. Without fail. <strong>For thirty years.</strong></p>
+
+  <div class="inline-quote">
+    <p>He didn't just write entrance music. He wrote the emotional shorthand for an entire era of professional wrestling. You hear four notes and you're somewhere specific in time. That's not composing. That's architecture.</p>
+    <cite>— Jim Johnston · The Unsung Architect · 1985–2017</cite>
+  </div>
+
+  <h2>The <em>Catalogue</em></h2>
+
+  <p>I could list every theme he composed and we'd be here all day. So here are the ones that hit different. The ones that, if you grew up watching in the 90s and early 2000s, are permanently embedded in your nervous system whether you like it or not.</p>
+
+  <div class="theme-grid">
+    <div class="theme-item">
+      <div class="theme-name">The <em>Undertaker</em></div>
+      <div class="theme-desc">The gong. The funeral march. The darkness. One of the most iconic pieces of entrance music in the history of entertainment. Built an entire mythological character before the man had taken a single step.</div>
+      <div class="theme-reaction">Stood Up</div>
+    </div>
+    <div class="theme-item">
+      <div class="theme-name">Steve <em>Austin</em></div>
+      <div class="theme-desc">Glass shatters. Horns. The stomp. Pavlovian. Twenty-eight years later it still works on every single person who ever watched wrestling in the 90s. Instantaneous. Unconditional. Perfect.</div>
+      <div class="theme-reaction">Gone</div>
+    </div>
+    <div class="theme-item">
+      <div class="theme-name"><em>DX</em></div>
+      <div class="theme-desc">Are you ready? Built an entire faction's identity in one riff. Still gets arenas on their feet decades later. The definition of a theme that outlived its original purpose and became something cultural.</div>
+      <div class="theme-reaction">Every Time</div>
+    </div>
+    <div class="theme-item">
+      <div class="theme-name">Bret <em>Hart</em></div>
+      <div class="theme-desc">The Hitman. Perfectly captures the excellence of execution without a single lyric. Technical, precise, cool. Exactly the man it was written for.</div>
+      <div class="theme-reaction">Iconic</div>
+    </div>
+    <div class="theme-item">
+      <div class="theme-name"><em>Mankind</em></div>
+      <div class="theme-desc">Unsettling. Carnival. Wrong in exactly the right way. Told you everything about Mick Foley's character before he'd opened his mouth or lost a single tooth.</div>
+      <div class="theme-reaction">Brilliant</div>
+    </div>
+    <div class="theme-item">
+      <div class="theme-name">Shawn <em>Michaels</em></div>
+      <div class="theme-desc">Sexy Boy. Controversial opinion: perfect theme song. Completely ridiculous. Completely HBK. You couldn't separate the man from that music if you tried.</div>
+      <div class="theme-reaction">Ridiculous. Perfect.</div>
+    </div>
+    <div class="theme-item">
+      <div class="theme-name">The Hart <em>Foundation</em></div>
+      <div class="theme-desc">Anvil's theme repurposed into one of the greatest faction themes ever written. Canada explodes every single time. Wembley 92. Every Bret pop. All of it powered by this.</div>
+      <div class="theme-reaction">Wembley</div>
+    </div>
+    <div class="theme-item">
+      <div class="theme-name">The <em>Rock</em></div>
+      <div class="theme-desc">If ya smell. The most electric entrance build in wrestling history. Every single word of that intro landing before the music has even properly started.</div>
+      <div class="theme-reaction">Electric</div>
+    </div>
+    <div class="theme-item">
+      <div class="theme-name">Kurt <em>Angle</em></div>
+      <div class="theme-desc">You Suck. Three words that an entire arena added themselves. Johnston wrote the theme. The fans wrote the rest. That's how good the foundation was.</div>
+      <div class="theme-reaction">You Suck</div>
+    </div>
+    <div class="theme-item">
+      <div class="theme-name">Edge <em>& Christian</em></div>
+      <div class="theme-desc">The brood theme into the E&C theme. Both Johnston. Both elite. Both perfectly captured two characters at completely different stages of their careers.</div>
+      <div class="theme-reaction">Five Second Pose</div>
+    </div>
+  </div>
+
+  <p>That list is not exhaustive. Not even close. The Hardy Boyz. The APA. Ken Shamrock. Val Venis. The New Age Outlaws. Thirty years of characters, thirty years of identities, thirty years of the first thing you heard when someone you loved or hated walked through that curtain. <strong>All of it Jim Johnston.</strong></p>
+
+  <h2>The <em>WrestleMania Album</em></h2>
+
+  <p>Here's how much I was bought in. I actually bought the WrestleMania album. Physical copy. Actual money. A record that featured WWF wrestlers — <em>wrestlers</em> — performing songs produced by Jim Johnston. Bret Hart actually singing. On an actual album. That I owned.</p>
+
+  <div class="album-box">
+    <div class="album-spine"></div>
+    <div class="album-content">
+      <span class="album-label">Personal Archive · Exhibit A · Proof Of Commitment</span>
+      <div class="album-title">The <em>WrestleMania</em> Album</div>
+      <p class="album-desc">Jim Johnston produced. WWF superstars performing. Bret Hart actually singing on an actual track on an actual album that I actually purchased with actual money as a teenager and have absolutely zero regrets about. The man made it work. Of course he did. He made everything work. That was his entire job for thirty years and he never once failed at it.</p>
+    </div>
+  </div>
+
+  <p>The fact that Jim Johnston could produce an album of WWF wrestlers singing — which should by all rights be a complete disaster — and make it <em>listenable</em>, make it feel like part of the same universe as everything else he'd built, is honestly one of the most underrated achievements of his career. The man had range. The man had vision. And the man understood this industry at a level that nobody has properly acknowledged.</p>
+
+  <h2>The Man Nobody <em>Talks About</em></h2>
+
+  <p>Here is the test. Ask any wrestling fan to name the five most important people in WWE history. You'll get Vince. Austin. Rock. Undertaker. Hogan. Maybe Flair. Maybe Triple H. Nobody — <strong>nobody</strong> — is putting Jim Johnston on that list. And yet remove him from the equation and the entire sonic landscape of the Attitude Era collapses. Every entrance that made you feel something. Every theme that told you a character's whole story in thirty seconds. Gone.</p>
+
+  <p>The glass doesn't shatter the same way without him designing exactly how it shatters and what comes after. The gong doesn't carry that weight without him understanding precisely what that weight needs to feel like. The DX theme doesn't make an entire generation lose their minds without him writing exactly the right riff at exactly the right tempo.</p>
+
+  <p>He was invisible by design. That was the job. The best entrance music doesn't make you think about the music — it makes you think about the performer. It gets out of the way and does its job so perfectly that you never notice it doing anything at all. <strong>Jim Johnston was so good at his job that his job was invisible. And invisibility is not the same as unimportance.</strong></p>
+
+  <h2>2017. <em>Let Go.</em></h2>
+
+  <p>After over thirty years. After the Undertaker and Austin and DX and Mankind and Bret Hart and The Rock and Kurt Angle and Edge and the Hardy Boyz and every theme that ever made you feel anything in a WWE arena — after all of it — Jim Johnston was let go by WWE in 2017. Quietly. Without ceremony. Without the acknowledgement that thirty years of foundational creative work deserved.</p>
+
+  <p>No send-off. No Hall of Fame induction — not then, not since. No moment where the company stood up and said: this man wrote the soundtrack to three decades of your wrestling life and we owe him something for that. Just — gone. The same quiet exit that this industry gives to so many of the people who matter most and get talked about least.</p>
+
+  <p>He deserves better than that. He deserved it then and he deserves it now. Which is exactly why he's the first name through the door of this Hall of Fame. Not the most famous. Not the most decorated. <strong>The most overdue.</strong></p>
+
+  <!-- INDUCTION STATEMENT -->
+  <div class="induction">
+    <span class="induction-label">The Real Ones · Hall Of Fame · Inductee #01</span>
+    <div class="induction-name">Jim <em>Johnston</em></div>
+    <span class="induction-title">Composer · WWE · 1985–2017 · The Unsung Architect</span>
+    <div class="induction-rule"></div>
+    <p class="induction-reason">For thirty years he wrote the music that told you who was coming and how to feel about it. For thirty years he built characters with thirty seconds of sound. For the glass shattering. For the gong. For the DX theme and the Hitman and Mankind and every entrance that ever made 20,000 people lose their minds simultaneously. For the WrestleMania album that nobody asked for and everybody owned. For being so good at his job that his job was invisible. And for never once getting the credit he deserved. This one's for you, Jim. First ballot. No debate.</p>
+  </div>
+
+  <div class="closing">
+    <p>300 million people know his music. Most couldn't tell you his name. That changes here. Jim Johnston is a Real One. First ballot. Long overdue. And if you're reading this and you've never looked him up — go do that now. Then come back and tell me this induction isn't earned.</p>
+    <span class="author">The Real Ones · HOF-001 · Jim Johnston · iseeeverything.me</span>
+  </div>
+
+</div>
+
+<div class="article-footer-nav">
+  <a href="wrestling.html" class="back-link">← Back To Wrestling</a>
+  <span class="article-id">HOF-001 / THE REAL ONES / JIM JOHNSTON</span>
+  <a href="wrestling.html" class="back-link">Next Inductee →</a>
+</div>
+
+<footer class="footer">
+  <div class="footer-left">
+    I See Everything<br>
+    Wrestling · Personal Archive · 2026<br>
+    iseeeverything.me
+  </div>
+  <div class="footer-right">
+    40 Years Of Watching<br>
+    The Real Ones<br>
+    Draw Your Own Conclusions
+  </div>
+</footer>
+
+</body>
+</html>

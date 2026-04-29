@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Miz — The Real Ones Hall of Fame — I See Everything</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400&family=Playfair+Display:ital,wght@0,900;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;background:#000;color:#fff}
+body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.92);border-bottom:1px solid rgba(200,160,60,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:52px;backdrop-filter:blur(8px)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.15em;color:#fff;text-decoration:none}
+.nav-logo em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:#c8a040}
+
+.ticker-wrap{overflow:hidden;border-bottom:1px solid rgba(200,160,60,0.1);padding:10px 0;background:rgba(200,160,60,0.02)}
+.ticker-inner{display:flex;white-space:nowrap;animation:ticker 50s linear infinite}
+.ticker-inner span{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.4);padding:0 3rem}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* HERO */
+.article-hero{position:relative;min-height:80vh;display:flex;align-items:flex-end;padding:4rem 3rem;border-bottom:1px solid rgba(200,160,60,0.12);overflow:hidden;background:#000}
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.hero-bg-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 80% 30%,rgba(200,160,60,0.05) 0%,transparent 70%)}
+.hero-bg-text{position:absolute;right:-1rem;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(10rem,22vw,28rem);letter-spacing:-0.02em;color:rgba(255,255,255,0.018);line-height:1;user-select:none;white-space:nowrap}
+.hero-bg-fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,0.5) 45%,rgba(0,0,0,0.1) 100%)}
+.hero-bg-left{position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,rgba(200,160,60,0.5),transparent)}
+
+/* HOF BADGE */
+.hof-badge{display:inline-flex;align-items:center;gap:1rem;margin-bottom:2rem;padding:0.8rem 1.5rem;border:1px solid rgba(200,160,60,0.3);background:rgba(200,160,60,0.05)}
+.hof-badge-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#c8a040;letter-spacing:0.1em;line-height:1}
+.hof-badge-text{display:flex;flex-direction:column;gap:0.2rem}
+.hof-badge-title{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.6)}
+.hof-badge-sub{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+
+.hero-content{position:relative;z-index:2;max-width:820px}
+.article-kicker{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5);margin-bottom:1.2rem}
+.article-tags{display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+.tag{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;border:1px solid;padding:4px 12px}
+.tag-gold{border-color:rgba(200,160,60,0.5);color:rgba(200,160,60,0.8)}
+.tag-dim{border-color:rgba(255,255,255,0.25);color:rgba(255,255,255,0.55)}
+
+.article-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,7rem);letter-spacing:0.06em;line-height:0.9;color:#fff;margin-bottom:1.8rem}
+.article-title em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.article-deck{font-size:12px;letter-spacing:0.1em;line-height:2.2;color:rgba(255,255,255,0.6);max-width:660px;text-transform:uppercase}
+.article-byline{margin-top:2rem;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);border-top:1px solid rgba(200,160,60,0.1);padding-top:1.2rem;display:flex;gap:2rem;flex-wrap:wrap}
+.article-byline span{color:rgba(200,160,60,0.5)}
+
+/* PULL QUOTE */
+.pull-quote-bleed{padding:4rem 3rem;border-bottom:1px solid rgba(200,160,60,0.1);background:rgba(200,160,60,0.015);text-align:center}
+.pull-quote-bleed blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.2rem,2.5vw,2.1rem);line-height:1.6;color:#c8a040;max-width:900px;margin:0 auto}
+.pull-quote-bleed cite{display:block;margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+
+/* ARTICLE BODY */
+.article-body{max-width:800px;margin:0 auto;padding:5rem 3rem}
+.article-body p{font-size:13px;letter-spacing:0.04em;line-height:2.4;color:rgba(255,255,255,0.8);margin-bottom:2rem}
+.article-body p strong{color:#fff;letter-spacing:0.06em}
+.article-body p em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040;font-size:14px}
+.article-body h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:0.1em;color:#fff;margin:4rem 0 1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(200,160,60,0.15)}
+.article-body h2 em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+
+/* TALKING SMACK TRANSCRIPT BOX */
+.transcript-box{margin:3rem 0;border:1px solid rgba(200,160,60,0.25);background:rgba(0,0,0,0.8);position:relative;overflow:hidden}
+.transcript-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,#c8a040,transparent)}
+.transcript-header{padding:1rem 1.8rem;border-bottom:1px solid rgba(200,160,60,0.15);display:flex;align-items:center;justify-content:space-between}
+.transcript-label{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5)}
+.transcript-date{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.2)}
+.transcript-body{padding:2.5rem}
+.transcript-line{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:2;color:rgba(255,255,255,0.75);margin-bottom:1.5rem;padding-left:1.5rem;border-left:2px solid rgba(200,160,60,0.2)}
+.transcript-line:last-child{margin-bottom:0}
+.transcript-line strong{color:#c8a040;font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;display:block;margin-bottom:0.5rem}
+
+/* CAREER TIMELINE */
+.career-timeline{margin:3rem 0;display:flex;flex-direction:column;gap:0}
+.career-item{display:flex;gap:2rem;padding:1.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.career-item:last-child{border-bottom:none}
+.career-year{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.15em;color:rgba(200,160,60,0.5);min-width:80px;flex-shrink:0;padding-top:0.2rem}
+.career-text{font-size:11px;letter-spacing:0.04em;line-height:1.9;color:rgba(255,255,255,0.6)}
+.career-text strong{color:#fff}
+
+/* INLINE QUOTE */
+.inline-quote{margin:3rem 0;padding:2rem 2.5rem;border-left:3px solid #c8a040;background:rgba(200,160,60,0.03)}
+.inline-quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.8;color:rgba(200,160,60,0.85);margin:0}
+.inline-quote cite{display:block;margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+
+/* RECEIPTS BOX */
+.receipts-box{margin:3rem 0;border:1px solid rgba(200,160,60,0.2);background:rgba(200,160,60,0.02)}
+.receipts-header{padding:1rem 1.8rem;border-bottom:1px solid rgba(200,160,60,0.15)}
+.receipts-label{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5)}
+.receipts-body{padding:1.8rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:rgba(255,255,255,0.04)}
+.receipt-item{background:#000;padding:1.5rem;display:flex;flex-direction:column;gap:0.5rem}
+.receipt-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.08em;color:#fff;line-height:1}
+.receipt-title em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.receipt-desc{font-size:9px;letter-spacing:0.08em;line-height:1.8;color:rgba(255,255,255,0.4)}
+
+/* INDUCTION STATEMENT */
+.induction{margin:4rem 0;padding:3rem;background:rgba(200,160,60,0.03);border:1px solid rgba(200,160,60,0.2);position:relative;overflow:hidden}
+.induction::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,#c8a040,transparent)}
+.induction-label{font-size:8px;letter-spacing:0.5em;text-transform:uppercase;color:rgba(200,160,60,0.4);margin-bottom:2rem;display:block;text-align:center}
+.induction-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);letter-spacing:0.08em;color:#fff;text-align:center;line-height:1;margin-bottom:0.5rem}
+.induction-name em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.induction-title{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5);text-align:center;margin-bottom:2rem;display:block}
+.induction-rule{width:120px;height:1px;background:rgba(200,160,60,0.3);margin:0 auto 2rem}
+.induction-reason{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:2;color:rgba(255,255,255,0.7);text-align:center;max-width:600px;margin:0 auto}
+
+/* CLOSING */
+.closing{margin:4rem 0 0;padding:3rem;border:1px solid rgba(200,160,60,0.15);background:rgba(200,160,60,0.02);text-align:center}
+.closing p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,2vw,1.4rem);line-height:1.9;color:rgba(200,160,60,0.8);margin:0}
+.closing .author{display:block;margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.2)}
+
+.article-footer-nav{padding:3rem;border-top:1px solid rgba(200,160,60,0.1);display:flex;justify-content:space-between;align-items:center}
+.back-link{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(200,160,60,0.5);text-decoration:none;transition:color 0.2s}
+.back-link:hover{color:#c8a040}
+.article-id{font-size:9px;letter-spacing:0.3em;color:rgba(255,255,255,0.15)}
+
+.footer{border-top:1px solid rgba(200,160,60,0.1);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between}
+.footer-left{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.15);line-height:2}
+.footer-right{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.25);text-align:right;line-height:2}
+
+@media(max-width:768px){
+  .nav{padding:0 1.5rem}
+  .nav-links{gap:1.2rem}
+  .article-hero{padding:3rem 1.5rem;min-height:70vh}
+  .article-body{padding:3rem 1.5rem}
+  .pull-quote-bleed{padding:3rem 1.5rem}
+  .receipts-body{grid-template-columns:1fr}
+  .career-item{flex-direction:column;gap:0.3rem}
+  .career-year{min-width:unset}
+  .article-footer-nav{padding:2rem 1.5rem;flex-direction:column;gap:1rem;text-align:center}
+  .footer{flex-direction:column;gap:1.5rem;padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">I See <em>Everything</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="wrestling.html">Wrestling</a></li>
+    <li><a href="wrestling.html">← The Real Ones</a></li>
+  </ul>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>The Miz · Awesome · WrestleMania Main Event · Talking Smack · Really? · The Most Must-See WWE Champion · The Man Who Was Never Supposed To Make It · And Made It Anyway · &nbsp;</span>
+    <span>The Miz · Awesome · WrestleMania Main Event · Talking Smack · Really? · The Most Must-See WWE Champion · The Man Who Was Never Supposed To Make It · And Made It Anyway · &nbsp;</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="article-hero">
+  <div class="hero-bg">
+    <div class="hero-bg-glow"></div>
+    <div class="hero-bg-text">AWESOME</div>
+    <div class="hero-bg-fade"></div>
+    <div class="hero-bg-left"></div>
+  </div>
+  <div class="hero-content">
+    <div class="article-kicker">HOF-002 · The Real Ones · Second Inductee</div>
+    <div class="hof-badge">
+      <div class="hof-badge-num">02</div>
+      <div class="hof-badge-text">
+        <span class="hof-badge-title">The Real Ones · Hall Of Fame</span>
+        <span class="hof-badge-sub">Second Inductee · The Pick That'll Surprise You</span>
+      </div>
+    </div>
+    <div class="article-tags">
+      <span class="tag tag-gold">Inductee #02</span>
+      <span class="tag tag-dim">The Most Must-See Champion</span>
+      <span class="tag tag-dim">Never Supposed To Make It</span>
+    </div>
+    <h1 class="article-title">The <em>Miz.</em><br>Awesome.</h1>
+    <p class="article-deck">Go on. Roll your eyes. That reaction — that exact reaction — is precisely why he belongs here. The best heel is the one you genuinely can't stand. You can't genuinely can't stand someone unless they're doing their job to absolute perfection. The Miz did his job to perfection for twenty years. And one night on Talking Smack he showed you exactly what it cost him.</p>
+    <div class="article-byline">
+      <div>Archive <span>HOF-002</span></div>
+      <div>Section <span>The Real Ones</span></div>
+      <div>Active <span>2004–Present</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PULL QUOTE -->
+<div class="pull-quote-bleed">
+  <blockquote>"I've been here for ten years and I have never — NEVER — been given anything. Everything I have I have earned. Everything."</blockquote>
+  <cite>— The Miz · Talking Smack · 2016 · The Most Important Promo Of His Career</cite>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+
+  <p>I know what you're thinking. I saw your face when you read the name. That slight pause. The "really?" forming somewhere in the back of your mind. And I need you to understand something — <strong>that reaction is the entire point.</strong> That reaction is the evidence. That reaction is twenty years of The Miz doing his job so completely, so committedly, so without a single break in character that even the people who watch wrestling and understand what a heel is still can't fully separate the performer from the performance.</p>
+
+  <p>That is extraordinarily difficult to do. Most heels eventually get cheered because the crowd respects the craft. Most heels crack a smile at the wrong moment or do something too charismatic and the crowd starts rooting for them. The Miz — for the majority of his career, in the majority of buildings, against the majority of opponents — <em>genuinely irritated people.</em> Not performed irritation. Actual irritation. The kind that makes you change the channel. The kind that makes you groan when his music hits.</p>
+
+  <p>That's not failure. <strong>That is the absolute pinnacle of professional wrestling heel work.</strong></p>
+
+  <h2>Talking Smack. <em>The Night He Showed You Everything.</em></h2>
+
+  <p>2016. Talking Smack. The backstage interview show that produced some of the most compelling unscripted — or loosely scripted — television in WWE's recent history. Daniel Bryan, then SmackDown General Manager, sitting across from The Miz after a match. And Bryan, the beloved people's champion, the man the fans carried to WrestleMania on their shoulders, looks The Miz in the eye and tells him his style is boring. Safe. That he's not a fighting champion.</p>
+
+  <p>And The Miz — the man the internet dismissed, the man the locker room allegedly looked down on, the man who was told from day one that he'd never make it — <strong>just went.</strong></p>
+
+  <div class="transcript-box">
+    <div class="transcript-header">
+      <span class="transcript-label">Talking Smack · 2016 · The Promo</span>
+      <span class="transcript-date">The Moment Everything Made Sense</span>
+    </div>
+    <div class="transcript-body">
+      <div class="transcript-line">
+        <strong>The Miz —</strong>
+        You want to talk about fighting? You want to talk about safe? I have been here for ten years. TEN YEARS. And in those ten years I have never — NEVER — been given anything. Everything I have I have earned.
+      </div>
+      <div class="transcript-line">
+        <strong>The Miz —</strong>
+        I came from The Real World. Do you know what it's like to be laughed at every single day? To be told you don't belong? To be told you're not good enough? To be told you're going to be future endeavoured before you even get started?
+      </div>
+      <div class="transcript-line">
+        <strong>The Miz —</strong>
+        I scratched and I clawed and I fought my way to become WWE Champion. I main evented WrestleMania. And people like you — people like YOU — still look at me like I don't belong here. I BELONG HERE. I have MORE than earned my place here.
+      </div>
+      <div class="transcript-line">
+        <strong>The Miz —</strong>
+        You sit there and you talk about unsafe wrestlers. I am the most safe wrestler in this locker room because I am STILL HERE. I am still WWE Champion because I am THAT good. And nobody — NOBODY — gives me the credit I deserve.
+      </div>
+    </div>
+  </div>
+
+  <p>The room went quiet. Maryse's face in the background said everything. Because what you were watching wasn't a promo. Or it was a promo — but it was also the truth. It was twenty years of being dismissed and doubted and laughed at and told he'd never make it, pouring out of a man who had made it and still wasn't getting his due. <strong>It recontextualised his entire career in four minutes of television.</strong></p>
+
+  <p>Suddenly every cowardly shortcut made sense. Every cheap title defence. Every "really? REALLY?" Every act of self-preservation on screen was the story of a man who had learned — because the industry taught him — that nobody was going to give him anything. So he took everything he could and he held onto it with both hands and he dared you to take it from him.</p>
+
+  <div class="inline-quote">
+    <p>That Talking Smack promo didn't just make The Miz look good. It made his entire twenty-year career make sense. Every cheap shortcut. Every cowardly defence. Every act of self-preservation. That's not a bad heel. That's a fully realised human character.</p>
+    <cite>— Talking Smack · 2016 · The Promo That Changed Everything</cite>
+  </div>
+
+  <h2>The Career <em>They Said Wouldn't Happen</em></h2>
+
+  <p>Mike Mizanin was on The Real World. He came to WWE through a reality television show. In a locker room full of people who had trained for years and paid their dues in bingo halls across America, he arrived as a reality TV guy. The target on his back was enormous from day one.</p>
+
+  <div class="career-timeline">
+    <div class="career-item">
+      <div class="career-year">2004</div>
+      <div class="career-text"><strong>Arrives via Tough Enough.</strong> Immediately becomes the most disliked person in the locker room. Not as a character. As a person. Uses it as fuel.</div>
+    </div>
+    <div class="career-item">
+      <div class="career-year">2006–09</div>
+      <div class="career-text"><strong>Tag team gold. US Championship.</strong> Each title win met with the same reaction: he doesn't deserve it. He keeps winning anyway.</div>
+    </div>
+    <div class="career-item">
+      <div class="career-year">2010</div>
+      <div class="career-text"><strong>WWE Champion.</strong> The man they said would never make it is holding the most important title in the company. The reaction from sections of the fanbase: outrage. Which is exactly right. He's a heel. It's working perfectly.</div>
+    </div>
+    <div class="career-item">
+      <div class="career-year">2011</div>
+      <div class="career-text"><strong>Main events WrestleMania 27.</strong> Against John Cena. In Atlanta. The Reality TV guy. The man who didn't belong. On the biggest stage in the industry. Nobody can take that away from him. <strong>Nobody.</strong></div>
+    </div>
+    <div class="career-item">
+      <div class="career-year">2016</div>
+      <div class="career-text"><strong>Talking Smack.</strong> The promo that recontextualised everything. The moment the mask came off just enough for everyone to see what was underneath. Love him or not — you understood him after that.</div>
+    </div>
+    <div class="career-item">
+      <div class="career-year">2017–23</div>
+      <div class="career-text"><strong>Still there. Still delivering.</strong> US Championship run that made the title mean something again. Tag work. The A-Lister character. Twenty years in and still one of the most reliable performers on any show he appears on.</div>
+    </div>
+  </div>
+
+  <h2>The <em>Receipts</em></h2>
+
+  <p>For the people still rolling their eyes. Here are the receipts. Not opinion. Not feeling. Facts.</p>
+
+  <div class="receipts-box">
+    <div class="receipts-header"><span class="receipts-label">The Case · By The Numbers</span></div>
+    <div class="receipts-body">
+      <div class="receipt-item">
+        <div class="receipt-title">WWE <em>Champion</em></div>
+        <div class="receipt-desc">Twice. The man they said would never hold that title held it twice. And made both reigns work because he understood exactly what his character needed to do with it.</div>
+      </div>
+      <div class="receipt-item">
+        <div class="receipt-title">WrestleMania <em>Main Event</em></div>
+        <div class="receipt-desc">WrestleMania 27. Atlanta. The Reality TV guy in the main event of the biggest show in wrestling history. Earned. Every bit of it.</div>
+      </div>
+      <div class="receipt-item">
+        <div class="receipt-title">US Championship <em>Revival</em></div>
+        <div class="receipt-desc">His 2016–17 US title run made the Intercontinental Championship feel important again at a time when mid-card titles had been an afterthought for years.</div>
+      </div>
+      <div class="receipt-item">
+        <div class="receipt-title">Twenty <em>Years</em></div>
+        <div class="receipt-desc">Still on the roster. Still delivering. In an industry that chews people up and moves on, twenty years of consistent, reliable, character-committed work is its own argument.</div>
+      </div>
+      <div class="receipt-item">
+        <div class="receipt-title">The <em>Talking Smack</em> Promo</div>
+        <div class="receipt-desc">One of the greatest unscripted promos in WWE history. The moment that made an entire fanbase reconsider everything they thought they knew about the man delivering it.</div>
+      </div>
+      <div class="receipt-item">
+        <div class="receipt-title">Never <em>Given Anything</em></div>
+        <div class="receipt-desc">His words. His truth. Every championship, every match, every moment on that stage scratched and clawed for against an industry that didn't believe he belonged. And he belongs.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>What The Eye Rolls <em>Actually Mean</em></h2>
+
+  <p>Here's the thing about the people who roll their eyes at The Miz. They've been worked. Completely, totally, expertly worked for twenty years by a man who understood his assignment better than almost anyone in the history of this industry. The eye roll is not the opposite of respect. The eye roll <em>is</em> the respect. It means he got you. It means he did his job.</p>
+
+  <p>The best heel in wrestling isn't the one who gets booed the loudest in the moment. It's the one who makes you feel something real — genuine irritation, genuine dismissal, genuine contempt — and sustains it over years without ever once breaking the spell. <strong>The Miz sustained it for twenty years.</strong> Against opponents who were more beloved. In buildings that wanted to see him fail. On shows where he was never the fan favourite and never tried to be.</p>
+
+  <p>And then on a Tuesday night on a backstage interview show, he dropped just enough of the character to show you the man underneath — the kid from Cleveland who was laughed out of every room he walked into and walked back in anyway — and suddenly the whole twenty years landed differently. <em>That</em> is craft. That is a career built with intention and intelligence and an absolute refusal to be what everyone expected him to be.</p>
+
+  <p>I see you, Miz. This Hall of Fame sees you. <strong>You're awesome. And that's not a catchphrase. That's a fact.</strong></p>
+
+  <!-- INDUCTION STATEMENT -->
+  <div class="induction">
+    <span class="induction-label">The Real Ones · Hall Of Fame · Inductee #02</span>
+    <div class="induction-name">The <em>Miz</em></div>
+    <span class="induction-title">Mike Mizanin · WWE · 2004–Present · The Most Must-See Champion In WWE History</span>
+    <div class="induction-rule"></div>
+    <p class="induction-reason">For twenty years of never being given anything and taking everything anyway. For making you feel something real every single time he appeared on screen. For the Talking Smack promo that recontextualised an entire career in four minutes of television. For main eventing WrestleMania when everyone said he never would. For making the eye rolls mean something. For scratching and clawing and fighting his way into a Hall of Fame that the industry would never give him — so we're giving it to him instead. He's awesome. He always was.</p>
+  </div>
+
+  <div class="closing">
+    <p>The eye roll you just did? He earned that. Twenty years of work went into that eye roll. That's not nothing. That's everything. Welcome to The Real Ones, Miz. You've been here longer than anyone gave you credit for.</p>
+    <span class="author">The Real Ones · HOF-002 · The Miz · iseeeverything.me</span>
+  </div>
+
+</div>
+
+<div class="article-footer-nav">
+  <a href="hof-jim-johnston.html" class="back-link">← HOF-001 · Jim Johnston</a>
+  <span class="article-id">HOF-002 / THE REAL ONES / THE MIZ</span>
+  <a href="wrestling.html" class="back-link">Back To Wrestling →</a>
+</div>
+
+<footer class="footer">
+  <div class="footer-left">
+    I See Everything<br>
+    Wrestling · Personal Archive · 2026<br>
+    iseeeverything.me
+  </div>
+  <div class="footer-right">
+    40 Years Of Watching<br>
+    The Real Ones<br>
+    Draw Your Own Conclusions
+  </div>
+</footer>
+
+</body>
+</html>
