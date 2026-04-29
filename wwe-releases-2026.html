@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Night WWE Fired 23 People Before SmackDown Even Started — I See Everything</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400&family=Playfair+Display:ital,wght@0,900;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;background:#000;color:#fff}
+body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.92);border-bottom:1px solid rgba(200,160,60,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:52px;backdrop-filter:blur(8px)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.15em;color:#fff;text-decoration:none}
+.nav-logo em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:#c8a040}
+
+/* TICKER */
+.ticker-wrap{overflow:hidden;border-bottom:1px solid rgba(200,160,60,0.1);padding:10px 0;background:rgba(200,160,60,0.02)}
+.ticker-inner{display:flex;white-space:nowrap;animation:ticker 40s linear infinite}
+.ticker-inner span{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.4);padding:0 3rem}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ARTICLE HERO */
+.article-hero{position:relative;padding:6rem 3rem 5rem;border-bottom:1px solid rgba(200,160,60,0.12);overflow:hidden;max-width:900px;margin:0 auto}
+.article-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(200,160,60,0.05) 0%,transparent 70%);pointer-events:none}
+.article-meta{display:flex;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap;align-items:center}
+.tag{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;border:1px solid;padding:4px 12px}
+.tag-gold{border-color:rgba(200,160,60,0.5);color:rgba(200,160,60,0.8)}
+.tag-dim{border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.65)}
+.article-date{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-left:auto}
+.article-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6.5rem);letter-spacing:0.06em;line-height:0.92;margin-bottom:2rem;color:#fff}
+.article-title em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.article-subtitle{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);line-height:2;font-style:italic;border-left:2px solid rgba(200,160,60,0.3);padding-left:1.5rem;margin-bottom:3rem}
+.hero-rule{width:100%;height:1px;background:linear-gradient(to right,rgba(200,160,60,0.4),transparent);margin-top:3rem}
+
+/* ARTICLE BODY */
+.article-body{max-width:900px;margin:0 auto;padding:4rem 3rem 6rem}
+
+.article-body p{font-size:13px;letter-spacing:0.04em;line-height:2.2;color:rgba(255,255,255,0.82);margin-bottom:1.8rem}
+
+.article-body p strong{color:#fff;font-weight:400;letter-spacing:0.06em}
+
+/* Section headings */
+.article-body h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:0.12em;color:#fff;margin:4rem 0 1.5rem;padding-top:3rem;border-top:1px solid rgba(200,160,60,0.1);line-height:1}
+.article-body h2 em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+
+/* Divider */
+.article-body hr{border:none;border-top:1px solid rgba(200,160,60,0.12);margin:3rem 0}
+
+/* Pull quote */
+.pull-quote{border-left:3px solid #c8a040;padding:1.5rem 2rem;margin:3rem 0;background:rgba(200,160,60,0.03)}
+.pull-quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;letter-spacing:0.03em;line-height:1.9;color:rgba(255,255,255,0.9);margin-bottom:0}
+
+/* Time stamp highlight */
+.timestamp{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:0.15em;color:#c8a040;display:block;margin:2rem 0 0.5rem}
+
+/* Name callouts */
+.handle{color:rgba(200,160,60,0.8);font-size:inherit}
+
+/* Release list */
+.release-block{border:1px solid rgba(200,160,60,0.12);padding:2rem;margin:2rem 0;background:rgba(200,160,60,0.02)}
+.release-block p{margin-bottom:1rem}
+.release-block p:last-child{margin-bottom:0}
+.release-name{color:#c8a040;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.15em;display:block;margin-bottom:0.4rem}
+.release-detail{font-size:11px;letter-spacing:0.05em;line-height:1.9;color:rgba(255,255,255,0.65)}
+
+/* Closing */
+.article-close{border-top:1px solid rgba(200,160,60,0.15);margin-top:4rem;padding-top:3rem}
+.article-close p{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);line-height:2.2;margin-bottom:0.8rem}
+.article-close .handles{font-size:9px;letter-spacing:0.1em;color:rgba(200,160,60,0.3);line-height:2.5;word-break:break-word}
+
+/* FOOTER */
+.footer{border-top:1px solid rgba(200,160,60,0.1);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between}
+.footer-left{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.15);line-height:2}
+.footer-right{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.25);text-align:right;line-height:2}
+
+/* Fade in */
+.article-hero,.article-body{animation:fadeUp 0.8s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.article-body{animation-delay:0.15s}
+
+@media(max-width:768px){
+  .nav{padding:0 1.5rem}
+  .nav-links{gap:1.5rem}
+  .article-hero{padding:3rem 1.5rem 3rem}
+  .article-body{padding:2.5rem 1.5rem 4rem}
+  .article-date{margin-left:0;margin-top:0.5rem}
+  .footer{flex-direction:column;gap:1.5rem;padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">I See <em>Everything</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="archive.html">Archive</a></li>
+    <li><a href="index.html#wrestling">Wrestling</a></li>
+  </ul>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>WWE · April 24 2026 · 23 Released · 5:09pm · Before SmackDown Aired · Wyatt Sicks Vignette Played Anyway · TKO Calling · &nbsp;</span>
+    <span>WWE · April 24 2026 · 23 Released · 5:09pm · Before SmackDown Aired · Wyatt Sicks Vignette Played Anyway · TKO Calling · &nbsp;</span>
+  </div>
+</div>
+
+<!-- ARTICLE HERO -->
+<div class="article-hero">
+  <div class="article-meta">
+    <span class="tag tag-gold">Wrestling</span>
+    <span class="tag tag-dim">Open Letter</span>
+    <span class="tag tag-dim">TKO · WWE · 2026</span>
+    <span class="article-date">April 2026</span>
+  </div>
+
+  <h1 class="article-title">The Night WWE Fired <em>23 People</em> Before SmackDown Even Started</h1>
+
+  <p class="article-subtitle">A 40-year fan's open letter. Again. Because apparently once wasn't enough.</p>
+
+  <div class="hero-rule"></div>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+
+  <p>Five days after WrestleMania 42, on Friday April 24th, Zelina Vega's phone rang.</p>
+
+  <span class="timestamp">5:09 PM</span>
+
+  <p>Not Stanford calling. TKO.</p>
+
+  <p>She knew immediately. She said so herself on stream. When it says TKO, your heart already knows.</p>
+
+  <p>SmackDown hadn't even aired yet.</p>
+
+  <hr>
+
+  <h2>Let's Go Back To <em>WrestleMania</em> First</h2>
+
+  <p>Because context matters here.</p>
+
+  <p>At WrestleMania 42 — the grandest stage in professional wrestling, the one families remortgaged their houses to attend — WWE gave a prominent segment to Danhausen.</p>
+
+  <p>Now. I want to be clear. Danhausen is a lovely human being. Very nice. Very evil. His merch is fantastic. His entire existence brings joy to the world and I mean that genuinely.</p>
+
+  <p>But he is essentially the new R-Truth. A comedy act the crowd enjoys. Except R-Truth could actually go in that ring and earn his spot. Danhausen wrestles like David Arquette with better merch. And if you don't know who David Arquette is, look up WCW 2000 and pour one out.</p>
+
+  <p>He got a WrestleMania segment. With John Cena. THE GOAT. Sixteen-time World Champion. A man in the final chapter of one of the most extraordinary careers professional wrestling has ever seen. And with The Miz — one of the most consistently brilliant, infuriatingly watchable characters this company has produced in twenty years. A man who made being insufferable into high art. One of my personal favourites and I will absolutely die on that hill.</p>
+
+  <div class="pull-quote">
+    <p>These two legends. At WrestleMania. Sharing their moment with that.</p>
+  </div>
+
+  <p>Fine. Deep breath. Fine.</p>
+
+  <hr>
+
+  <h2>Then <em>April 24th</em> Happened</h2>
+
+  <p>Twenty-three people. Gone. Before SmackDown aired.</p>
+
+  <div class="release-block">
+
+    <p>
+      <span class="release-name">Zelina Vega</span>
+      <span class="release-detail">Found out at 5:09pm. Inaugural Queen of the Ring. Women's United States Champion. A woman who stood in a WWE ring in Puerto Rico at Backlash — her home crowd — and received a standing ovation so overwhelming she was in tears. Triple H told her he was proud of her. She wrote about it saying "this weekend my life changed forever." She won the US title last year and heard the crowd chanting "you deserve it" and was genuinely shocked — shocked — that they felt that way about her. That a crowd full of strangers loved her that much. TKO called at 5:09pm.</span>
+    </p>
+
+    <p>
+      <span class="release-name">Aleister Black</span>
+      <span class="release-detail">Released the same day as his wife. For the second time. A man who oozes atmosphere from every single pore, who makes the air around him feel genuinely different, whose visual storytelling alone puts most of the roster to shame. WWE creative's response on both occasions has essentially been "yeah, we're not sure what to do with this." In a company that once pushed a man in a rotting mask who set things on fire and called himself The Fiend. The failure of imagination here is genuinely staggering. Together, Aleister and Zelina were one of the most visually arresting, genuinely compelling things on SmackDown. Every segment landed. Every promo meant something. The aesthetics alone were worth the subscription fee. Disgraceful they're gone. Both of them.</span>
+    </p>
+
+    <p>
+      <span class="release-name">Kairi Sane</span>
+      <span class="release-detail">Knee deep in an active storyline with Iyo Sky, Rhea Ripley and Asuka. One of the most naturally gifted, joyful, technically brilliant performers this company has ever had. Didn't make the WrestleMania card. Released the week after. Mid-story. Poof. Gone. Like the storyline never existed. Like she never existed.</span>
+    </p>
+
+    <p>
+      <span class="release-name">The Wyatt Sicks — All Of Them</span>
+      <span class="release-detail">Bo Dallas building something genuinely moving as Uncle Howdy — a tribute to his brother, to Bray Wyatt, to everything that character meant. Nikki Cross, Dexter Lumis, Joe Gacy, Erick Rowan. People who gave themselves fully to a story that carried real emotional weight. Dissolved overnight.</span>
+    </p>
+
+    <p>
+      <span class="release-name">Motor City Machine Guns</span>
+      <span class="release-detail">Alex Shelley and Chris Sabin. Twenty years. Gone. I read that three times and it still doesn't compute.</span>
+    </p>
+
+    <p>
+      <span class="release-name">Zoey Stark</span>
+      <span class="release-detail">Just medically cleared from serious injury. Released anyway. Someone in that building made that specific decision with full awareness of what they were doing.</span>
+    </p>
+
+    <p>
+      <span class="release-name">Apollo Crews · Santos Escobar · Andre Chase · Alba Fyre · And More</span>
+      <span class="release-detail">Twenty-three people in total. Real humans with real lives who gave this company everything.</span>
+    </p>
+
+  </div>
+
+  <hr>
+
+  <h2>Now Here's The Part That Actually <em>Broke Me</em></h2>
+
+  <p>That same night — Friday April 24th, SmackDown night, the night all twenty-three people had already been let go — a Wyatt Sicks hype vignette played on the screen inside the arena.</p>
+
+  <p>Not on TV. In the building. To a live crowd who had absolutely no idea those people were already gone.</p>
+
+  <p>Fans in those seats watching that vignette, cheering, excited, completely unaware that every single person in it had already been released hours earlier.</p>
+
+  <p>Nobody pulled it. Nobody caught it. Or worse — somebody did catch it and decided it didn't matter.</p>
+
+  <div class="pull-quote">
+    <p>Bo Dallas watched his own tribute faction get hyped to an arena crowd on the same day TKO ended it.</p>
+  </div>
+
+  <p>I genuinely don't have a joke for that. That's just awful.</p>
+
+  <hr>
+
+  <h2>What This Is <em>Actually</em> About</h2>
+
+  <p>Zelina Vega stood in a WWE ring in Puerto Rico and cried because a crowd loved her so much it broke something open in her. She wrote about it like it was a religious experience. Because for a woman who'd been told her whole career she was too small, too short, not enough — it was.</p>
+
+  <p>TKO called her at 5:09pm on a Friday afternoon before her own show had aired.</p>
+
+  <p>Kairi Sane was mid-story. Aleister Black was mid-story. The Wyatt Sicks were mid-story. The Motor City Machine Guns were twenty years in the making.</p>
+
+  <p>None of that mattered to whoever was in that room making those calls.</p>
+
+  <hr>
+
+  <h2>The Talent Is <em>Never</em> The Problem</h2>
+
+  <p>Cody Rhodes is extraordinary. Roman Reigns becoming World Heavyweight Champion at WrestleMania was electric. Oba Femi is a genuine star being built correctly. Triple H is trying. You can see it in the moments that still land.</p>
+
+  <p>But the twenty-three people who got that call on Friday afternoon? They were never the problem either.</p>
+
+  <p>The problem is a structure where creative decisions get filtered through a revenue model before they reach the screen. Where a comedy act gets WrestleMania real estate and twenty-three wrestlers get a Friday afternoon phone call. Where a hype package plays in an arena for a faction that was already fired.</p>
+
+  <p>That's not a wrestling company making wrestling decisions.</p>
+
+  <hr>
+
+  <h2>Still Here. Still Watching. <em>Still Furious.</em></h2>
+
+  <p>Zelina Vega heard "you deserve it" from a crowd of strangers and couldn't believe they meant it.</p>
+
+  <p>They meant it.</p>
+
+  <p>She deserved better than a 5:09pm phone call on a Friday.</p>
+
+  <p>They all did.</p>
+
+  <div class="article-close">
+    <p>All claims sourced. Draw your own conclusions.</p>
+    <p>Read the full archive: iseeeverything.me</p>
+    <div class="handles">@WWE @TKOGrp @Netflix @ZelinaVegaWWE @CodingBlack_ @KairiSaneWWE @IYOSkyWWE @RheaRipley_WWE @Asuka_WWE @BoDallasWWE @NikkiWWE @DexterWWE @JoeGacy_ @ErickRowan @AlexShelleyMCMG @ChrisSabinMCMG @ZoeyStar_WWE @ApolloCrews @SantosEscobar_ @AndreChaseWWE @Danhausen @JohnCena @mikethemiz @TripleH @CodyRhodes @WWERomanReigns @ObaFemiWWE</div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-left">
+    I See Everything<br>
+    Wrestling · Open Letter · 2026<br>
+    iseeeverything.me
+  </div>
+  <div class="footer-right">
+    All claims sourced<br>
+    Draw your own conclusions<br>
+    @iseeeverything
+  </div>
+</footer>
+
+</body>
+</html>
