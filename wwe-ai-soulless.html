@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>They Lied. They Fired Everyone. And Then They Admitted It. — I See Everything</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400&family=Playfair+Display:ital,wght@0,900;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;background:#000;color:#fff}
+body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.92);border-bottom:1px solid rgba(200,160,60,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:52px;backdrop-filter:blur(8px)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.15em;color:#fff;text-decoration:none}
+.nav-logo em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:#c8a040}
+
+.ticker-wrap{overflow:hidden;border-bottom:1px solid rgba(200,160,60,0.1);padding:10px 0;background:rgba(200,160,60,0.02)}
+.ticker-inner{display:flex;white-space:nowrap;animation:ticker 40s linear infinite}
+.ticker-inner span{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.4);padding:0 3rem}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* HERO */
+.article-hero{position:relative;min-height:70vh;display:flex;align-items:flex-end;padding:4rem 3rem;border-bottom:1px solid rgba(200,160,60,0.12);overflow:hidden;background:#000}
+.hero-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(8rem,20vw,22rem);letter-spacing:0.05em;color:rgba(255,255,255,0.025);line-height:1;user-select:none;text-align:center;white-space:nowrap}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,0.6) 40%,rgba(0,0,0,0.2) 100%)}
+
+/* Danhausen image block */
+.hero-img-wrap{position:absolute;right:0;top:0;bottom:0;width:45%;overflow:hidden;opacity:0.25}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:grayscale(100%) contrast(1.2)}
+.hero-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,#000 0%,transparent 40%)}
+
+.hero-content{position:relative;z-index:2;max-width:700px}
+.article-tags{display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+.tag{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;border:1px solid;padding:4px 12px}
+.tag-gold{border-color:rgba(200,160,60,0.5);color:rgba(200,160,60,0.8)}
+.tag-red{border-color:rgba(200,60,60,0.5);color:rgba(200,60,60,0.8)}
+.tag-dim{border-color:rgba(255,255,255,0.25);color:rgba(255,255,255,0.55)}
+
+.article-kicker{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5);margin-bottom:1.2rem}
+.article-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6.5rem);letter-spacing:0.06em;line-height:0.92;color:#fff;margin-bottom:1.8rem}
+.article-title em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.article-title .red{color:#c83232}
+.article-deck{font-size:12px;letter-spacing:0.1em;line-height:2.2;color:rgba(255,255,255,0.65);max-width:620px;text-transform:uppercase}
+.article-byline{margin-top:2rem;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);border-top:1px solid rgba(200,160,60,0.1);padding-top:1.2rem;display:flex;gap:2rem}
+.byline-item span{color:rgba(200,160,60,0.5)}
+
+/* PULL QUOTE — full bleed */
+.pull-quote-bleed{padding:4rem 3rem;border-top:1px solid rgba(200,160,60,0.1);border-bottom:1px solid rgba(200,160,60,0.1);background:rgba(200,160,60,0.02);text-align:center}
+.pull-quote-bleed blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.4rem,3vw,2.4rem);line-height:1.5;color:#c8a040;max-width:900px;margin:0 auto}
+.pull-quote-bleed cite{display:block;margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+
+/* ARTICLE BODY */
+.article-body{max-width:800px;margin:0 auto;padding:5rem 3rem}
+
+.article-body p{font-size:13px;letter-spacing:0.04em;line-height:2.4;color:rgba(255,255,255,0.8);margin-bottom:2rem}
+.article-body p strong{color:#fff;letter-spacing:0.06em}
+.article-body p em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040;font-size:14px}
+
+.article-body h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:0.1em;color:#fff;margin:4rem 0 1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(200,160,60,0.15)}
+.article-body h2 em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+
+/* INLINE PULL QUOTE */
+.inline-quote{margin:3rem 0;padding:2rem 2.5rem;border-left:3px solid #c8a040;background:rgba(200,160,60,0.03)}
+.inline-quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.8;color:rgba(200,160,60,0.85);margin:0}
+.inline-quote cite{display:block;margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+
+/* EVIDENCE BOX */
+.evidence-box{margin:3rem 0;border:1px solid rgba(200,160,60,0.2);background:rgba(200,160,60,0.02)}
+.evidence-header{padding:1rem 1.8rem;border-bottom:1px solid rgba(200,160,60,0.15);display:flex;align-items:center;gap:1rem}
+.evidence-label{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5)}
+.evidence-body{padding:1.8rem}
+.evidence-body p{font-size:11px;letter-spacing:0.05em;line-height:2;color:rgba(255,255,255,0.6);margin-bottom:0.8rem}
+.evidence-body p:last-child{margin-bottom:0}
+.evidence-body strong{color:rgba(200,160,60,0.8)}
+
+/* TIMELINE */
+.timeline{margin:3rem 0;display:flex;flex-direction:column;gap:0}
+.timeline-item{display:flex;gap:2rem;padding:1.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.timeline-item:last-child{border-bottom:none}
+.timeline-date{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.15em;color:rgba(200,160,60,0.5);min-width:120px;flex-shrink:0;padding-top:0.2rem}
+.timeline-text{font-size:11px;letter-spacing:0.04em;line-height:1.9;color:rgba(255,255,255,0.65)}
+.timeline-text strong{color:#fff}
+
+/* RED STAT */
+.stat-callout{margin:3rem 0;display:flex;gap:1px;background:rgba(200,60,60,0.1)}
+.stat-block{flex:1;background:#000;padding:2rem;text-align:center}
+.stat-big{font-family:'Bebas Neue',sans-serif;font-size:3rem;display:block;letter-spacing:0.1em}
+.stat-big.red{color:#c83232}
+.stat-big.gold{color:#c8a040}
+.stat-label{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:0.5rem;display:block}
+
+/* CLOSING STATEMENT */
+.closing{margin:4rem 0 0;padding:3rem;border:1px solid rgba(200,160,60,0.15);background:rgba(200,160,60,0.02);text-align:center}
+.closing p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,2vw,1.4rem);line-height:1.8;color:rgba(200,160,60,0.8);margin:0}
+.closing .author{margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+
+.article-footer-nav{padding:3rem;border-top:1px solid rgba(200,160,60,0.1);display:flex;justify-content:space-between;align-items:center}
+.back-link{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(200,160,60,0.5);text-decoration:none;transition:color 0.2s}
+.back-link:hover{color:#c8a040}
+.article-id{font-size:9px;letter-spacing:0.3em;color:rgba(255,255,255,0.15)}
+
+.footer{border-top:1px solid rgba(200,160,60,0.1);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between}
+.footer-left{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.15);line-height:2}
+.footer-right{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.25);text-align:right;line-height:2}
+
+@media(max-width:768px){
+  .nav{padding:0 1.5rem}
+  .nav-links{gap:1.2rem}
+  .article-hero{padding:3rem 1.5rem;min-height:60vh}
+  .hero-img-wrap{display:none}
+  .article-body{padding:3rem 1.5rem}
+  .pull-quote-bleed{padding:3rem 1.5rem}
+  .stat-callout{flex-direction:column}
+  .article-footer-nav{padding:2rem 1.5rem;flex-direction:column;gap:1rem;text-align:center}
+  .footer{flex-direction:column;gap:1.5rem;padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">I See <em>Everything</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="wrestling.html">Wrestling</a></li>
+    <li><a href="wrestling.html">← Cheap Seats</a></li>
+  </ul>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>"It Feels Soulless" · Now We Know Why · They Lied In October · They Fired 23 In April · And Then They Admitted It At A Town Hall · Like It Was Nothing · &nbsp;</span>
+    <span>"It Feels Soulless" · Now We Know Why · They Lied In October · They Fired 23 In April · And Then They Admitted It At A Town Hall · Like It Was Nothing · &nbsp;</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="article-hero">
+  <div class="hero-bg">
+    <div class="hero-bg-text">SOULLESS</div>
+  </div>
+  <div class="hero-img-wrap">
+    <!-- REPLACE WITH DANHAUSEN IMAGE -->
+    <img src="" alt="" onerror="this.style.display='none'">
+  </div>
+  <div class="hero-content">
+    <div class="article-kicker">CHS-003 · From The Cheap Seats · April 2026</div>
+    <div class="article-tags">
+      <span class="tag tag-red">Exposé</span>
+      <span class="tag tag-gold">TKO</span>
+      <span class="tag tag-dim">AI</span>
+      <span class="tag tag-dim">40-Year Fan</span>
+    </div>
+    <h1 class="article-title">They <em>Lied.</em> They Fired Everyone.<br>Then They <span class="red">Admitted It.</span></h1>
+    <p class="article-deck">In October they said it wasn't happening. In April they fired 23 people. This week they stood at a Town Hall and confirmed it like it was a weather update. The algorithm is writing your wrestling. And the humans who used to do it just got a phone call.</p>
+    <div class="article-byline">
+      <div class="byline-item">Archive <span>CHS-003</span></div>
+      <div class="byline-item">Section <span>From The Cheap Seats</span></div>
+      <div class="byline-item">Published <span>April 2026</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- OPENING PULL QUOTE -->
+<div class="pull-quote-bleed">
+  <blockquote>"It feels soulless."</blockquote>
+  <cite>— Ariel Helwani. Said it months ago. Turns out he was more right than he knew.</cite>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+
+  <p>Let me tell you about a company that looked its own workforce in the eye, told them everything was fine, then systematically dismantled them while an algorithm quietly took their jobs. Let me tell you about a company that, when journalists started asking questions, redirected, deflected and denied. And let me tell you about the moment — this week — when a TKO president stood in front of a room of people and <strong>confirmed the whole thing like he was announcing a new catering menu.</strong></p>
+
+  <p>This isn't speculation. This isn't a hot take from someone who hasn't watched in twenty years. This is forty years of watching, paying attention, getting up at 4am for every PLE without exception — and being absolutely, categorically <em>lied to.</em></p>
+
+  <h2>October 2025 — <em>The Denial</em></h2>
+
+  <p>The story broke in October. Dave Meltzer reported that WWE had hired a man called Cyrus Kowsari as Senior Director of Creative Strategy — and that Triple H had introduced him to the writing room as the person who would <strong>lead WWE's transition into AI-based storytelling.</strong> Triple H's words, not mine. He reportedly called it an "inevitable shift."</p>
+
+  <p>The reaction from the fanbase was exactly what you'd expect. Alarm. Anger. Questions. And what did WWE do? What TKO always does. They sent their people out to pour cold water on it.</p>
+
+  <div class="evidence-box">
+    <div class="evidence-header">
+      <span class="evidence-label">The Official Line — October 2025</span>
+    </div>
+    <div class="evidence-body">
+      <p><strong>Fightful's Sean Ross Sapp</strong> — presented as the rebuttal to Meltzer — reported that the AI tools were "mainly like a digital writer's assistant" used to look up match history. Nothing more.</p>
+      <p><strong>WWE sources told multiple outlets</strong> that Kowsari was being brought in for production elements only. Background noise removal. File organisation. Technical stuff. Nothing creative. Don't worry about it.</p>
+      <p><strong>A top WWE talent</strong> was quoted dismissing the idea entirely — "Michael Hayes, Paul Heyman and Ed Koskey are not AI" — and took exception to anyone suggesting otherwise.</p>
+      <p><strong>Triple H himself</strong> stood in the writers' room and told every single person in that room: <strong>nobody loses their job to AI.</strong></p>
+    </div>
+  </div>
+
+  <p>And here's the thing about that last one. Triple H — the man fans spent years defending. The saviour. The guy who actually loves wrestling. The one who was going to fix everything Vince broke. He looked at writers. Human beings with mortgages and careers and kids. And he told them they were safe.</p>
+
+  <div class="inline-quote">
+    <p>"Nobody in the writers' room would lose their job to AI."</p>
+    <cite>— Triple H. October 2025. To his creative team's faces.</cite>
+  </div>
+
+  <p>Even Meltzer — who had the story right from the start — noted that WWE higher-ups didn't actually deny the facts internally. They just tried to change the subject. Pointed to the production use cases. Hoped it would blow over. <strong>It didn't blow over. It just went quiet. Which is not the same thing.</strong></p>
+
+  <h2>The Timeline <em>They Hope You've Forgotten</em></h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">Sept 2025</div>
+      <div class="timeline-text"><strong>Cyrus Kowsari hired.</strong> Introduced to creative staff by Triple H. Former BuzzFeed producer. Also appointed White House liaison to WWE — because sure, why not. Triple H calls the AI shift "inevitable."</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Oct 17 2025</div>
+      <div class="timeline-text"><strong>Meltzer breaks the story.</strong> WWE already running two AI experiments. The first was scrapped because it "couldn't understand wrestling storylines." The second — a platform called Writer AI — being trained on decades of WWE content.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Oct 19–24 2025</div>
+      <div class="timeline-text"><strong>The great denial.</strong> WWE sources flood wrestling media with reassurances. Production use only. Nobody losing jobs. Don't panic. Move along. Meltzer's sources confirm internally nobody denied a thing — they just changed the subject.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Months of TV</div>
+      <div class="timeline-text"><strong>Fans keep saying it feels off.</strong> Flat. Hollow. Going through the motions. The word that keeps coming up, from fans and respected media alike: <strong>soulless.</strong></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">April 2026</div>
+      <div class="timeline-text"><strong>5:09pm. Twenty-three people fired.</strong> Before SmackDown aired. Phones rang. Careers ended. The Wyatt Sicks vignette played to fans in the arena who had no idea what had just happened backstage. Danhausen — brilliant, beloved Danhausen — got WrestleMania.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">April 28 2026</div>
+      <div class="timeline-text"><strong>TKO President Mark Shapiro at a Town Hall.</strong> Nick Khan and Triple H are using AI for storylines. Stated plainly. No apology. No context. Just announced. 509,000 people saw the tweet inside hours.</div>
+    </div>
+  </div>
+
+  <h2>So Who's <em>Actually Surprised?</em></h2>
+
+  <p>The honest answer is nobody who was paying attention. Because the product has been telling us for months. You don't need a source inside Titan Towers when the television is the source. When feuds go nowhere. When promos feel like they were written by something that has read every promo ever written but has never once <strong>felt</strong> anything. When the emotional logic of a story just... doesn't land. When you can't put your finger on it but something is wrong.</p>
+
+  <p>Ariel Helwani put his finger on it. <em>Soulless.</em> And he was right in a way that's actually quite profound when you think about what we now know. Because that's the perfect word for content generated by something that has no soul to put into it. It can study every great wrestling promo ever delivered. It can analyse the structure of every great feud. It can identify patterns in what made fans react. <strong>And it will produce something that looks exactly like wrestling and feels absolutely nothing like it.</strong></p>
+
+  <div class="stat-callout">
+    <div class="stat-block">
+      <span class="stat-big red">23</span>
+      <span class="stat-label">Human beings fired in one afternoon</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-big gold">0</span>
+      <span class="stat-label">Algorithms that got a phone call</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-big red">6</span>
+      <span class="stat-label">Months between the lie and the admission</span>
+    </div>
+  </div>
+
+  <h2>The Part That Makes Me <em>Genuinely Furious</em></h2>
+
+  <p>I can handle bad creative. I've watched WWE through some genuinely terrible periods. The Reign of Terror. Katie Vick. The entire post-Attitude Era wilderness. I sat through all of it because even in the bad times there was something human in there. A writer who cared too much about something stupid. A performer who elevated garbage material because they gave a shit. <strong>Human beings making human mistakes in a human industry.</strong></p>
+
+  <p>What I can't handle — what forty years of loyalty makes me unable to just shrug at — is being <em>lied to.</em> Systematically. By people who knew exactly what they were doing. Who stood in front of their own staff and promised safety while the algorithm was already in the building. Who sent their media contacts out to run cleanup while the transition was already underway. Who fired twenty-three people on a Thursday afternoon and then had a TKO president casually confirm at a Town Hall that the machine had taken over.</p>
+
+  <p>Triple H told those writers nobody was losing their job to AI. Six months later twenty-three people got phone calls. <strong>You do the maths.</strong></p>
+
+  <div class="inline-quote">
+    <p>"AI is not replacing the creative team. A top talent said, 'Michael Hayes, Paul Heyman and Ed Koskey are not AI,' and took exception to the belief that AI storylines were going to happen."</p>
+    <cite>— WWE sources. October 2025. Ageing like milk in the sun.</cite>
+  </div>
+
+  <p>Where are those quotes now? Where's the clarification? Where's the acknowledgement that what was said in October and what was confirmed in April are two completely different things that cannot both be true? There's no statement. No apology. No accountability. Just Mark Shapiro at a Town Hall, matter-of-fact, as if he was talking about a new catering supplier.</p>
+
+  <h2>What They Actually <em>Fed The Machine</em></h2>
+
+  <p>Here's the detail that should end any remaining debate about whether this can work. When WWE trained their AI system — their partnership with Writer AI — they fed it the company's content library. Decades of WWE creative. Which means they trained it primarily on <strong>the Vince McMahon era.</strong></p>
+
+  <p>Let that land. The product that fans spent years praying would end. The creative regime that was so toxic, so repetitive, so out of touch that Triple H's arrival was celebrated as a new dawn — <em>that</em> is what they put into the machine. That is the creative DNA the algorithm learned from. Vince's booking. Vince's logic. Vince's obsessions. And then they wondered why the early outputs were described as laughably bad. And then they kept going anyway.</p>
+
+  <p>The internal belief, reportedly, was that "once the bugs are worked out, AI will begin to have a major impact on storyline direction." <strong>The bugs being: it doesn't understand wrestling, it can't do character work, it produces output trained on a discredited creative era, and it has never in its existence watched two people tell a story in a ring and felt anything at all.</strong> Minor bugs. Should be fine.</p>
+
+  <h2>Danhausen Got <em>WrestleMania.</em></h2>
+
+  <p>I want to come back to this because it matters more than it might seem. On the same day twenty-three people lost their jobs — on the same afternoon the phone calls went out — Danhausen, the most wonderfully weird, completely original, utterly human character in professional wrestling, got a WrestleMania moment. The fans in that building lost their minds. Because Danhausen is everything the algorithm can never be. He is inexplicable. He is specific. He is the kind of character that no AI trained on decades of WWE content would ever generate because he breaks every pattern the machine was taught to recognise as correct.</p>
+
+  <p>And in that single afternoon you have the entire story of what TKO is doing to this company. Fire the humans. Keep the one the fans love most as a reminder of what human creativity looks like. Use him as proof that everything's fine. <strong>While the algorithm writes the rest of it.</strong></p>
+
+  <h2>Forty Years <em>From The Cheap Seats</em></h2>
+
+  <p>I have been watching this product since I was a kid. I have got up at 4am for every single PLE without exception for years. I have defended this company to people who think it's fake — yes mate, I know it's fake, that's not the point, it's never been the point. I have cried at this show. Genuinely cried. At a wrestling show. Because the storytelling was that good and the performers were that committed and the whole ridiculous beautiful thing somehow reached something real.</p>
+
+  <p>You cannot get that from a machine. You cannot train an algorithm to understand why certain moments hit the way they do. You cannot feed it fifty years of content and expect it to produce the thing that made those fifty years matter. Because what made them matter was people. Writers who'd been up all night. Performers who were working through real pain. A creative team that sometimes got it catastrophically wrong and sometimes got it so right it made you forget you were watching a scripted fight in your pants at 4 in the morning.</p>
+
+  <p><strong>That's what they're replacing. That's what they fired twenty-three people to make room for. And that's what they lied about for six months before casually confirming it at a Town Hall.</strong></p>
+
+  <div class="closing">
+    <p>"It feels soulless." Ariel called it. He was right. It's being written by something that doesn't have one. And the people who did have one got a phone call on a Thursday afternoon before SmackDown aired.</p>
+    <div class="author">From The Cheap Seats · CHS-003 · April 2026 · iseeeverything.me</div>
+  </div>
+
+</div>
+
+<div class="article-footer-nav">
+  <a href="wrestling.html" class="back-link">← Back To Wrestling</a>
+  <span class="article-id">CHS-003 / FROM THE CHEAP SEATS / APRIL 2026</span>
+  <a href="wwe-releases-2026.html" class="back-link">Next Article →</a>
+</div>
+
+<footer class="footer">
+  <div class="footer-left">
+    I See Everything<br>
+    Wrestling · Personal Archive · 2026<br>
+    iseeeverything.me
+  </div>
+  <div class="footer-right">
+    40 Years Of Watching<br>
+    From The Cheap Seats<br>
+    Draw Your Own Conclusions
+  </div>
+</footer>
+
+</body>
+</html>
