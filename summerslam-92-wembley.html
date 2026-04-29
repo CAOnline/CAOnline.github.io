@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>£32. 15 Rows Back. 82,000 People. Happy Birthday. — I See Everything</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400&family=Playfair+Display:ital,wght@0,900;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;background:#000;color:#fff}
+body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.92);border-bottom:1px solid rgba(200,160,60,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:52px;backdrop-filter:blur(8px)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.15em;color:#fff;text-decoration:none}
+.nav-logo em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:#c8a040}
+
+.ticker-wrap{overflow:hidden;border-bottom:1px solid rgba(200,160,60,0.1);padding:10px 0;background:rgba(200,160,60,0.02)}
+.ticker-inner{display:flex;white-space:nowrap;animation:ticker 45s linear infinite}
+.ticker-inner span{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.4);padding:0 3rem}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* HERO */
+.article-hero{position:relative;min-height:75vh;display:flex;align-items:flex-end;padding:4rem 3rem;border-bottom:1px solid rgba(200,160,60,0.12);overflow:hidden;background:#000}
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.hero-bg-number{position:absolute;right:-2rem;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(12rem,30vw,32rem);letter-spacing:-0.05em;color:rgba(255,255,255,0.025);line-height:1;user-select:none}
+.hero-bg-fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,0.5) 50%,rgba(0,0,0,0.15) 100%)}
+.hero-bg-left{position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,rgba(200,160,60,0.4),transparent)}
+
+.hero-content{position:relative;z-index:2;max-width:780px}
+.article-kicker{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5);margin-bottom:1.2rem}
+.article-tags{display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+.tag{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;border:1px solid;padding:4px 12px}
+.tag-gold{border-color:rgba(200,160,60,0.5);color:rgba(200,160,60,0.8)}
+.tag-emotion{border-color:rgba(160,100,200,0.5);color:rgba(160,100,200,0.8)}
+.tag-dim{border-color:rgba(255,255,255,0.25);color:rgba(255,255,255,0.55)}
+
+.article-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,6.5vw,6rem);letter-spacing:0.06em;line-height:0.92;color:#fff;margin-bottom:1.8rem}
+.article-title em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.article-deck{font-size:12px;letter-spacing:0.1em;line-height:2.2;color:rgba(255,255,255,0.6);max-width:640px;text-transform:uppercase}
+.article-byline{margin-top:2rem;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);border-top:1px solid rgba(200,160,60,0.1);padding-top:1.2rem;display:flex;gap:2rem;flex-wrap:wrap}
+.byline-item span{color:rgba(200,160,60,0.5)}
+
+/* EMOTION BANNER */
+.emotion-banner{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(200,160,60,0.08)}
+.emotion-cell{background:#000;padding:1.2rem 1rem;text-align:center}
+.emotion-icon{font-size:1.2rem;display:block;margin-bottom:0.4rem}
+.emotion-word{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;display:block}
+.emotion-word.active{color:#c8a040}
+.emotion-word.inactive{color:rgba(255,255,255,0.12)}
+
+/* OPENING PULL QUOTE */
+.pull-quote-bleed{padding:4rem 3rem;border-bottom:1px solid rgba(200,160,60,0.1);background:rgba(200,160,60,0.015);text-align:center}
+.pull-quote-bleed blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.3rem,2.8vw,2.2rem);line-height:1.6;color:#c8a040;max-width:860px;margin:0 auto}
+.pull-quote-bleed cite{display:block;margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+
+/* ARTICLE BODY */
+.article-body{max-width:800px;margin:0 auto;padding:5rem 3rem}
+.article-body p{font-size:13px;letter-spacing:0.04em;line-height:2.4;color:rgba(255,255,255,0.8);margin-bottom:2rem}
+.article-body p strong{color:#fff;letter-spacing:0.06em}
+.article-body p em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040;font-size:14px}
+.article-body h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:0.1em;color:#fff;margin:4rem 0 1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(200,160,60,0.15)}
+.article-body h2 em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+
+/* FACT BOX */
+.fact-box{margin:3rem 0;border:1px solid rgba(200,160,60,0.2);background:rgba(200,160,60,0.02)}
+.fact-header{padding:1rem 1.8rem;border-bottom:1px solid rgba(200,160,60,0.15)}
+.fact-label{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5)}
+.fact-body{padding:1.8rem;display:flex;flex-direction:column;gap:1rem}
+.fact-row{display:flex;gap:2rem;align-items:baseline;border-bottom:1px solid rgba(255,255,255,0.04);padding-bottom:1rem}
+.fact-row:last-child{border-bottom:none;padding-bottom:0}
+.fact-key{font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.25);min-width:160px;flex-shrink:0}
+.fact-val{font-size:12px;letter-spacing:0.06em;color:rgba(255,255,255,0.75)}
+.fact-val strong{color:#c8a040}
+
+/* INLINE QUOTE */
+.inline-quote{margin:3rem 0;padding:2rem 2.5rem;border-left:3px solid #c8a040;background:rgba(200,160,60,0.03)}
+.inline-quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.8;color:rgba(200,160,60,0.85);margin:0}
+.inline-quote cite{display:block;margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+
+/* PRICE COMPARISON */
+.price-compare{margin:3rem 0;display:flex;gap:1px;background:rgba(255,255,255,0.05)}
+.price-block{flex:1;background:#000;padding:2.5rem 2rem;text-align:center;display:flex;flex-direction:column;gap:0.8rem}
+.price-year{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+.price-amount{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:0.05em;line-height:1}
+.price-amount.gold{color:#c8a040}
+.price-amount.red{color:#c83232}
+.price-desc{font-size:9px;letter-spacing:0.1em;line-height:1.8;color:rgba(255,255,255,0.4)}
+.price-verdict{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;margin-top:0.5rem}
+.price-verdict.good{color:rgba(100,200,100,0.6)}
+.price-verdict.bad{color:rgba(200,60,60,0.6)}
+
+/* CLOSING */
+.closing{margin:4rem 0 0;padding:3rem;border:1px solid rgba(200,160,60,0.15);background:rgba(200,160,60,0.02);text-align:center}
+.closing p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,2vw,1.4rem);line-height:1.9;color:rgba(200,160,60,0.8);margin:0}
+.closing .author{margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+
+.article-footer-nav{padding:3rem;border-top:1px solid rgba(200,160,60,0.1);display:flex;justify-content:space-between;align-items:center}
+.back-link{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(200,160,60,0.5);text-decoration:none;transition:color 0.2s}
+.back-link:hover{color:#c8a040}
+.article-id{font-size:9px;letter-spacing:0.3em;color:rgba(255,255,255,0.15)}
+
+.footer{border-top:1px solid rgba(200,160,60,0.1);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between}
+.footer-left{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.15);line-height:2}
+.footer-right{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.25);text-align:right;line-height:2}
+
+@media(max-width:768px){
+  .nav{padding:0 1.5rem}
+  .nav-links{gap:1.2rem}
+  .article-hero{padding:3rem 1.5rem;min-height:65vh}
+  .article-body{padding:3rem 1.5rem}
+  .pull-quote-bleed{padding:3rem 1.5rem}
+  .emotion-banner{grid-template-columns:repeat(5,1fr)}
+  .price-compare{flex-direction:column}
+  .fact-row{flex-direction:column;gap:0.5rem}
+  .fact-key{min-width:unset}
+  .article-footer-nav{padding:2rem 1.5rem;flex-direction:column;gap:1rem;text-align:center}
+  .footer{flex-direction:column;gap:1.5rem;padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">I See <em>Everything</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="wrestling.html">Wrestling</a></li>
+    <li><a href="wrestling.html">← Why I Never Left</a></li>
+  </ul>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>SummerSlam 1992 · Wembley Stadium · 80,355 People · £32 A Ticket · 15 Rows From The Ring · A Birthday Treat · The Greatest Intercontinental Title Match Ever Wrestled · &nbsp;</span>
+    <span>SummerSlam 1992 · Wembley Stadium · 80,355 People · £32 A Ticket · 15 Rows From The Ring · A Birthday Treat · The Greatest Intercontinental Title Match Ever Wrestled · &nbsp;</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="article-hero">
+  <div class="hero-bg">
+    <div class="hero-bg-number">92</div>
+    <div class="hero-bg-fade"></div>
+    <div class="hero-bg-left"></div>
+  </div>
+  <div class="hero-content">
+    <div class="article-kicker">WNL-001 · Why I Never Left · SummerSlam 1992</div>
+    <div class="article-tags">
+      <span class="tag tag-gold">I Was There</span>
+      <span class="tag tag-emotion">Sobbed</span>
+      <span class="tag tag-dim">Wembley Stadium</span>
+      <span class="tag tag-dim">Age 14</span>
+    </div>
+    <h1 class="article-title">£32. 15 Rows Back.<br><em>82,000 People.</em><br>Happy Birthday.</h1>
+    <p class="article-deck">My parents bought me a ticket to Wembley Stadium for my birthday. I went with four mates from school. None of us had any idea we were about to watch one of the greatest matches ever performed in the history of professional wrestling.</p>
+    <div class="article-byline">
+      <div class="byline-item">Archive <span>WNL-001</span></div>
+      <div class="byline-item">Section <span>Why I Never Left</span></div>
+      <div class="byline-item">Event <span>SummerSlam · August 29 1992</span></div>
+      <div class="byline-item">Venue <span>Wembley Stadium, London</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- EMOTION BANNER -->
+<div class="emotion-banner">
+  <div class="emotion-cell"><span class="emotion-icon">😂</span><span class="emotion-word inactive">Laughed</span></div>
+  <div class="emotion-cell"><span class="emotion-icon">😭</span><span class="emotion-word active">Sobbed</span></div>
+  <div class="emotion-cell"><span class="emotion-icon">😤</span><span class="emotion-word inactive">Angry</span></div>
+  <div class="emotion-cell"><span class="emotion-icon">😊</span><span class="emotion-word active">Happy</span></div>
+  <div class="emotion-cell"><span class="emotion-icon">😱</span><span class="emotion-word active">Shocked</span></div>
+</div>
+
+<!-- OPENING PULL QUOTE -->
+<div class="pull-quote-bleed">
+  <blockquote>"My mum and dad bought me a ticket to Wembley Stadium for my birthday. I was 14. I was 15 rows from the ring. It cost £32. I didn't know it then — but I was about to watch the greatest Intercontinental Championship match ever wrestled."</blockquote>
+  <cite>— Why I Never Left · Entry 001</cite>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+
+  <p>August 29th, 1992. Wembley Stadium, London. Five schoolkids from Hertfordshire on the floor, 15 rows back, tickets that cost thirty-two quid each that my parents bought as a birthday treat. The old Wembley. Twin towers. The one that felt like it had been built specifically to make noise in. And we were about to be inside it with <strong>82,000 other people</strong> who had all come to watch the same thing.</p>
+
+  <p>I was 14 years old. I had been watching wrestling since I was 7 or 8. It had already got its hooks into me in a way nothing else had — not football, not music, nothing. But I had never seen it live. Never felt what it was like to be inside a building where it was actually happening. Where the ring was real and the noise was yours and every reaction you had was part of something bigger than yourself.</p>
+
+  <p>Wembley Stadium was my first time. And I will never — <em>never</em> — get a first time like that again.</p>
+
+  <div class="fact-box">
+    <div class="fact-header"><span class="fact-label">The Night · By The Numbers</span></div>
+    <div class="fact-body">
+      <div class="fact-row">
+        <span class="fact-key">Event</span>
+        <span class="fact-val"><strong>WWF SummerSlam 1992</strong></span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key">Date</span>
+        <span class="fact-val">August 29, 1992</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key">Venue</span>
+        <span class="fact-val">Wembley Stadium, London, England</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key">Attendance</span>
+        <span class="fact-val"><strong>80,355</strong> — largest WWF crowd outside North America at the time</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key">Main Event</span>
+        <span class="fact-val">British Bulldog vs Bret Hart — WWF Intercontinental Championship</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key">Ticket Price</span>
+        <span class="fact-val"><strong>£32</strong> — floor, 15 rows from the ring</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key">Age</span>
+        <span class="fact-val">14. Birthday treat. Four mates from school.</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>The <em>Build-Up</em></h2>
+
+  <p>The storyline was perfect. Bret Hart — the Hitman, the Excellence of Execution, the best technical wrestler on the planet — defending his Intercontinental Championship against his brother-in-law, Davey Boy Smith, the British Bulldog. In England. At Wembley. In front of Bulldog's home crowd. In front of Diana Hart, Davey's wife and Bret's sister, sitting at ringside.</p>
+
+  <p>As a British kid watching this build, it meant everything. The Bulldog was <em>ours.</em> He was from Golborne, Lancashire. He was massive and he was brilliant and he was going to win the title in front of 80,000 of his own people and it was going to be the greatest thing that had ever happened. That was the story. That was what we all believed walking into that stadium.</p>
+
+  <p>What none of us knew — what we wouldn't find out until years later — was what was actually happening behind the curtain. That the Bulldog had been struggling. That he wasn't in the condition he should have been. That Bret Hart was about to go out there and do something extraordinary — carry a match almost entirely on his own in front of the biggest crowd of his career, against a man who was barely able to remember the spots, and make it look like the greatest contest ever fought.</p>
+
+  <p>We didn't know any of that. We just knew it felt enormous. And it did.</p>
+
+  <h2>When Bulldog's Music <em>Hit</em></h2>
+
+  <p>I have been in loud buildings since. Concerts. Football grounds. Other wrestling shows. Nothing — <strong>nothing</strong> — has ever come close to the noise that went through Wembley Stadium when Davey Boy Smith's music hit and he walked out into that crowd.</p>
+
+  <p>80,000 British people absolutely losing their minds. The sound didn't just go up — it went physical. You felt it in your chest. Five fourteen-year-old kids from Hertfordshire looking at each other with the same face, the same wide eyes, the same completely overwhelmed expression. We weren't watching wrestling any more. We were inside something. Something that was happening to us as much as we were watching it happen.</p>
+
+  <div class="inline-quote">
+    <p>I have never felt a noise like that before or since. 80,000 people making one sound. And we were 15 rows from the ring when it happened.</p>
+    <cite>— Wembley Stadium · August 29 1992</cite>
+  </div>
+
+  <p>Bret came out to a chorus of boos that, in any other context, would have been devastating. But Bret Hart doesn't get devastated. Bret Hart looks at 80,000 people booing him and he thinks: <em>right then. Watch this.</em> Because Bret Hart knew something the rest of us didn't. He knew what the next twenty-five minutes were going to look like. He knew exactly what he was going to do.</p>
+
+  <h2>The Match <em>Itself</em></h2>
+
+  <p>There are matches you watch and appreciate. There are matches you enjoy. And then there are matches that do something to you that you cannot fully explain — that reach past the performance and the athleticism and the storytelling and land somewhere deeper, somewhere that has nothing to do with knowing what a wristlock is or being able to rate a match out of five stars.</p>
+
+  <p>Bret Hart vs British Bulldog at SummerSlam 1992 is one of those matches. And I say that as someone who was there. As someone who didn't know at 14 what I know now about what Bret was actually doing out there. I didn't know he was calling every single spot in Davey's ear throughout. I didn't know the pressure he was under. I didn't know that Diana was in tears backstage beforehand because she could see what was happening with her husband.</p>
+
+  <p>All I knew was that it felt real. It felt like it mattered. The near-falls had 80,000 people lurching forward simultaneously. The Bulldog's power spots had the building in absolute hysterics. And when Bret locked in the Sharpshooter and Davey Boy Smith — <strong>in front of his own people, in his own country, in the biggest match of his life</strong> — powered out of it and reversed it into the pin, the noise that went through Wembley Stadium was unlike anything I have ever experienced.</p>
+
+  <p>14 years old. 15 rows back. Absolutely gone. All five of us.</p>
+
+  <h2>What Bret Actually <em>Did That Night</em></h2>
+
+  <p>Years later — as an adult, as someone who has spent decades studying this craft — I came to understand the full picture of what happened at Wembley that night. And it made me love that match even more.</p>
+
+  <p>Bret Hart essentially wrestled that match for two people. He performed his half and he guided Davey Boy through his. Every transition, every spot, every near-fall — Bret was the architect and the builder simultaneously. He did it in front of the largest crowd of his career. He did it as the villain, getting booed by 80,000 people. And he produced something so technically flawless, so emotionally perfect, that it has been rated among the greatest matches ever performed.</p>
+
+  <p>The fact that the crowd got exactly the ending they came for — Bulldog winning the title in front of his home nation — while Bret controlled every single second of how they got there, is one of the most remarkable pieces of professional wrestling craftsmanship I am aware of. <strong>He gave 80,000 people the night of their lives and they booed him for it. And he loved every second.</strong></p>
+
+  <div class="inline-quote">
+    <p>Bret Hart went out there, got booed by 80,000 of his brother-in-law's home crowd, called every spot in Davey's ear, and produced an absolute masterpiece. Then shook his hand. That is what greatness looks like.</p>
+    <cite>— The Excellence of Execution · August 29 1992</cite>
+  </div>
+
+  <h2>£32. <em>Thirty-Two Pounds.</em></h2>
+
+  <p>My parents bought those tickets. For my birthday. Because their kid loved wrestling and they wanted to give him something he'd remember. I don't think they had any idea what they were actually giving me. I don't think they could have known that thirty-odd years later I would still be talking about that afternoon as one of the defining experiences of my life.</p>
+
+  <p>£32. Floor seats. 15 rows from the ring. Wembley Stadium. The biggest wrestling crowd ever assembled in this country. One of the greatest matches ever performed. Five schoolkids from Hertfordshire who had absolutely no idea what they were in the middle of.</p>
+
+  <div class="price-compare">
+    <div class="price-block">
+      <span class="price-year">1992 · Wembley Stadium</span>
+      <span class="price-amount gold">£32</span>
+      <span class="price-desc">Floor seats · 15 rows from the ring · 80,355 people · Greatest IC Title match ever wrestled</span>
+      <span class="price-verdict good">Birthday treat. Five mates. Fourteen years old.</span>
+    </div>
+    <div class="price-block">
+      <span class="price-year">2026 · TKO Event</span>
+      <span class="price-amount red">£400+</span>
+      <span class="price-desc">Sponsored mat · LED boards · Ads on the ring posts · Saudi airline on the canvas</span>
+      <span class="price-verdict bad">And that's before the service charge.</span>
+    </div>
+  </div>
+
+  <h2>Why This Is <em>Why I Never Left</em></h2>
+
+  <p>People ask — people who don't watch wrestling, people who think it's just blokes pretending to fight — why. Why have you watched this for forty years. Why do you still get up at 4am. Why does it matter.</p>
+
+  <p>This is why. Because I was 14 years old in Wembley Stadium with my four best mates and 80,000 strangers and something happened in that ring that made all of us feel the same thing at the same time. Joy. Tension. Relief. Heartbreak — the Hitman losing the title to his own brother-in-law, in front of all those people, and shaking his hand afterwards. And then the noise. That noise.</p>
+
+  <p>You don't forget that. You can't. It gets inside you at 14 and it stays there. Every time the product makes you question why you still bother — every time TKO does something that makes you want to throw the remote through the telly — you go back to that afternoon. To the twin towers. To the floor. To 15 rows from the ring and a ticket that cost thirty-two quid and four mates who were just as gone as you were.</p>
+
+  <p><strong>That's why I never left. That afternoon at Wembley is why I never left. And no algorithm is ever going to give anyone that.</strong></p>
+
+  <div class="closing">
+    <p>My mum and dad spent £160 on five birthday tickets to Wembley Stadium in 1992. Best money anyone has ever spent on me. I've been watching ever since. I don't plan on stopping.</p>
+    <div class="author">Why I Never Left · WNL-001 · SummerSlam 1992 · iseeeverything.me</div>
+  </div>
+
+</div>
+
+<div class="article-footer-nav">
+  <a href="wrestling.html" class="back-link">← Back To Wrestling</a>
+  <span class="article-id">WNL-001 / WHY I NEVER LEFT / SUMMERSLAM 1992</span>
+  <a href="wrestling.html" class="back-link">Next Entry →</a>
+</div>
+
+<footer class="footer">
+  <div class="footer-left">
+    I See Everything<br>
+    Wrestling · Personal Archive · 2026<br>
+    iseeeverything.me
+  </div>
+  <div class="footer-right">
+    40 Years Of Watching<br>
+    Why I Never Left<br>
+    Draw Your Own Conclusions
+  </div>
+</footer>
+
+</body>
+</html>

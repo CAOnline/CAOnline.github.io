@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When You Hear The Glass, That's Your Ass — I See Everything</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400&family=Playfair+Display:ital,wght@0,900;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;background:#000;color:#fff}
+body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.92);border-bottom:1px solid rgba(200,160,60,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:52px;backdrop-filter:blur(8px)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.15em;color:#fff;text-decoration:none}
+.nav-logo em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:#c8a040}
+
+.ticker-wrap{overflow:hidden;border-bottom:1px solid rgba(200,160,60,0.1);padding:10px 0;background:rgba(200,160,60,0.02)}
+.ticker-inner{display:flex;white-space:nowrap;animation:ticker 40s linear infinite}
+.ticker-inner span{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.4);padding:0 3rem}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* HERO */
+.article-hero{position:relative;min-height:80vh;display:flex;align-items:flex-end;padding:4rem 3rem;border-bottom:1px solid rgba(200,160,60,0.12);overflow:hidden;background:#000}
+
+/* Blood red gradient — this one earns it */
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.hero-bg-glow{position:absolute;bottom:0;left:0;right:0;height:60%;background:radial-gradient(ellipse 80% 100% at 30% 100%,rgba(160,20,20,0.15) 0%,transparent 70%)}
+.hero-bg-number{position:absolute;right:-1rem;bottom:-2rem;font-family:'Bebas Neue',sans-serif;font-size:clamp(14rem,35vw,38rem);letter-spacing:-0.05em;color:rgba(255,255,255,0.02);line-height:1;user-select:none}
+.hero-bg-fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,0.55) 45%,rgba(0,0,0,0.1) 100%)}
+.hero-bg-left{position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,rgba(160,20,20,0.6),transparent)}
+
+.hero-content{position:relative;z-index:2;max-width:800px}
+.article-kicker{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5);margin-bottom:1.2rem}
+.article-tags{display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+.tag{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;border:1px solid;padding:4px 12px}
+.tag-gold{border-color:rgba(200,160,60,0.5);color:rgba(200,160,60,0.8)}
+.tag-red{border-color:rgba(200,60,60,0.5);color:rgba(200,60,60,0.8)}
+.tag-dim{border-color:rgba(255,255,255,0.25);color:rgba(255,255,255,0.55)}
+
+.article-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,6.5vw,6.5rem);letter-spacing:0.06em;line-height:0.9;color:#fff;margin-bottom:1.8rem}
+.article-title em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.article-title .blood{color:#c83232}
+.article-deck{font-size:12px;letter-spacing:0.1em;line-height:2.2;color:rgba(255,255,255,0.6);max-width:660px;text-transform:uppercase}
+.article-byline{margin-top:2rem;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);border-top:1px solid rgba(200,160,60,0.1);padding-top:1.2rem;display:flex;gap:2rem;flex-wrap:wrap}
+.article-byline span{color:rgba(200,160,60,0.5)}
+
+/* EMOTION BANNER */
+.emotion-banner{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(200,160,60,0.08)}
+.emotion-cell{background:#000;padding:1.2rem 1rem;text-align:center}
+.emotion-icon{font-size:1.2rem;display:block;margin-bottom:0.4rem}
+.emotion-word{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;display:block}
+.emotion-word.active{color:#c8a040}
+.emotion-word.active-red{color:#c83232}
+.emotion-word.inactive{color:rgba(255,255,255,0.12)}
+
+/* OPENING PULL QUOTE — THE ONE */
+.pull-quote-bleed{padding:4rem 3rem;border-bottom:1px solid rgba(200,160,60,0.1);background:rgba(160,20,20,0.04);text-align:center}
+.pull-quote-bleed blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.6rem,3.5vw,2.8rem);line-height:1.4;color:#c8a040;max-width:700px;margin:0 auto}
+.pull-quote-bleed cite{display:block;margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+
+/* ARTICLE BODY */
+.article-body{max-width:800px;margin:0 auto;padding:5rem 3rem}
+.article-body p{font-size:13px;letter-spacing:0.04em;line-height:2.4;color:rgba(255,255,255,0.8);margin-bottom:2rem}
+.article-body p strong{color:#fff;letter-spacing:0.06em}
+.article-body p em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040;font-size:14px}
+.article-body p .blood{color:#c83232;font-weight:bold}
+.article-body h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:0.1em;color:#fff;margin:4rem 0 1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(200,160,60,0.15)}
+.article-body h2 em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.article-body h2 .blood{color:#c83232}
+
+/* FACT BOX */
+.fact-box{margin:3rem 0;border:1px solid rgba(200,160,60,0.2);background:rgba(200,160,60,0.02)}
+.fact-header{padding:1rem 1.8rem;border-bottom:1px solid rgba(200,160,60,0.15)}
+.fact-label{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5)}
+.fact-body{padding:1.8rem;display:flex;flex-direction:column;gap:1rem}
+.fact-row{display:flex;gap:2rem;align-items:baseline;border-bottom:1px solid rgba(255,255,255,0.04);padding-bottom:1rem}
+.fact-row:last-child{border-bottom:none;padding-bottom:0}
+.fact-key{font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.25);min-width:160px;flex-shrink:0}
+.fact-val{font-size:12px;letter-spacing:0.06em;color:rgba(255,255,255,0.75)}
+.fact-val strong{color:#c8a040}
+
+/* INLINE QUOTE */
+.inline-quote{margin:3rem 0;padding:2rem 2.5rem;border-left:3px solid #c8a040;background:rgba(200,160,60,0.03)}
+.inline-quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.8;color:rgba(200,160,60,0.85);margin:0}
+.inline-quote cite{display:block;margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+
+/* RED INLINE QUOTE — for the blood moments */
+.inline-quote-red{margin:3rem 0;padding:2rem 2.5rem;border-left:3px solid #c83232;background:rgba(160,20,20,0.04)}
+.inline-quote-red p{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.8;color:rgba(200,80,80,0.85);margin:0}
+.inline-quote-red cite{display:block;margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+
+/* THE IMAGE MOMENT — full bleed description */
+.image-moment{margin:4rem 0;padding:4rem 3rem;background:rgba(160,20,20,0.05);border-top:1px solid rgba(160,20,20,0.2);border-bottom:1px solid rgba(160,20,20,0.2);text-align:center}
+.image-moment-label{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,60,60,0.5);margin-bottom:1.5rem;display:block}
+.image-moment-text{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.1rem,2.2vw,1.6rem);line-height:1.7;color:rgba(255,255,255,0.75);max-width:700px;margin:0 auto}
+.image-moment-text strong{color:#fff}
+
+/* RUSHMORE */
+.rushmore{margin:3rem 0;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.05)}
+.rushmore-slot{background:#000;padding:2rem 1.5rem;text-align:center;display:flex;flex-direction:column;gap:0.6rem}
+.rushmore-num{font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:0.2em;color:rgba(255,255,255,0.2)}
+.rushmore-name{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.08em;line-height:1;color:#fff}
+.rushmore-name.gold{color:#c8a040}
+.rushmore-debate{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-top:0.3rem}
+.rushmore-debate.nodebate{color:rgba(200,160,60,0.5)}
+
+/* CLOSING — THE SIGN OFF */
+.closing{margin:4rem 0 0;padding:3rem;border:1px solid rgba(200,160,60,0.15);background:rgba(200,160,60,0.02)}
+.closing-main{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,2vw,1.3rem);line-height:1.9;color:rgba(200,160,60,0.8);margin-bottom:2rem;text-align:center}
+.closing-austin{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,2.5vw,1.8rem);letter-spacing:0.1em;color:#fff;text-align:center;line-height:1.4;border-top:1px solid rgba(200,160,60,0.1);padding-top:2rem}
+.closing-austin em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
+.closing .author{display:block;margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:center}
+
+.article-footer-nav{padding:3rem;border-top:1px solid rgba(200,160,60,0.1);display:flex;justify-content:space-between;align-items:center}
+.back-link{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(200,160,60,0.5);text-decoration:none;transition:color 0.2s}
+.back-link:hover{color:#c8a040}
+.article-id{font-size:9px;letter-spacing:0.3em;color:rgba(255,255,255,0.15)}
+
+.footer{border-top:1px solid rgba(200,160,60,0.1);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between}
+.footer-left{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.15);line-height:2}
+.footer-right{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.25);text-align:right;line-height:2}
+
+@media(max-width:768px){
+  .nav{padding:0 1.5rem}
+  .nav-links{gap:1.2rem}
+  .article-hero{padding:3rem 1.5rem;min-height:70vh}
+  .article-body{padding:3rem 1.5rem}
+  .pull-quote-bleed{padding:3rem 1.5rem}
+  .image-moment{padding:3rem 1.5rem;margin:3rem -1.5rem}
+  .rushmore{grid-template-columns:repeat(2,1fr)}
+  .fact-row{flex-direction:column;gap:0.5rem}
+  .fact-key{min-width:unset}
+  .article-footer-nav{padding:2rem 1.5rem;flex-direction:column;gap:1rem;text-align:center}
+  .footer{flex-direction:column;gap:1.5rem;padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">I See <em>Everything</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="wrestling.html">Wrestling</a></li>
+    <li><a href="wrestling.html">← Why I Never Left</a></li>
+  </ul>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>WrestleMania 13 · Chicago · March 23 1997 · The Double Turn · The Image · The Blood · The Submission · The Birth Of The Attitude Era · Austin 3:16 · The Glass Shatters · That's Your Ass · &nbsp;</span>
+    <span>WrestleMania 13 · Chicago · March 23 1997 · The Double Turn · The Image · The Blood · The Submission · The Birth Of The Attitude Era · Austin 3:16 · The Glass Shatters · That's Your Ass · &nbsp;</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="article-hero">
+  <div class="hero-bg">
+    <div class="hero-bg-glow"></div>
+    <div class="hero-bg-number">13</div>
+    <div class="hero-bg-fade"></div>
+    <div class="hero-bg-left"></div>
+  </div>
+  <div class="hero-content">
+    <div class="article-kicker">WNL-002 · Why I Never Left · WrestleMania 13 · March 23 1997</div>
+    <div class="article-tags">
+      <span class="tag tag-red">The Double Turn</span>
+      <span class="tag tag-gold">Generational</span>
+      <span class="tag tag-dim">Chicago · 1997</span>
+      <span class="tag tag-dim">The Attitude Era Begins</span>
+    </div>
+    <h1 class="article-title">When You Hear The <em>Glass,</em><br>That's Your <span class="blood">Ass.</span></h1>
+
+    <p class="article-deck">He lost the match. He passed out in a pool of his own blood rather than tap. And 18,000 people in Chicago decided in that moment that Steve Austin was the most important man in professional wrestling. They weren't wrong. They've never been wrong since.</p>
+    <div class="article-byline">
+      <div>Archive <span>WNL-002</span></div>
+      <div>Section <span>Why I Never Left</span></div>
+      <div>Event <span>WrestleMania 13 · March 23 1997</span></div>
+      <div>Venue <span>Rosemont Horizon · Chicago, Illinois</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- EMOTION BANNER -->
+<div class="emotion-banner">
+  <div class="emotion-cell"><span class="emotion-icon">😂</span><span class="emotion-word inactive">Laughed</span></div>
+  <div class="emotion-cell"><span class="emotion-icon">😭</span><span class="emotion-word active">Sobbed</span></div>
+  <div class="emotion-cell"><span class="emotion-icon">😤</span><span class="emotion-word active-red">Angry</span></div>
+  <div class="emotion-cell"><span class="emotion-icon">😊</span><span class="emotion-word inactive">Happy</span></div>
+  <div class="emotion-cell"><span class="emotion-icon">😱</span><span class="emotion-word active">Shocked</span></div>
+</div>
+
+<!-- OPENING PULL QUOTE -->
+<div class="pull-quote-bleed">
+  <blockquote>"When you hear the glass — that's your ass."</blockquote>
+  <cite>— The only introduction Stone Cold Steve Austin ever needed</cite>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+
+  <p>There are moments in professional wrestling that you watch and appreciate. There are moments that entertain you. There are moments that make you pop out of your seat. And then — if you're lucky, if you've been watching long enough, if the stars align in exactly the right way at exactly the right time — there are moments that <strong>change everything.</strong> That split the timeline into before and after. That you carry with you for the rest of your life as the clearest possible answer to the question of why you never stopped watching.</p>
+
+  <p>WrestleMania 13. Chicago. March 23rd, 1997. Bret Hart versus Steve Austin. A submission match with Ken Shamrock as the special guest referee. On paper — a good match. In reality — <em>the single most important twenty-two minutes in the history of professional wrestling.</em></p>
+
+  <p>This is where the Attitude Era started. Not with a promo. Not with a formation. Not with a corporate announcement. With a man sitting in a Sharpshooter, bleeding dark red all over the canvas of WrestleMania, refusing to quit. Refusing. Absolutely refusing.</p>
+
+  <div class="fact-box">
+    <div class="fact-header"><span class="fact-label">The Night · By The Numbers</span></div>
+    <div class="fact-body">
+      <div class="fact-row">
+        <span class="fact-key">Event</span>
+        <span class="fact-val"><strong>WrestleMania 13</strong></span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key">Date</span>
+        <span class="fact-val">March 23, 1997</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key">Venue</span>
+        <span class="fact-val">Rosemont Horizon, Chicago, Illinois</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key">Match</span>
+        <span class="fact-val">Bret Hart vs Steve Austin — Submission Match — WWF Championship #1 Contender</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key">Result</span>
+        <span class="fact-val">Bret Hart wins — Austin passes out in the Sharpshooter rather than submit</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key">What Actually Happened</span>
+        <span class="fact-val"><strong>The most perfect double turn in wrestling history. Austin became the hero. Bret became the villain. Neither man planned it. The crowd decided.</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <h2>What It Was <em>Supposed To Be</em></h2>
+
+  <p>Here's the thing people forget. Walking into WrestleMania 13, Bret Hart was the babyface. The returning hero. The Excellence of Execution who'd left and come back and was supposed to be the man to lead WWF into its next chapter. Steve Austin was the villain. The Rattlesnake. The man you were supposed to boo.</p>
+
+  <p>That was the plan. That was the story. The good guy was going to win. The bad guy was going to lose. Classic wrestling booking. Bret Hart reestablished as the top babyface. Austin put in his place. Everyone goes home happy.</p>
+
+  <p>Except nobody told Chicago. And nobody told Steve Austin's face.</p>
+
+  <div class="inline-quote">
+    <p>Austin was supposed to be the villain. Bret was supposed to be the hero. And then Austin started bleeding and refused to quit and 18,000 people in Chicago looked at each other and collectively decided: no. That man there. That bleeding, refusing, absolutely not tapping out man. That's our hero.</p>
+    <cite>— The crowd rewrote the script in real time · Chicago · 1997</cite>
+  </div>
+
+  <p>You cannot book that. No writer in any writers' room — human or otherwise — sits down and writes "and then the entire crowd spontaneously decides to cheer the villain and boo the hero because the villain is too proud to quit." That doesn't come from a script. That comes from something true. Something Austin was doing out there that was so real and so raw that the audience couldn't help themselves.</p>
+
+  <h2>The <em>Image</em></h2>
+
+  <p>If you have watched wrestling for any length of time you know the image. You don't need me to describe it. But I'm going to anyway because it deserves every word.</p>
+
+  <p>Steve Austin. Locked in Bret Hart's Sharpshooter. Face down on the canvas. And the blood — <span class="blood">dark red, almost brown, the colour blood goes when it's been there a while</span> — streaming down his forehead, pooling on the mat around his face, covering his features until he looks less like a wrestler and more like something from a war photograph. Head down. Jaw set. Not tapping. Eyes somewhere far away from the pain. Not tapping.</p>
+
+  <div class="image-moment">
+    <span class="image-moment-label">The Image · WrestleMania 13 · March 23 1997</span>
+    <p class="image-moment-text">Steve Austin in the Sharpshooter. <strong>Face covered in his own blood.</strong> Head down. Jaw locked. 18,000 people on their feet. Not tapping. Not tapping. Not tapping. Until his body gave out before his will did. That image is not a wrestling photograph. That is <strong>a piece of cultural iconography.</strong> It belongs next to anything from any sport from that entire decade.</p>
+  </div>
+
+  <p>Ken Shamrock raises Austin's arm. It drops once. Twice. Third time — <strong>Austin wills it to stay up.</strong> The place loses its mind. And then finally — only finally, only when his body has nothing left, only when consciousness itself gives out — he goes limp. Shamrock calls it. Bret Hart wins.</p>
+
+  <p>And Steve Austin loses WrestleMania 13 as the most over man in professional wrestling.</p>
+
+  <h2>The <em>Double Turn</em></h2>
+
+  <p>Professional wrestling has seen double turns before. It's a known device — both men swap their alignment in the same match, hero becomes villain, villain becomes hero. But there has never been one executed with the surgical perfection of what happened in Chicago that night. And the reason it worked — the reason it stands completely alone — is because <strong>nobody manufactured it.</strong></p>
+
+  <p>Bret Hart, to his enormous credit, saw what was happening and leaned into it completely. When Austin was refusing to quit and bleeding all over the canvas and the crowd was shifting, Bret didn't fight it. He became what the crowd needed him to become. Every stomp. Every wrench of the Sharpshooter. Every sneer. He gave them a villain worthy of the hero they'd just chosen.</p>
+
+  <p>And Austin — Austin just bled and refused. That's it. That was the whole performance. The refusal to submit even as his own blood was blinding him. That's what made 18,000 people stand up and decide. That's what made millions more watching at home decide. <em>That man right there. That one. He's the one.</em></p>
+
+  <div class="inline-quote-red">
+    <p>He didn't win. He passed out in a pool of his own blood on the canvas of WrestleMania. And he left that building the most important man in professional wrestling. That is the most Austin thing that has ever happened.</p>
+    <cite>— WrestleMania 13 · The Submission That Changed Everything</cite>
+  </div>
+
+  <h2>The <em>Explosion</em> That Followed</h2>
+
+  <p>People talk about popularity in wrestling. Hogan at his peak. The Rock at his peak. But what happened to Steve Austin in the twelve months after WrestleMania 13 was something the business had genuinely never seen before and has never seen since. He didn't just become popular. He became <strong>unavoidable.</strong> He became the answer to every question the WWF had been asking itself for the previous three years.</p>
+
+  <p>Austin 3:16. Think about those three characters. Think about the fact that over 28 years later they are still one of the top selling pieces of merchandise in professional wrestling. Three numbers. A colon. That's it. No image needed. No context needed. No explanation. You see it and you're right back there. You're back in 1997 and the glass is shattering and something enormous is about to happen and you're on your feet before you know you're standing.</p>
+
+  <p>The WHAT chant. People argue about it — and fair enough, it can derail a promo in ways Austin himself has said he regrets. But the fact that crowds are still doing it in 2026, over two decades after it started, is not an annoyance. It's a monument. It's 18,000 people in an arena saying: <em>we remember. We were there. We know what this means.</em></p>
+
+  <h2>Mount Rushmore. <em>No Debate.</em></h2>
+
+  <p>Everyone has a different opinion on who belongs on the wrestling Mount Rushmore. Hogan — obviously. The Rock — make the argument. Flair — the case is strong. Taker — don't @ me either way. People will fight you on every single one of those names. Passionately. With receipts.</p>
+
+  <p>Say Austin and the room goes quiet. Because everyone knows. It doesn't matter what era you grew up in, what promotion you watched, what your personal taste in wrestling is. Austin on the Rushmore is the one name that requires no debate, no justification, no argument. He belongs there the same way that image from WrestleMania 13 belongs in a museum. <strong>Inarguably. Permanently. Completely.</strong></p>
+
+  <div class="rushmore">
+    <div class="rushmore-slot">
+      <span class="rushmore-num">01</span>
+      <span class="rushmore-name gold">Steve Austin</span>
+      <span class="rushmore-debate nodebate">No debate. Ever.</span>
+    </div>
+    <div class="rushmore-slot">
+      <span class="rushmore-num">02</span>
+      <span class="rushmore-name">Hulk Hogan</span>
+      <span class="rushmore-debate">Some debate.</span>
+    </div>
+    <div class="rushmore-slot">
+      <span class="rushmore-num">03</span>
+      <span class="rushmore-name">The Rock</span>
+      <span class="rushmore-debate">Make the case.</span>
+    </div>
+    <div class="rushmore-slot">
+      <span class="rushmore-num">04</span>
+      <span class="rushmore-name">Ric Flair</span>
+      <span class="rushmore-debate">Strong argument.</span>
+    </div>
+  </div>
+
+  <h2>If The Glass Shatters <em>Tonight</em></h2>
+
+  <p>Close your eyes. Final minutes of WrestleMania Night Two. Something's going wrong. The finish is being messed with. There's interference. The crowd doesn't know what's coming. And then — silence. One second of silence before the entire world changes.</p>
+
+  <p><em>CRASH.</em></p>
+
+  <p>The glass. The glass shatters. And before the first note of that entrance music has finished, before Steve Austin has taken a single step, before anyone has even seen him — every single person in that stadium is on their feet. Every single one. Screaming. The pop heard on the dark side of the moon. Because that sound — that specific, unrepeatable, Pavlovian sound — belongs to one man on this planet and everyone in that building knows it and their body responds before their brain does.</p>
+
+  <p>That is the legacy of WrestleMania 13. That is what one match, one image, one act of bloody refusal built. Twenty-eight years of the most instinctive, unconditional, completely earned reaction in the history of entertainment. <strong>You hear the glass. You're on your feet. That's just what happens.</strong></p>
+
+  <p>That's why this is why I never left. Because I was there for the beginning of it. I watched it happen in real time. I watched a crowd of 18,000 people in Chicago rewrite the story they'd been given and choose their own hero. And I have been watching ever since to see if anything will ever come close.</p>
+
+  <p>Nothing has.</p>
+
+  <div class="closing">
+    <p class="closing-main">He lost the match. He passed out rather than tap. He left that building as the most important man in professional wrestling. Twenty-eight years later the glass still shatters and the world still stops. Some things you just can't fake. Some things you just can't algorithm your way into. WrestleMania 13 is one of them.</p>
+    <div class="closing-austin">Fire it up before I drop you on that stack of dimes you call a neck.<br><em>And that's the bottom line.</em><br>'Cos Stone Cold Said So.</div>
+    <span class="author">Why I Never Left · WNL-002 · WrestleMania 13 · 1997 · iseeeverything.me</span>
+  </div>
+
+</div>
+
+<div class="article-footer-nav">
+  <a href="summerslam-92-wembley.html" class="back-link">← WNL-001 · Wembley 92</a>
+  <span class="article-id">WNL-002 / WHY I NEVER LEFT / WRESTLEMANIA 13</span>
+  <a href="wrestling.html" class="back-link">Back To Wrestling →</a>
+</div>
+
+<footer class="footer">
+  <div class="footer-left">
+    I See Everything<br>
+    Wrestling · Personal Archive · 2026<br>
+    iseeeverything.me
+  </div>
+  <div class="footer-right">
+    40 Years Of Watching<br>
+    Why I Never Left<br>
+    Draw Your Own Conclusions
+  </div>
+</footer>
+
+</body>
+</html>
