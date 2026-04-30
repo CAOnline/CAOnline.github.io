@@ -14,12 +14,12 @@ body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.15em;color:#fff;text-decoration:none}
 .nav-logo em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
 .nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
+.nav-links a{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.9);text-decoration:none;transition:color 0.2s}
 .nav-links a:hover{color:#c8a040}
 
 .ticker-wrap{overflow:hidden;border-bottom:1px solid rgba(200,160,60,0.1);padding:10px 0;background:rgba(200,160,60,0.02)}
 .ticker-inner{display:flex;white-space:nowrap;animation:ticker 40s linear infinite}
-.ticker-inner span{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.4);padding:0 3rem}
+.ticker-inner span{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.75);padding:0 3rem}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* HERO */
@@ -38,20 +38,20 @@ body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
 .tag{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;border:1px solid;padding:4px 12px}
 .tag-gold{border-color:rgba(200,160,60,0.5);color:rgba(200,160,60,0.8)}
 .tag-red{border-color:rgba(200,60,60,0.5);color:rgba(200,60,60,0.8)}
-.tag-dim{border-color:rgba(255,255,255,0.25);color:rgba(255,255,255,0.55)}
+.tag-dim{border-color:rgba(255,255,255,0.5);color:rgba(255,255,255,0.85)}
 
 .article-kicker{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5);margin-bottom:1.2rem}
 .article-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6.5rem);letter-spacing:0.06em;line-height:0.92;color:#fff;margin-bottom:1.8rem}
 .article-title em{font-family:'Playfair Display',serif;font-style:italic;color:#c8a040}
 .article-title .red{color:#c83232}
-.article-deck{font-size:12px;letter-spacing:0.1em;line-height:2.2;color:rgba(255,255,255,0.65);max-width:620px;text-transform:uppercase}
-.article-byline{margin-top:2rem;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);border-top:1px solid rgba(200,160,60,0.1);padding-top:1.2rem;display:flex;gap:2rem}
+.article-deck{font-size:12px;letter-spacing:0.1em;line-height:2.2;color:rgba(255,255,255,0.9);max-width:620px;text-transform:uppercase}
+.article-byline{margin-top:2rem;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.5);border-top:1px solid rgba(200,160,60,0.1);padding-top:1.2rem;display:flex;gap:2rem}
 .byline-item span{color:rgba(200,160,60,0.5)}
 
 /* PULL QUOTE — full bleed */
 .pull-quote-bleed{padding:4rem 3rem;border-top:1px solid rgba(200,160,60,0.1);border-bottom:1px solid rgba(200,160,60,0.1);background:rgba(200,160,60,0.02);text-align:center}
 .pull-quote-bleed blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.4rem,3vw,2.4rem);line-height:1.5;color:#c8a040;max-width:900px;margin:0 auto}
-.pull-quote-bleed cite{display:block;margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+.pull-quote-bleed cite{display:block;margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.6)}
 
 /* ARTICLE BODY */
 .article-body{max-width:800px;margin:0 auto;padding:5rem 3rem}
@@ -66,14 +66,14 @@ body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
 /* INLINE PULL QUOTE */
 .inline-quote{margin:3rem 0;padding:2rem 2.5rem;border-left:3px solid #c8a040;background:rgba(200,160,60,0.03)}
 .inline-quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.8;color:rgba(200,160,60,0.85);margin:0}
-.inline-quote cite{display:block;margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+.inline-quote cite{display:block;margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.6)}
 
 /* EVIDENCE BOX */
 .evidence-box{margin:3rem 0;border:1px solid rgba(200,160,60,0.2);background:rgba(200,160,60,0.02)}
 .evidence-header{padding:1rem 1.8rem;border-bottom:1px solid rgba(200,160,60,0.15);display:flex;align-items:center;gap:1rem}
 .evidence-label{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(200,160,60,0.5)}
 .evidence-body{padding:1.8rem}
-.evidence-body p{font-size:11px;letter-spacing:0.05em;line-height:2;color:rgba(255,255,255,0.6);margin-bottom:0.8rem}
+.evidence-body p{font-size:11px;letter-spacing:0.05em;line-height:2;color:rgba(255,255,255,0.88);margin-bottom:0.8rem}
 .evidence-body p:last-child{margin-bottom:0}
 .evidence-body strong{color:rgba(200,160,60,0.8)}
 
@@ -82,7 +82,7 @@ body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
 .timeline-item{display:flex;gap:2rem;padding:1.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05)}
 .timeline-item:last-child{border-bottom:none}
 .timeline-date{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.15em;color:rgba(200,160,60,0.5);min-width:120px;flex-shrink:0;padding-top:0.2rem}
-.timeline-text{font-size:11px;letter-spacing:0.04em;line-height:1.9;color:rgba(255,255,255,0.65)}
+.timeline-text{font-size:11px;letter-spacing:0.04em;line-height:1.9;color:rgba(255,255,255,0.9)}
 .timeline-text strong{color:#fff}
 
 /* RED STAT */
@@ -91,21 +91,21 @@ body{font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
 .stat-big{font-family:'Bebas Neue',sans-serif;font-size:3rem;display:block;letter-spacing:0.1em}
 .stat-big.red{color:#c83232}
 .stat-big.gold{color:#c8a040}
-.stat-label{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:0.5rem;display:block}
+.stat-label{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:0.5rem;display:block}
 
 /* CLOSING STATEMENT */
 .closing{margin:4rem 0 0;padding:3rem;border:1px solid rgba(200,160,60,0.15);background:rgba(200,160,60,0.02);text-align:center}
 .closing p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,2vw,1.4rem);line-height:1.8;color:rgba(200,160,60,0.8);margin:0}
-.closing .author{margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+.closing .author{margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.5)}
 
 .article-footer-nav{padding:3rem;border-top:1px solid rgba(200,160,60,0.1);display:flex;justify-content:space-between;align-items:center}
 .back-link{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(200,160,60,0.5);text-decoration:none;transition:color 0.2s}
 .back-link:hover{color:#c8a040}
-.article-id{font-size:9px;letter-spacing:0.3em;color:rgba(255,255,255,0.15)}
+.article-id{font-size:9px;letter-spacing:0.3em;color:rgba(255,255,255,0.55)}
 
 .footer{border-top:1px solid rgba(200,160,60,0.1);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between}
-.footer-left{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.15);line-height:2}
-.footer-right{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.25);text-align:right;line-height:2}
+.footer-left{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.55);line-height:2}
+.footer-right{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,60,0.6);text-align:right;line-height:2}
 
 @media(max-width:768px){
   .nav{padding:0 1.5rem}
